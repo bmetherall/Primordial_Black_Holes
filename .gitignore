@@ -1,0 +1,14 @@
+# Files to ignore
+
+*.nb
+/Papers
+*.png
+*.eps
+*.pdf
+
+# TeX files
+*.tex
+*.aux
+*.log
+*.gz
+*.zip
