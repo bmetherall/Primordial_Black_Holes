@@ -1,7 +1,11 @@
 # Files to ignore
 
-*.nb
 /Papers
+/Wave/Images
+/OctoberPresentation
+/Wave/load
+/Wave/Waves2.dat
+*.nb
 *.png
 *.eps
 *.pdf
