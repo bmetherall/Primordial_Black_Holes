@@ -9,6 +9,7 @@
 *.png
 *.eps
 *.pdf
+*~*
 
 # TeX files
 *.tex
@@ -16,3 +17,7 @@
 *.log
 *.gz
 *.zip
+*.nav
+*.out
+*.snm
+*.toc
