@@ -5,6 +5,7 @@
 /OctoberPresentation
 /Wave/load
 /Wave/Waves2.dat
+/ThesisTemplate
 *.nb
 *.png
 *.eps
@@ -12,7 +13,7 @@
 *~*
 
 # TeX files
-*.tex
+test.tex
 *.aux
 *.log
 *.gz
@@ -21,3 +22,6 @@
 *.out
 *.snm
 *.toc
+
+# Things to include
+!NovemberPresentation.pdf
