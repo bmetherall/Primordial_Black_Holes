@@ -44,6 +44,10 @@ c0 = 10 * Vmax; rho0 = 1000.0
 p0 = c0*c0*rho0
 gamma = 1.0
 
+soft = 0.1
+t_hit = 10.0
+Mass = 10.0
+
 # Reynolds number and kinematic viscosity
 Re = 100; nu = Vmax * Ly/Re
 
@@ -202,7 +206,7 @@ class HydrostaticTank(Application):
                     XSPHCorrection(dest='fluid', sources=['fluid'], eps=0.0),
 
 					# Add a PBH
-					BlackHole(dest='fluid', sources=['solid'], plum=0.1)
+					BlackHole(dest='fluid', sources=['solid'], soft=0.1, t_hit=t_hit, M=Mass)
 
                     ]),
             ]
@@ -256,7 +260,7 @@ class HydrostaticTank(Application):
                     XSPHCorrection(dest='fluid', sources=['fluid'], eps=0.0),
 
 					# Add a PBH
-					BlackHole(dest='fluid', sources=['solid'], plum=0.1)
+					BlackHole(dest='fluid', sources=['solid'], soft=0.1, t_hit=t_hit, M=Mass)
 
                     ]),
             ]
@@ -301,7 +305,7 @@ class HydrostaticTank(Application):
                     XSPHCorrection(dest='fluid', sources=['fluid'], eps=0.5),
 
 					# Add a PBH
-					BlackHole(dest='fluid', sources=['solid'], plum=0.1)
+					BlackHole(dest='fluid', sources=['solid'], soft=0.1, t_hit=t_hit, M=Mass)
 
                     ]),
             ]
