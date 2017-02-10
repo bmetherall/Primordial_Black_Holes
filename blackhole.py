@@ -1,4 +1,4 @@
-"""Hydrostatic tank with gravitational force due to a primordial black hole. Modified from hydrostatic_tank by Brady Metherall"""
+"""Two dimensional hydrostatic tank with gravitational force due to a primordial black hole. Modified from hydrostatic_tank by Brady Metherall"""
 
 import os.path
 
@@ -37,7 +37,7 @@ from pysph.sph.basic_equations import XSPHCorrection, \
     MonaghanArtificialViscosity
 
 # domain and reference values
-Lx = 2.0; Ly = 5.0; H = 2.0
+Lx = 6.0; Ly = 5.0; H = 2.0
 gy = -1.0
 Vmax = np.sqrt(abs(gy) * H)
 c0 = 10 * Vmax; rho0 = 1000.0
@@ -59,7 +59,7 @@ dt_viscous = 0.125 * h0**2/nu
 dt_force = 0.25 * np.sqrt(h0/abs(gy))
 
 tdamp = 1.0
-tf = 2.0
+tf = 25.0
 dt = 0.75 * min(dt_cfl, dt_viscous, dt_force)
 output_at_times = np.arange(0.25, 2.1, 0.25)
 
@@ -81,15 +81,15 @@ class HydrostaticTank(Application):
 
     def create_particles(self):
         # create all the particles
-        _x = np.arange( -ghost_extent, Lx + ghost_extent, dx )
-        _y = np.arange( -ghost_extent, Ly, dx )
+        _x = np.arange( -0.5*Lx - ghost_extent, 0.5*Lx + ghost_extent, dx )
+        _y = np.arange( -H-ghost_extent, -H+Ly, dx )
         x, y = np.meshgrid(_x, _y); x = x.ravel(); y = y.ravel()
 
         # sort out the fluid and the solid
         indices = []
         for i in range(x.size):
-            if ( (x[i] > 0.0) and (x[i] < Lx) ):
-                if ( (y[i] > 0.0) and (y[i] < H) ):
+            if ( (x[i] > -0.5*Lx) and (x[i] < 0.5*Lx) ):
+                if ( (y[i] > -H) and (y[i] < 0) ):
                     indices.append(i)
 
         # create the arrays
@@ -102,12 +102,12 @@ class HydrostaticTank(Application):
         # remove the lid to generate an open tank
         indices = []
         for i in range(solid.get_number_of_particles()):
-            if solid.y[i] > 0.9:
-                if (0 < solid.x[i] < Lx):
+            if solid.y[i] > 0:
+                if (-0.5*Lx < solid.x[i] < 0.5*Lx):
                     indices.append(i)
         solid.remove_particles(indices)
 
-        print("Hydrostatic tank :: nfluid = %d, nsolid=%d, dt = %g"%(
+        print("Hydrostatic tank with primordial black hole :: nfluid = %d, nsolid=%d, dt = %g"%(
             fluid.get_number_of_particles(),
             solid.get_number_of_particles(), dt))
 
@@ -202,7 +202,7 @@ class HydrostaticTank(Application):
                     XSPHCorrection(dest='fluid', sources=['fluid'], eps=0.0),
 
 					# Add a PBH
-					BlackHole(dest='fluid', sources='solid', plum=0.05)
+					BlackHole(dest='fluid', sources=['solid'], plum=0.1)
 
                     ]),
             ]
@@ -256,7 +256,7 @@ class HydrostaticTank(Application):
                     XSPHCorrection(dest='fluid', sources=['fluid'], eps=0.0),
 
 					# Add a PBH
-					BlackHole(dest='fluid', sources='solid', plum=0.05)
+					BlackHole(dest='fluid', sources=['solid'], plum=0.1)
 
                     ]),
             ]
@@ -301,7 +301,7 @@ class HydrostaticTank(Application):
                     XSPHCorrection(dest='fluid', sources=['fluid'], eps=0.5),
 
 					# Add a PBH
-					BlackHole(dest='fluid', sources='solid', plum=0.05)
+					BlackHole(dest='fluid', sources=['solid'], plum=0.1)
 
                     ]),
             ]
