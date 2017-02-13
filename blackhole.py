@@ -37,22 +37,22 @@ from pysph.sph.basic_equations import XSPHCorrection, \
     MonaghanArtificialViscosity
 
 # domain and reference values
-Lx = 6.0; Ly = 5.0; H = 2.0
+Lx = 150.0; Ly = 50.0; H = 0.8*Ly
 gy = -1.0
 Vmax = np.sqrt(abs(gy) * H)
-c0 = 10 * Vmax; rho0 = 1000.0
+c0 = 10 * Vmax; rho0 = 100.0
 p0 = c0*c0*rho0
 gamma = 1.0
 
 soft = 0.1
-t_hit = 10.0
-Mass = 10.0
+t_hit = 50.0
+Mass = 1000.0
 
 # Reynolds number and kinematic viscosity
-Re = 100; nu = Vmax * Ly/Re
+Re = 0; nu = 0.01#Vmax * Ly/Re
 
 # Numerical setup
-nx = 100; dx = Lx/nx
+nx = 150; dx = Lx/nx
 ghost_extent = 5.5 * dx
 hdx = 1.2
 
@@ -63,16 +63,16 @@ dt_viscous = 0.125 * h0**2/nu
 dt_force = 0.25 * np.sqrt(h0/abs(gy))
 
 tdamp = 1.0
-tf = 25.0
+tf = 100.0
 dt = 0.75 * min(dt_cfl, dt_viscous, dt_force)
 output_at_times = np.arange(0.25, 2.1, 0.25)
 
 
 def damping_factor(t, tdamp):
     if t < tdamp:
-        return 0.5 * ( np.sin((-0.5 + t/tdamp)*np.pi)+ 1.0 )
+        return 0 * ( np.sin((-0.5 + t/tdamp)*np.pi)+ 1.0 )
     else:
-        return 1.0
+        return 0
 
 
 class HydrostaticTank(Application):
