@@ -6,6 +6,8 @@
 /Wave/load
 /Wave/Waves2.dat
 /ThesisTemplate
+BlackHoleVideo.sh
+/Videos
 *.nb
 *.png
 *.eps
