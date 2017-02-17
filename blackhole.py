@@ -63,7 +63,7 @@ dt_viscous = 0.125 * h0**2/nu
 dt_force = 0.25 * np.sqrt(h0/abs(gy))
 
 tdamp = 1.0
-tf = t_hit + 8.0
+tf = t_hit + H
 dt = 0.75 * min(dt_cfl, dt_viscous, dt_force)
 output_at_times = np.arange(0.25, 2.1, 0.25)
 
@@ -206,7 +206,7 @@ class HydrostaticTank(Application):
                     XSPHCorrection(dest='fluid', sources=['fluid'], eps=0.0),
 
                     # Add a PBH
-                    BlackHole2D(dest='fluid', sources=['solid'], soft=0.1, t_hit=t_hit, M=Mass)
+                    BlackHole2D(dest='fluid', sources=['solid'], soft=soft, t_hit=t_hit, M=Mass)
 
                     ]),
             ]
@@ -260,7 +260,7 @@ class HydrostaticTank(Application):
                     XSPHCorrection(dest='fluid', sources=['fluid'], eps=0.0),
 
                     # Add a PBH
-                    BlackHole2D(dest='fluid', sources=['solid'], soft=0.1, t_hit=t_hit, M=Mass)
+                    BlackHole2D(dest='fluid', sources=['solid'], soft=soft, t_hit=t_hit, M=Mass)
 
                     ]),
             ]
@@ -305,7 +305,7 @@ class HydrostaticTank(Application):
                     XSPHCorrection(dest='fluid', sources=['fluid'], eps=0.5),
 
                     # Add a PBH
-                    BlackHole2D(dest='fluid', sources=['solid'], soft=0.1, t_hit=t_hit, M=Mass)
+                    BlackHole2D(dest='fluid', sources=['solid'], soft=soft, t_hit=t_hit, M=Mass)
 
                     ]),
             ]
