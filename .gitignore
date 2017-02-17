@@ -13,18 +13,25 @@ BlackHoleVideo.sh
 *.eps
 *.pdf
 *~*
+/Dissertation/Hankel.text
 
 # TeX files
 test.tex
+/Dissertation/Dissertation.tex
 *.aux
+*.lof
 *.log
+*.lot
+*.out
 *.gz
 *.zip
 *.nav
-*.out
 *.snm
 *.toc
+
 
 # Things to include
 !NovemberPresentation.pdf
 !Thesis_Notes.pdf
+!/Dissertation/uoit.png
+!/Dissertation/2Transforms/Transforms.pdf
