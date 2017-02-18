@@ -17,7 +17,7 @@
 \DeclareMathOperator{\Heavi}{H}
 
 \DeclareMathOperator{\Hsign}{\mathscr{H}}
-\newcommand\Hank[2][0]{{(\Hsign_{#1} #2 ) }}
+\newcommand\Hank[2][]{{\left( \Hsign_{#1} #2 \right) }}
 
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{definition}[theorem]{Definition}
@@ -38,24 +38,20 @@ where $K$ is called the kernel function.
 
 \begin{theorem}
 \label{thm:continuity}
-$\mathcal{T}f$ is continuous iff $\int_a^b |f(y)| dy < \infty$, and $K(x,y)$ is uniformly continuous on $[a,b]$.
+$\mathcal{T}f$ is continuous if $\int_a^b |f(y)| dy < \infty$, and $K(x,y)$ is uniformly continuous on $[a,b]$.
 \end{theorem}
 \begin{proof}
-For all $\epsilon > 0$, choose $\delta : |x - x_0| < \delta$, so that $|K(x,y) - K(x_0,y)| < \epsilon/M$, with $M = \int_a^b |f(y)| dy$. $\mathcal{T}f$ is continuous iff
+For all $\varepsilon > 0$, choose $\delta : |x - x_0| < \delta$, so that $|K(x,y) - K(x_0,y)| < \varepsilon/M$, with $M = \int_a^b |f(y)| dy$. Then,
 \begin{align*}
 |(\mathcal{T}f)(x) - (\mathcal{T}f)(x_0)| &= \left| \int_a^b K(x,y)f(y) dy - \int_a^b K(x_0,y)f(y) dy \right| \\
 &\leq \int_a^b |K(x,y) - K(x_0,y)||f(y)| dy \\
-&< \int_a^b \frac{\epsilon}{M} |f(y)| dy \\
-&< \epsilon
+&< \int_a^b \frac{\varepsilon}{M} |f(y)| dy \\
+&< \varepsilon,
 \end{align*}
+and $\mathcal{T}f$ is continuous.
 \end{proof}
 
-\begin{corollary}
-The conditions for Theorem \ref{thm:continuity} are satisfied if $a$ and $b$ are finite, as well as if $f$ and $K$ are bounded and continuous.
-\end{corollary}
-\begin{proof}
-A bounded continuous function is integrable over a compact domain.
-\end{proof}
+The conditions for Theorem \ref{thm:continuity} are automatically satisfied if $a$ and $b$ are finite, in addition to $K$ being bounded and continuous. A bounded continuous function over a compact domain is uniformly continuous and integrable.
 
 \subsection{Hankel Transform}
 
@@ -67,6 +63,7 @@ The Hankel transform of a function $f(s)$ is given by
 \end{align*}
 where $J_\nu$ is the Bessel function of the first kind, of order $\nu \geq -\frac{1}{2}$, and $\sigma$ is a non-negative real variable.
 \end{definition}
+Notice though, that the kernel function of the Hankel transform is not $J_\nu (s \sigma) s$, but in fact $J_\nu (s \sigma) \sqrt{s}$, the other $\sqrt{s}$ factor gets absorbed into $f$. This is to ensure uniform continuity of the kernel, and the continuity of the transform. As a consequence, we have the modified condition that $\int_0^\infty \sqrt{s}|f(s)| ds < \infty$. **Include in appendix?
 
 \begin{corollary}[Inverse Hankel Transform]
 \label{def:invhanktrans}
@@ -76,55 +73,12 @@ The Hankel transform is self-reciprocal, that is, the inverse Hankel transform i
 The Hankel transform is self-reciprocal
 \begin{align*}
 \iff f(s) &= \int_0^\infty \Hank[\nu]{f}(\sigma) J_\nu(s \sigma) \sigma \, d\sigma \\
-\iff f(s) &= \int_0^\infty \int_0^\infty f(s') J_\nu(s \sigma) s' \, ds' J_\nu(s \sigma) \sigma \, d\sigma \\
+\iff &= \int_0^\infty \int_0^\infty f(s') J_\nu(s \sigma) s' \, ds' J_\nu(s \sigma) \sigma \, d\sigma \\
 &= \int_0^\infty f(s') s' \int_0^\infty J_\nu(s' \sigma) J_\nu(s \sigma) \sigma \, d\sigma \, ds' \\
 &= f(s),
 \end{align*}
 by the orthogonality of the Bessel functions.
 \end{proof}
-
-\newpage
-
-\begin{align*}
-\varphi = \int_0^\infty J_0(kr) e^{kz} T(t) dk \\
-\left( \frac{\partial \varphi}{\partial t} + (g \eta + \Phi) \right) \bigg|_{z=0} = 0 \\
-\left( \frac{\partial^2 \varphi}{\partial t^2} + g \frac{\partial \varphi}{\partial z} + \frac{\partial \Phi}{\partial t} \right) \bigg|_{z=0} = 0\\
-\text{where }\Phi = \frac{-Gm}{\sqrt{r^2+(z-vt)^2}} \\
-\varphi = \frac{Gmv}{g} \int_0^\infty \frac{J_0(kr)e^{kz}}{1+kv^2/g} \left(-\sgn(t)e^{-kv|t|} + 2 \Heavi (t)\cos(\omega_k t) \right)dk \\
-\text{with } \omega_k^2=gk
-\end{align*}
-
-We must write the gravitational potential as an infinite sum of Bessel functions,
-\begin{align*}
-\frac{\partial \Phi}{\partial t}\bigg|_{z=0} &= \int_0^\infty a(k; t)J_0(k r)k \, dk \\
-a(k; t) &= \int_0^\infty \frac{\partial \Phi}{\partial t}\bigg|_{z=0} J_0(k r) r \, dr \text{ *HT*} \\
-a(k;t) &= Gmv^2tk \int_0^\infty \frac{ J_0(k r) r}{(r^2+v^2t^2)^{3/2}} dr \\
-&= Gmv^2t \frac{1}{|vt|} e^{-k|vt|} \text{ *HT*} \\
-&= Gmv \sgn(t)e^{-kv|t|}
-\end{align*}
-\begin{gather*}
-\int_0^\infty J_0(kr)  \ddot{T}(t) dk + g \int_0^\infty k J_0(kr) T(t) dk + Gmv \int_0^\infty \sgn(t) e^{-kv|t|} J_0(kr)k \, dk = 0 \\
-\int_0^\infty \left[ \frac{\ddot{T}(t)}{k} + gT(t) + Gmv \sgn(t) e^{-kv|t|} \right] J_0(kr) k \, dk = 0 \\
-\frac{\ddot{T}(t)}{k} + gT(t) + Gmv \sgn(t) e^{-kv|t|} = \int_0^\infty 0 \times J_0(kr) r \, dr = 0 \text{ *HT*} \\
-T(t) = A \cos(\omega_k t) + B \sin(\omega_k t) \text{ homogenous solution } t \geq 0 \\
-\text{Assume } T(t) = C e^{\xi |t|} \text{ for the particular solution} \\
-\implies C \left(\xi^2 \sgn^2(t) e^{\xi |t|} + gk e^{\xi |t|} \right) + Gmvk \sgn(t) e^{-kv|t|} = 0 \\
-\implies \xi = -kv, \quad C = \frac{-Gmvk \sgn(t)}{k^2v^2 + gk} = \frac{Gmv}{g} \frac{-\sgn(t)}{1+kv^2/g} \\
-\implies T(t) = \frac{Gmv}{g} \frac{1}{1+kv^2/g} \left( -\sgn(t) e^{-kv|t|} + \Heavi(t) \left( \widetilde{A} \cos(\omega_k t) + \widetilde{B} \sin(\omega_k t \right) \right) \\
-T(t) \text{ must be at least of class } C^1 \implies \widetilde{A} = 2, \quad \widetilde{B} = 0 \\
-\implies \varphi = \frac{Gmv}{g} \int_0^\infty \frac{J_0(kr)e^{kz}}{1+kv^2/g} \left(-\sgn(t)e^{-kv|t|} + 2H(t)\cos(\omega_k t) \right)dk
-\end{gather*}
-
-
-
-
-
-
-
-
-
-
-
 
 
 \end{document}
