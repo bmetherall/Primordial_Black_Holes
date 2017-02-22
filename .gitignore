@@ -7,13 +7,13 @@
 /Wave/Waves2.dat
 /ThesisTemplate
 BlackHoleVideo.sh
-/Videos
 *.nb
 *.png
 *.eps
 *.pdf
 *~*
 /Dissertation/Hankel.text
+blackhole_output
 
 # TeX files
 test.tex

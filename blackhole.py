@@ -14,6 +14,7 @@ from pysph.solver.solver import Solver
 from pysph.solver.application import Application
 from pysph.sph.integrator import PECIntegrator
 from pysph.sph.integrator_step import WCSPHStep
+from pysph.solver.output import dump
 
 # the eqations
 from pysph.sph.equation import Group
@@ -37,7 +38,7 @@ from pysph.sph.basic_equations import XSPHCorrection, \
     MonaghanArtificialViscosity
 
 # domain and reference values
-Lx = 60.0; Ly = 30.0; H = 0.8*Ly
+Lx = 200.0; H = 30.0; Ly = 1.5*H
 gy = -1.0
 Vmax = np.sqrt(abs(gy) * H)
 c0 = 10 * Vmax; rho0 = 1.0
@@ -46,13 +47,13 @@ gamma = 1.0
 
 soft = 0.05
 t_hit = 10.0
-Mass = 1.0
+Mass = 20.0
 
 # Reynolds number and kinematic viscosity
 Re = 0; nu = 0.01#Vmax * Ly/Re
 
 # Numerical setup
-nx = 250; dx = Lx/nx
+nx = 400; dx = Lx/nx
 ghost_extent = 5.5 * dx
 hdx = 1.2
 
@@ -206,7 +207,7 @@ class HydrostaticTank(Application):
                     XSPHCorrection(dest='fluid', sources=['fluid'], eps=0.0),
 
                     # Add a PBH
-                    BlackHole2D(dest='fluid', sources=['solid'], soft=soft, t_hit=t_hit, M=Mass)
+                    BlackHole2D(dest='fluid', sources=None, soft=soft, t_hit=t_hit, M=Mass)
 
                     ]),
             ]
@@ -257,10 +258,7 @@ class HydrostaticTank(Application):
                         dest='fluid', sources=['fluid'], alpha=0.25, c0=c0),
 
                     # Position step with XSPH
-                    XSPHCorrection(dest='fluid', sources=['fluid'], eps=0.0),
-
-                    # Add a PBH
-                    BlackHole2D(dest='fluid', sources=['solid'], soft=soft, t_hit=t_hit, M=Mass)
+                    XSPHCorrection(dest='fluid', sources=['fluid'], eps=0.0)
 
                     ]),
             ]
@@ -302,10 +300,7 @@ class HydrostaticTank(Application):
                         dest='fluid', sources=['fluid', 'solid'], alpha=0.25, c0=c0),
 
                     # Position step with XSPH
-                    XSPHCorrection(dest='fluid', sources=['fluid'], eps=0.5),
-
-                    # Add a PBH
-                    BlackHole2D(dest='fluid', sources=['solid'], soft=soft, t_hit=t_hit, M=Mass)
+                    XSPHCorrection(dest='fluid', sources=['fluid'], eps=0.5)
 
                     ]),
             ]
@@ -367,6 +362,8 @@ class HydrostaticTank(Application):
         plt.legend()
         fig = os.path.join(self.output_dir, 'p_vs_y.png')
         plt.savefig(fig, dpi=300)
+
+        dump('test.hdf5', [['fluid']], d_x[d_idx])
 
 
 if __name__ == '__main__':

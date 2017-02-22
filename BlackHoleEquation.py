@@ -13,8 +13,8 @@ class BlackHole2D(Equation):
 
     # calculate the force due to the black hole
     def loop(self, d_x, d_y, d_idx, d_au, d_av, t):
-        d_au[d_idx] += -self.M * d_x[d_idx] / pow((d_x[d_idx]**2 + self.soft**2 + (d_y[d_idx] - t + self.t_hit)**2),3.0/2.0)
-        d_av[d_idx] += -self.M * (d_y[d_idx] - t + self.t_hit) / pow((d_x[d_idx]**2 + self.soft**2 + (d_y[d_idx] - t + self.t_hit)**2),3.0/2.0)
+        d_au[d_idx] += -self.M * d_x[d_idx] / pow((d_x[d_idx]**2 + self.soft**2 + (d_y[d_idx] + t - self.t_hit)**2),3.0/2.0)
+        d_av[d_idx] += -self.M * (d_y[d_idx] + t - self.t_hit) / pow((d_x[d_idx]**2 + self.soft**2 + (d_y[d_idx] + t - self.t_hit)**2),3.0/2.0)
 
 
 class BlackHole3D(Equation):
