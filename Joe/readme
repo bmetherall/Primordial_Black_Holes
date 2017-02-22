@@ -1,6 +1,7 @@
 Brady,
 
-I've modified your black hole code a bit -- to give it a velocity and to start it at any location.  But otherwise it seemed fine
+I've modified your black hole code a bit -- to give it a velocity and to start it at any location. I also included the mass 
+of the fluid particle we're modifying. But otherwise it seemed fine.
 
 I tested it with some of the simple exmaples (like the elliptical drop one, where I set the initial velocity of the 
 fluid to zero, made it a rectangle instead of a circle, and let the black hole fly through -- it ended up looking pretty neat,
