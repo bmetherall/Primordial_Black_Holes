@@ -1,0 +1,15 @@
+Brady,
+
+I've modified your black hole code a bit -- to give it a velocity and to start it at any location.  But otherwise it seemed fine
+
+I tested it with some of the simple exmaples (like the elliptical drop one, where I set the initial velocity of the 
+fluid to zero, made it a rectangle instead of a circle, and let the black hole fly through -- it ended up looking pretty neat,
+but not very much like what we want).  
+
+The file "black_hole.py" is just the Equation for the black hole.  The "hydrostatic_tank.py" file is a slightly-modified version
+of the example.  I changed the shape of the box and added the black hole to "REF 1" equations, and deleted the post-processing code
+that was happening (that made some graphs at the end).  It made some pretty neat movies -- movie2.mpg is the highest resolution
+one I made, looks pretty good.
+
+Still more work to do; some playing around with the box shape (as big as we can, or something clever?), the mass, the velocity,
+plus trying to measure the energy of the system.
