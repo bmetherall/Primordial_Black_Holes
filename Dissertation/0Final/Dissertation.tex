@@ -1,0 +1,89 @@
+\documentclass{jthesis}
+
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{xcolor,graphicx}
+%\usepackage{wrapfig}
+%\usepackage{subcaption}
+\usepackage{mathrsfs}
+\usepackage{amsthm}
+
+\title{Collisions of Primordial Black Holes with Neutron Stars} %Don't put a line break in, it gets really upset
+\author{Brady Metherall}
+\date{March 30, 2017}
+
+\setlength\parindent{0pt}
+
+\DeclareMathOperator{\sgn}{sgn}
+
+\DeclareMathOperator{\Hsign}{\mathscr{H}}
+\newcommand\Hank[2][0]{{\Hsign_{#1} \{ #2 \} }}
+
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+
+\begin{document}
+
+\pagenumbering{roman}
+\maketitle
+
+\makeabstract{
+This is a short example of an abstract.
+}
+
+\makeacknowledgements{
+Thank some people that you like here.
+}
+
+\makedeclaration
+
+\maketableofcontents
+
+\pagenumbering{arabic}
+\doublespacing
+
+\chapter{Intro}
+
+\begin{definition}[Hankel Transform]
+\label{def:hanktrans}
+The Hankel transform of a function $f(s)$ is given by
+\begin{align*}
+\Hank[\nu]{f}(\sigma) = \int_0^\infty f(s) J_\nu(s \sigma) s \, ds,
+\end{align*}
+where $J_\nu$ is the Bessel function of the first kind, of order $\nu \geq -\frac{1}{2}$, and $\sigma$ is a non-negative real variable.
+\end{definition}
+
+\begin{corollary}[Inverse Hankel Transform]
+\label{def:invhanktrans}
+The Hankel transform is self-reciprocal, that is, the inverse Hankel transform is also given by Definition \ref{def:hanktrans}.
+\end{corollary}
+\begin{proof}
+The Hankel transform is self-reciprocal
+\begin{align*}
+\iff f(s) &= \int_0^\infty \Hank[\nu]{f}(\sigma) J_\nu(s \sigma) \sigma \, d\sigma \\
+\iff f(s) &= \int_0^\infty \int_0^\infty f(s') J_\nu(s \sigma) s' \, ds' J_\nu(s \sigma) \sigma \, d\sigma \\
+&= \int_0^\infty f(s') s' \int_0^\infty J_\nu(s' \sigma) J_\nu(s \sigma) \sigma \, d\sigma \, ds' \\
+&= f(s)
+\end{align*}
+by the orthogonality of the Bessel functions.
+\end{proof}
+
+
+%\include{introduction}
+
+\begin{thebibliography}{}
+
+\bibitem[Navarro, Frenk, \& White(1995)]{nfw95} Navarro, J.F., Frenk, C.S., \& White, S.D.M.  1995, MNRAS, 275, 720
+
+\end{thebibliography}
+
+\appendix
+
+\chapter{A Sample Appendix}
+\label{app:sample}
+
+This is just an example of an appendix.
+
+\end{document}
