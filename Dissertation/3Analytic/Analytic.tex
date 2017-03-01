@@ -29,6 +29,28 @@
 
 \subsection{Eigenfunctions of the Laplacian}
 
+\begin{align*}
+\nabla^2 \varphi &=0 \\
+\varphi &= f(r) g(\theta) h(z) T(t) \\
+\nabla^2 &= \frac{1}{r}\frac{\partial}{\partial r} \left( r \frac{\partial}{\partial r} \right) + \frac{1}{r^2} \left( \frac{\partial^2}{\partial \theta^2} \right) + \frac{\partial^2}{\partial z^2} \\
+\frac{1}{r}\frac{\partial}{\partial r} \left( r \frac{\partial \varphi}{\partial r} \right) + \frac{1}{r^2} \left( \frac{\partial^2 \varphi}{\partial \theta^2} \right) + \frac{\partial^2 \varphi}{\partial z^2} &= 0 \\
+\frac{1}{fr}\frac{\partial}{\partial r}(rf') + \frac{1}{r^2}\frac{g''}{g} + \frac{h''}{h} &= 0 \\
+\frac{h''}{h} &= k^2 \\
+h(z) &= Ae^{kz} + Be^{-kz} \\
+&= e^{kz} \\
+\frac{1}{fr}\frac{\partial}{\partial r}(rf') + \frac{1}{r^2}\frac{g''}{g} + k^2 &= 0 \\
+\frac{r}{f}\frac{\partial}{\partial r} \left( rf' \right) + k^2r^2 + \frac{g''}{g} &= 0 \\
+\frac{g''}{g} &= -\mu^2 \\
+g(\theta) &= A \sin(\mu \theta) + B \cos(\mu \theta) \\
+\mu &= 0 \\
+g(\theta) &= 1 \\
+r \frac{\partial}{\partial r}(rf') + (k^2r^2 - 0^2)f &= 0 \\
+f(r) &= A J_0(kr) + B Y_0(kr) \\
+&= A J_0(kr) \\
+\varphi &\propto e^{kz}J_0(kr)T(t) \\
+&= \int_0^\infty e^{kz}T(t)J_0(kr)dk
+\end{align*}
+
 \subsection{Solving the Velocity Potential}
 We must write the gravitational potential as an infinite sum of Bessel functions to match the form of $\varphi$, to do so, we take the Hankel transform,
 \begin{align*}
