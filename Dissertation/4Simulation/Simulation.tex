@@ -3,19 +3,51 @@
 \usepackage{amsfonts}
 \usepackage{amsmath}
 \usepackage{geometry}
-%\usepackage{xcolor,graphicx}
+\usepackage{listings}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{graphicx}
 %\usepackage{wrapfig}
 %\usepackage{subcaption}
 %\usepackage{hyperref}
 
-\title{}
-\author{Brady Metherall}
-\date{}
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+ 
+\lstdefinestyle{mystyle}{
+    emph={self, Equation, loop, BlackHole2D,__init__, initialization},
+    emphstyle=\color{PineGreen},
+    commentstyle=\color{blue},
+    keywordstyle={\color{BrickRed}\bfseries},
+    numberstyle=\color{codegray},
+    stringstyle=\color{codepurple},
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
 
 \newgeometry{margin=1in}
 \setlength\parindent{0pt}
 
 \begin{document}
-\maketitle
+
+\lstset{style=mystyle}
+
+\section{Code}
+
+\begin{figure}[htbp]
+\lstinputlisting[language=Python, lastline=18]{../../BlackHoleEquation.py}
+\caption{Class for adding the acceleration due to the primordial black hole.}
+\label{fig:blackholeclass}
+\end{figure}
+
 
 \end{document}
