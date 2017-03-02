@@ -2,8 +2,6 @@
 
 import os.path
 
-import sys
-
 import numpy as np
 
 # PyZoltan imports
@@ -18,7 +16,7 @@ from pysph.sph.integrator import PECIntegrator
 from pysph.sph.integrator_step import WCSPHStep
 from pysph.solver.output import dump
 
-# the eqations
+# Import the eqations
 from pysph.sph.equation import Group
 from pysph.sph.BlackHoleEquation import BlackHole2D
 
@@ -39,20 +37,21 @@ from pysph.sph.wc.basic import TaitEOS, TaitEOSHGCorrection, MomentumEquation
 from pysph.sph.basic_equations import XSPHCorrection, \
     MonaghanArtificialViscosity
 
-# domain and reference values
-Lx = 200.0; H = 30.0; Ly = 1.5*H
+# Domain and reference values
+Lx = 30.0; H = 15.0; Ly = 1.5*H
 gy = -1.0
 Vmax = np.sqrt(abs(gy) * H)
 c0 = 10 * Vmax; rho0 = 1.0
 p0 = c0*c0*rho0
 gamma = 1.0
 
-soft = 0.05
-t_hit = 30.0
-Mass = 20.0
+soft = 0.01
+t_hit = 10.0
+Mass = 1.0
+tf = H + t_hit # Simulation ends when the black hole reaches the bottom of the tank
 
 # Reynolds number and kinematic viscosity
-Re = 0; nu = 0.01#Vmax * Ly/Re
+Re = 0; nu = 0.01#Vmax*Ly/Re # Ideal fluid
 
 # Numerical setup
 nx = 100; dx = Lx/nx
@@ -66,7 +65,6 @@ dt_viscous = 0.125 * h0**2/nu
 dt_force = 0.25 * np.sqrt(h0/abs(gy))
 
 tdamp = 1.0
-tf = 200
 dt = 0.75 * min(dt_cfl, dt_viscous, dt_force)
 output_at_times = np.arange(0.25, 2.1, 0.25)
 
@@ -81,7 +79,7 @@ def damping_factor(t, tdamp):
         return 1.0
 
 
-class HydrostaticTank(Application):
+class BlackHole(Application):
     def add_user_options(self, group):
         group.add_argument(
             '--bc-type', action='store', type=int,
@@ -196,26 +194,26 @@ class HydrostaticTank(Application):
             # Main acceleration block
             Group(equations=[
 
-                    # Continuity equation
-                    ContinuityEquation(dest='fluid', sources=['fluid','solid']),
+                # Continuity equation
+                ContinuityEquation(dest='fluid', sources=['fluid','solid']),
 
-                    # Pressure gradient with acceleration damping.
-                    MomentumEquationPressureGradient(
-                        dest='fluid', sources=['fluid', 'solid'], pb=0.0, gy=gy,
-                        tdamp=tdamp),
+                # Pressure gradient with acceleration damping.
+                MomentumEquationPressureGradient(
+                    dest='fluid', sources=['fluid', 'solid'], pb=0.0, gy=gy,
+                    tdamp=tdamp),
 
-                    # artificial viscosity for stability
-                    MomentumEquationArtificialViscosity(
-                        dest='fluid', sources=['fluid', 'solid'], alpha=0.24, c0=c0),
+                # artificial viscosity for stability
+                MomentumEquationArtificialViscosity(
+                    dest='fluid', sources=['fluid', 'solid'], alpha=0.24, c0=c0),
 
-                    # Position step with XSPH
-                    XSPHCorrection(dest='fluid', sources=['fluid'], eps=0.0)#,
+                # Position step with XSPH
+                XSPHCorrection(dest='fluid', sources=['fluid'], eps=0.0),
 
-                    # Add a PBH
-                    #BlackHole2D(dest='fluid', sources=None, soft=soft, t_hit=t_hit, M=Mass)
+                # Add the black hole
+                BlackHole2D(dest='fluid', sources=None, soft=soft, t_hit=t_hit, M=Mass)
 
-                    ]),
-            ]
+            ]),
+        ]
 
         # Formulation for REF2. Note that for this formulation to work, the
         # boundary particles need to have a spacing different from the fluid
@@ -318,6 +316,6 @@ class HydrostaticTank(Application):
             return equations3
 
 if __name__ == '__main__':
-    app = HydrostaticTank()
+    app = BlackHole()
     app.run()
     app.post_process(app.info_filename)

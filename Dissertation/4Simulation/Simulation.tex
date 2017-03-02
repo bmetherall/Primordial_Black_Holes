@@ -7,7 +7,7 @@
 \usepackage[dvipsnames]{xcolor}
 \usepackage{graphicx}
 %\usepackage{wrapfig}
-%\usepackage{subcaption}
+\usepackage{subcaption}
 %\usepackage{hyperref}
 
 \definecolor{codegreen}{rgb}{0,0.6,0}
@@ -16,7 +16,7 @@
 \definecolor{backcolour}{rgb}{0.95,0.95,0.92}
  
 \lstdefinestyle{mystyle}{
-    emph={self, Equation, loop, BlackHole2D,__init__, initialization},
+    emph={self, Equation, loop, BlackHole2D,__init__, initialize, BlackHole, Application, Group},
     emphstyle=\color{PineGreen},
     commentstyle=\color{blue},
     keywordstyle={\color{BrickRed}\bfseries},
@@ -49,5 +49,26 @@
 \label{fig:blackholeclass}
 \end{figure}
 
+\begin{figure}[htbp]
+ \begin{subfigure}{\textwidth}
+  \lstinputlisting[language=Python, firstnumber=19, firstline=19, lastline=21]{../../blackhole.py}
+ \end{subfigure} \\
+ \begin{subfigure}{\textwidth}
+  \lstinputlisting[language=Python, firstnumber=40, firstline=40, lastline=59]{../../blackhole.py}
+ \end{subfigure} \\ 
+ \begin{subfigure}{\textwidth}
+  \lstinputlisting[language=Python, firstnumber=82, firstline=82, lastline=82]{../../blackhole.py}
+ \end{subfigure} \\
+  \begin{subfigure}{\textwidth}
+  \lstinputlisting[language=Python, firstnumber=171, firstline=171, lastline=173]{../../blackhole.py}
+ \end{subfigure} \\
+ \begin{subfigure}{\textwidth}
+  \lstinputlisting[language=Python, firstnumber=194, firstline=194, lastline=195]{../../blackhole.py}
+ \end{subfigure} \\
+ \begin{subfigure}{\textwidth}
+  \lstinputlisting[language=Python, firstnumber=212, firstline=212, lastline=217]{../../blackhole.py}
+ \end{subfigure}
+ \caption{Modifications of the hydrostatic tank.}
+\end{figure}
 
 \end{document}
