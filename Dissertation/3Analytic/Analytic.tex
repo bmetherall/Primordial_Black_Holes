@@ -5,9 +5,9 @@
 \usepackage{geometry}
 \usepackage{amsthm}
 \usepackage{mathrsfs}
-%\usepackage{xcolor,graphicx}
+\usepackage{xcolor,graphicx}
 %\usepackage{wrapfig}
-%\usepackage{subcaption}
+\usepackage{subcaption}
 %\usepackage{hyperref}
 
 \newgeometry{margin=1in}
@@ -96,6 +96,43 @@ T(t) &= \frac{Gmv}{g}\frac{1}{1+kv^2/g} \left(-\sgn(t)e^{-kv|t|} + 2H(t)\cos(\om
 \varphi = \frac{Gmv}{g} \int_0^\infty \frac{J_0(kr)e^{kz}}{1+kv^2/g} \left(-\sgn(t)e^{-kv|t|} + 2 \Heavi (t)\cos(\omega_k t) \right)dk \\
 \text{with } \omega_k^2=gk
 \end{align*}
+
+\newpage
+
+\begin{figure}[p]
+\begin{centering}
+ \begin{subfigure}{\textwidth}
+  \input{./Analytic000}
+  \caption{$t=-1$ s.}
+ \end{subfigure} \\
+ \begin{subfigure}{\textwidth}
+  \input{./Analytic001}
+  \caption{$t=0$ s.}
+ \end{subfigure} \\
+ \begin{subfigure}{\textwidth}
+  \input{./Analytic002}
+  \caption{$t=1$ s.}
+ \end{subfigure}
+\end{centering}
+\end{figure}
+
+\begin{figure}[p] \ContinuedFloat
+\begin{centering}
+ \begin{subfigure}{\textwidth}
+  \input{./Analytic003}
+  \caption{$t=2$ s.}
+ \end{subfigure} \\
+ \begin{subfigure}{\textwidth}
+  \input{./Analytic004}
+  \caption{$t=3$ s.}
+ \end{subfigure} \\
+  \begin{subfigure}{\textwidth}
+  \input{./Analytic005}
+  \caption{$t=4$ s.}
+ \end{subfigure}
+ \end{centering}
+\end{figure}
+
 
 
 
