@@ -14,7 +14,7 @@ do for [t=0:5] {
     set grid front
     set object circle at first 0.05,1-t radius char 0.5 \
     fillcolor rgb 'black' fillstyle solid noborder front# Plot the PBH
-    plot "../../Wave/WavesFinal.dat" using 1:40*t+42 notitle smooth unique with filledcurves y1=-8
+    plot "../../Wave/WavesFinal.dat" using 1:40*t+42 notitle smooth unique with filledcurves x1 lc 7
     set out
     unset object
     unset grid
