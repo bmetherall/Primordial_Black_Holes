@@ -5,10 +5,7 @@
 \usepackage{geometry}
 \usepackage{amsthm}
 \usepackage{mathrsfs}
-%\usepackage{xcolor,graphicx}
-%\usepackage{wrapfig}
-%\usepackage{subcaption}
-%\usepackage{hyperref}
+\usepackage{setspace}
 
 \newgeometry{margin=1in}
 \setlength\parindent{0pt}
@@ -26,14 +23,39 @@
 
 \begin{document}
 
+\doublespacing
+\linespread{2}
+
 \section{Operators and Integral Transforms}
 
-\begin{definition}[Uniform Continuity]
-A function $f: X \rightarrow Y$ is uniformly continuous if $\forall \varepsilon > 0$, $\exists \, \delta > 0 \, : \, |x-x_0| < \delta \Rightarrow |f(x) - f(x_0)| < \varepsilon$, $ \forall x_0 \in X$.
+Before starting the in-depth analysis, we first must introduce key definitions, and theorems, several of which have been modified from ***, to more easily analytically solve the velocity potential of the neutron star.
+
+\begin{definition}[Operator]
+\label{def:operator}
+Let $A$, and $B$ be vector spaces with respective subspaces, $X$, and $Y$. An operator $\mathcal{T}$, maps any $x \in X$ to $Y$, and is denoted by $\mathcal{T}(x)$.
 \end{definition}
 
+Common examples of operators are the Sturm-Liouville operator, the Laplacian, or the Hamiltonian. Our focus will be on the integral operator, or transform.
+
+\begin{definition}[Integral Transform]
+\label{def:transform}
+Let the domain, and co-domain of the transform be $C[a,b]$ and $K: \mathbb{R}^2 \rightarrow \mathbb{R}$, then we can define our operator $\mathcal{T}:C[a,b] \rightarrow C[a,b]$ as
+\begin{align*}
+(\mathcal{T}f)(x) = \int_a^b f(y) K(x,y) \, dy,
+\end{align*}
+where $K$ is called the kernel function.
+\end{definition}
+
+During the analysis, a specific integral transform will be used, namely the Hankel transform, which will be defined shortly. Typically, the bounds of integral transforms are either $0$ or $-\infty$, to $\infty$, and therefore, the following definition and theorem are necessary to show that integral transforms are well behaved, and continuous.
+
+\begin{definition}[Uniform Continuity]
+A function $f: X \rightarrow Y$, with $X, \, Y \subseteq \mathbb{R}$, is uniformly continuous if $\forall \varepsilon > 0$, $\exists \, \delta > 0 \, : \, |x-x_0| < \delta \Rightarrow |f(x) - f(x_0)| < \varepsilon$, $ \forall x_0 \in X$.
+\end{definition}
+
+Uniform continuity has a very similar definition to continuity formally, the difference being of course, is that  $\delta$ must be the same for the entire domain. Furthermore, continuity is only defined for a point, whereas uniform continuity is defined over an interval.
+
 \begin{theorem}
-If a function $f: X \rightarrow \mathbb{R}$ is continuous with $X$ compact, $f$ is uniformly continuous on $X$.
+If a function $f: X \rightarrow \mathbb{R}$, with $X$ a compact, subset of the real numbers, is continuous, $f$ is uniformly continuous on $X$.
 \label{thm:uniform}
 \end{theorem}
 \begin{proof}
@@ -49,15 +71,7 @@ Then, let $\delta = \min \{ \frac{1}{2} \delta_i \}$, and suppose, $|x-x_0| < \d
 by the triangle inequality.
 \end{proof}
 
-\begin{definition}[Operator]
-\label{def:operator}
-Let $A$, and $B$ be vector spaces with respective subspaces, $X$, and $Y$. An operator $\mathcal{T}$, maps any $x \in X$ to $Y$, and is denoted by $\mathcal{T}(x)$.
-\end{definition}
-Common examples of operators are the Sturm-Liouville operator, the Laplacian, or Hamiltonian. Our focus will be on the integral operator, or transform. Let the domain, and co-domain of the transform be $C[a,b]$ and $K: \mathbb{R}^2 \rightarrow \mathbb{R}$, then we can define our operator $\mathcal{T}:C[a,b] \rightarrow C[a,b]$ as
-\begin{align*}
-(\mathcal{T}f)(x) = \int_a^b f(y) K(x,y)dy,
-\end{align*}
-where $K$ is called the kernel function.
+Physically, we require the velocity potential to be continuous, and so the Hankel transform, and in fact all integral transforms, should preserve continuity, as shown in Theorem \ref{thm:continuity}.
 
 \begin{theorem}
 \label{thm:continuity}
@@ -78,6 +92,8 @@ The conditions for Theorem \ref{thm:continuity} are automatically satisfied by T
 
 \subsection{Hankel Transform}
 
+The Hankel transform, named after the German mathematician Hermann Hankel, is quite common in cylindrically symmetric systems, such as ours, and arises from the eigenfunctions of the Laplacian.
+
 \begin{definition}[Hankel Transform]
 \label{def:hanktrans}
 The Hankel transform of a function $f(s)$ is given by
@@ -86,6 +102,8 @@ The Hankel transform of a function $f(s)$ is given by
 \end{align*}
 where $J_\nu$ is the Bessel function of the first kind, of order $\nu \geq -\frac{1}{2}$, and $\sigma$ is a non-negative real variable.
 \end{definition}
+
+Notice, too that it directly follows from Definition \ref{def:hanktrans} that the Hankel transform is self-reciprocal.
 
 \begin{corollary}[Inverse Hankel Transform]
 \label{def:invhanktrans}
@@ -102,7 +120,7 @@ The Hankel transform is self-reciprocal
 by the orthogonality of the Bessel functions.
 \end{proof}
 
-However, only the order zero Hankel transform will be used in the analysis, so the $\nu$ will be omitted and assumed zero.
+However, only the order zero Hankel transform will be used in the analysis, so the $\nu$ shall be omitted and assumed zero. Note that the kernel function of the Hankel transform is not $J_0 (s \sigma) s$, but in fact $\sqrt{s} J_0 (s \sigma)$, the other $\sqrt{s}$ factor gets absorbed into $f$. This is to ensure uniform continuity of the kernel (Lemma \ref{lem:Jcont}), and the continuity of the transform, while minimizing the constraint on $f$. As a consequence, we have the modified condition that $\int_0^\infty \sqrt{s}|f(s)| ds < \infty$.
 
 \begin{lemma}
 $\sqrt{s}J_0(s \sigma)$ is uniformly continuous on $[0,\infty)$.
@@ -111,12 +129,20 @@ $\sqrt{s}J_0(s \sigma)$ is uniformly continuous on $[0,\infty)$.
 \begin{proof}
 Let $N$ be a sufficiently large number. By Theorem \ref{thm:uniform}, $\sqrt{s}J_0(s \sigma)$ is uniformly continuous on $[0,N]$. And on the interval $(N,\infty)$,
 \begin{align*}
-J_0(s \sigma) \approx \sqrt{\frac{2}{\pi s \sigma}} \cos \left( s \sigma - \frac{\pi}{4} \right)
+J_0(s \sigma) \rightarrow \sqrt{\frac{2}{\pi s \sigma}} \cos \left( s \sigma - \frac{\pi}{4} \right)
 \end{align*}
-asymptotically, and therefore $\sqrt{s}J_0(s \sigma)$ is uniformly continuous on $[0,\infty)$ since cosine is uniformly continuous everywhere.
+asymptotically, and therefore $\sqrt{s}J_0(s \sigma)$ is uniformly continuous on $[0,\infty)$ since cosine is uniformly continuous everywhere by its periodicity.
 \end{proof}
 
-Notice that the kernel function of the Hankel transform is not $J_0 (s \sigma) s$, but in fact $J_0 (s \sigma) \sqrt{s}$, the other $\sqrt{s}$ factor gets absorbed into $f$. This is to ensure uniform continuity of the kernel (Lemma \ref{lem:Jcont}), and the continuity of the transform. As a consequence, we have the modified condition that $\int_0^\infty \sqrt{s}|f(s)| ds < \infty$.
+\begin{theorem}
+The Hankel transform is continuous if $\int_0^\infty \sqrt{s}|f(s)| ds < \infty$.
+\end{theorem}
+\begin{proof}
+Lemma \ref{lem:Jcont} shows the uniform continuity of the kernel, and $\int_0^\infty \sqrt{s}|f(s)| ds < \infty$ is a stronger condition than $\int_0^\infty |f(s)| ds < \infty$, thus by Theorem \ref{thm:continuity}, the Hankel transform is continuous.
+\end{proof}
 
+\subsubsection{Applications of the Hankel Transform}
+
+As previously noted, the Hankel transform arises from axisymmetric problems in cylindrical coordinates from the radial eigenfunction of the Laplacian. Because of this, the Hankel transform along with the Laplace transform have many applications in solving partial differential equations in physics. Some examples include, but are not limited to, a free vibration of a circular membrane, the diffusion equation, acoustic radiation, or even the axisymmetric Cauchy-Poisson wave problem, which shares many similarities with this work.
 
 \end{document}
