@@ -6,9 +6,7 @@
 \usepackage{amsthm}
 \usepackage{mathrsfs}
 \usepackage{xcolor,graphicx}
-%\usepackage{wrapfig}
 \usepackage{subcaption}
-%\usepackage{hyperref}
 
 \newgeometry{margin=1in}
 \setlength\parindent{0pt}
@@ -27,31 +25,106 @@
 
 \section{Analytic Solution}
 
+Typically, in fluid dynamics, the scalar function known as the velocity potential denoted by $\varphi$, is what is desired. Once the velocity potential is known, the system is solved because  $\overset{\rightharpoonup}\nabla \varphi = \bf{u}$, and in the case of a free surface, the deformation of the surface can readily be found from the velocity potential as well. The velocity potential will be found in the coming sub-chapters, and then the energy deposited into the neutron star will be calculated.
+
 \subsection{Eigenfunctions of the Laplacian}
 
+The first step in analytically solving for the velocity potential will be to find the eigenfunctions of Laplace's equation, $\nabla^2 \varphi = 0$, since the velocity potential is conservative. Since this is a partial differential equation we will assume the solution is the product of univariate functions, $\varphi = f(r) g(\theta) h(z) T(t)$. Expanding the Laplacian for cylindrical systems gives 
+
 \begin{align*}
-\nabla^2 \varphi &=0 \\
-\varphi &= f(r) g(\theta) h(z) T(t) \\
-\nabla^2 &= \frac{1}{r}\frac{\partial}{\partial r} \left( r \frac{\partial}{\partial r} \right) + \frac{1}{r^2} \left( \frac{\partial^2}{\partial \theta^2} \right) + \frac{\partial^2}{\partial z^2} \\
-\frac{1}{r}\frac{\partial}{\partial r} \left( r \frac{\partial \varphi}{\partial r} \right) + \frac{1}{r^2} \left( \frac{\partial^2 \varphi}{\partial \theta^2} \right) + \frac{\partial^2 \varphi}{\partial z^2} &= 0 \\
-\frac{1}{fr}\frac{\partial}{\partial r}(rf') + \frac{1}{r^2}\frac{g''}{g} + \frac{h''}{h} &= 0 \\
-\frac{h''}{h} &= k^2 \\
-h(z) &= Ae^{kz} + Be^{-kz} \\
-&= e^{kz} \\
-\frac{1}{fr}\frac{\partial}{\partial r}(rf') + \frac{1}{r^2}\frac{g''}{g} + k^2 &= 0 \\
-\frac{r}{f}\frac{\partial}{\partial r} \left( rf' \right) + k^2r^2 + \frac{g''}{g} &= 0 \\
-\frac{g''}{g} &= -\mu^2 \\
-g(\theta) &= A \sin(\mu \theta) + B \cos(\mu \theta) \\
-\mu &= 0 \\
-g(\theta) &= 1 \\
-r \frac{\partial}{\partial r}(rf') + (k^2r^2 - 0^2)f &= 0 \\
-f(r) &= A J_0(kr) + B Y_0(kr) \\
-&= A J_0(kr) \\
-\varphi &\propto e^{kz}J_0(kr)T(t) \\
-&= \int_0^\infty e^{kz}T(t)J_0(kr)dk
+\frac{1}{r}\frac{\partial}{\partial r} \left( r \frac{\partial \varphi}{\partial r} \right) + \frac{1}{r^2} \left( \frac{\partial^2 \varphi}{\partial \theta^2} \right) + \frac{\partial^2 \varphi}{\partial z^2} = 0.
 \end{align*}
 
-\subsection{Solving the Velocity Potential}
+The temporal component can be divided out since the Laplacian does not involve time, and will be found later on. Substituting in our assumed form, and dividing by $\varphi$, yields
+
+\begin{align}
+\label{eq:laplaciansub}
+\frac{1}{fr}\frac{\partial}{\partial r}(rf') + \frac{1}{r^2}\frac{g''}{g} + \frac{h''}{h} = 0.
+\end{align}
+
+Where primes denote the derivative with respect to the functions only variable. Notice that the function $h(z)$ has been separated from both $f(r)$, and $g(\theta)$, and since each function is univariate, it must be the case that the last term is constant,
+
+\begin{align*}
+\frac{h''}{h} = k^2.
+\end{align*}
+
+We cleverly force this constant to be positive to satisfy the boundary conditions, namely, that $h(-\infty) = 0$. The most general solution to this is of course exponentials,
+
+\begin{align*}
+h(z) = Ae^{kz} + Be^{-kz}.
+\end{align*}
+
+Since the velocity potential has to vanish at negative infinity, this is simplified to
+
+\begin{align}
+\label{eq:h}
+h(z) = e^{kz},
+\end{align}
+
+without loss of generality we can assume the constant is one, since it can be absorbed into $T(t)$. By substituting in $k^2$ and multiplying through by $r^2$ \eqref{eq:laplaciansub} becomes
+
+\begin{align}
+\label{eq:laplacenoh}
+\frac{r}{f}\frac{\partial}{\partial r} \left( rf' \right) + k^2r^2 + \frac{g''}{g} = 0,
+\end{align}
+
+and once again, $g(\theta)$ has been separated from $f(r)$, and so the last term must be constant,
+
+\begin{align*}
+\frac{g''}{g} = -\mu^2.
+\end{align*}
+
+The constant is forced to be negative since $g(\theta)$ is expected to be periodic, and not exponential. Of course, the general solution to this differential equation is 
+
+\begin{align*}
+g(\theta) = A \sin(\mu \theta) + B \cos(\mu \theta).
+\end{align*}
+
+However, our system is cylindrically symmetric, there is no way to differentiate one value of $\theta$ to another, thus, it is expected that $\varphi$ has no $\theta$ dependence, and consequentially, $g(\theta)$ must be constant, the only way this is satisfied is if $\mu = 0$, so that
+
+\begin{align}
+\label{eq:g}
+g(\theta) = 1.
+\end{align}
+
+By substituting $\mu = 0$ into \eqref{eq:laplacenoh}, and multiplying through by $f$ we obtain
+
+\begin{align*}
+r \frac{\partial}{\partial r}(rf') + (k^2r^2 - 0^2)f = 0,
+\end{align*}
+
+which indeed is Bessel's differential equation of order $0$. Therefore,
+
+\begin{align*}
+f(r) = A J_0(kr) + B Y_0(kr),
+\end{align*}
+
+but, once again, $B$ must equal zero, since $Y_0(0)$ is not finite which is unphysical. The radial part thus simplifies to
+
+\begin{align}
+\label{eq:f}
+f(r) = J_0(kr).
+\end{align}
+
+By combining \eqref{eq:h}, \eqref{eq:g}, and \eqref{eq:f} we find that the velocity potential is 
+
+\begin{align*}
+\varphi \propto e^{kz}T(t)J_0(kr),
+\end{align*}
+
+where $k$ is the eigenvalues. Clearly though, the only restriction on $k$ is that it must be a non-negative real number, all of which are a valid solution to Laplace's equation. Therefore, the total solution must be the sum of all of these, or since $k$ is valid within an interval, we have the integral form 
+
+\begin{align}
+\label{eq:phieigen}
+\varphi = \int_0^\infty e^{kz}T(t)J_0(kr)dk.
+\end{align}
+
+The temporal component can be solved for using equations of fluid dynamics.
+
+\subsection{Temporal Component of the Velocity Potential}
+
+***Add the part about the fluid dynamics equation*** \\
+
 We must write the gravitational potential as an infinite sum of Bessel functions to match the form of $\varphi$, to do so, we take the Hankel transform,
 \begin{align*}
 \frac{\partial \Phi}{\partial t}\bigg|_{z=0} &=  \int_0^\infty \Hank{\frac{\partial \Phi}{\partial t}\bigg|_{z=0}}(k) J_0(kr) k \, dk \\
@@ -59,7 +132,7 @@ We must write the gravitational potential as an infinite sum of Bessel functions
 &= G m v^2 t \int_0^\infty \frac{1}{|vt|} e^{-k|vt|} J_0(kr) k \, dk \\
 &= G m v \sgn(t) \int_0^\infty e^{-kv|t|} J_0(kr) k \, dk.
 \end{align*}
-\footnotetext{Note that $\int_0^\infty \sqrt{r}(r^2 + v^2 t^2)^{-3/2} dr = \Gamma^2(3/4) (\pi v^3 t^3)^{-1/2} < \infty$ for $t \neq 0$ which is not concerning since this is true almost everywhere, and so the condition in Theorem ***** is satisfied.}
+\footnotetext{Note that $\int_0^\infty \sqrt{r}(r^2 + v^2 t^2)^{-3/2} dr = \Gamma^2(3/4) (\pi v^3 t^3)^{-1/2} < \infty$ for $t \neq 0$ which is not concerning since this is true almost everywhere, and so the condition in Theorem *** is satisfied.}
 We can now substitute this into the differential equation and find $\varphi$,
 \begin{align*}
 \int_0^\infty J_0(kr)  \ddot{T}(t) dk + g \int_0^\infty k J_0(kr) T(t) dk + Gmv \int_0^\infty \sgn(t) e^{-kv|t|} J_0(kr)k \, dk = 0 \\
