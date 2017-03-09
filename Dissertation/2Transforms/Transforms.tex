@@ -1,4 +1,4 @@
-\documentclass[10pt]{article}
+\documentclass[12pt]{article}
 
 \usepackage{amsfonts}
 \usepackage{amsmath}
@@ -52,7 +52,7 @@ During the analysis, a specific integral transform will be used, namely the Hank
 A function $f: X \rightarrow Y$, with $X, \, Y \subseteq \mathbb{R}$, is uniformly continuous if $\forall \varepsilon > 0$, $\exists \, \delta > 0 \, : \, |x-x_0| < \delta \Rightarrow |f(x) - f(x_0)| < \varepsilon$, $ \forall x_0 \in X$.
 \end{definition}
 
-Uniform continuity has a very similar definition to continuity formally, the difference being of course, is that  $\delta$ must be the same for the entire domain. Furthermore, continuity is only defined for a point, whereas uniform continuity is defined over an interval.
+Uniform continuity has a very similar formal definition to continuity, the difference being of course, is that  $\delta$ must be the same for the entire domain. Furthermore, continuity is only defined for a point, whereas uniform continuity is defined over an interval.
 
 \begin{theorem}
 If a function $f: X \rightarrow \mathbb{R}$, with $X$ a compact, subset of the real numbers, is continuous, $f$ is uniformly continuous on $X$.
@@ -66,7 +66,7 @@ Since $f$ is continuous
 Then, let $\delta = \min \{ \frac{1}{2} \delta_i \}$, and suppose, $|x-x_0| < \delta$, then, $\exists i : |x-x_i| < \delta_i$, and
 \begin{align*}
 |x_0-x_i| \leq |x_0-x| &+ |x-x_i| < \delta + \frac{1}{2}\delta_i \leq \delta_i, \\
-|f(x_0)-f(x)| \leq |f(x_0)-f(x_i)| &+ |f(x_i)-f(x)| < \frac{1}{2}\varepsilon + \frac{1}{2}\varepsilon = \varepsilon \\
+|f(x_0)-f(x)| \leq |f(x_0)-f(x_i)| &+ |f(x_i)-f(x)| < \frac{1}{2}\varepsilon + \frac{1}{2}\varepsilon = \varepsilon
 \end{align*}
 by the triangle inequality.
 \end{proof}
@@ -103,7 +103,7 @@ The Hankel transform of a function $f(s)$ is given by
 where $J_\nu$ is the Bessel function of the first kind, of order $\nu \geq -\frac{1}{2}$, and $\sigma$ is a non-negative real variable.
 \end{definition}
 
-Notice, too that it directly follows from Definition \ref{def:hanktrans} that the Hankel transform is self-reciprocal.
+Notice too, that it directly follows from Definition \ref{def:hanktrans} that the Hankel transform is self-reciprocal.
 
 \begin{corollary}[Inverse Hankel Transform]
 \label{def:invhanktrans}
@@ -143,6 +143,6 @@ Lemma \ref{lem:Jcont} shows the uniform continuity of the kernel, and $\int_0^\i
 
 \subsubsection{Applications of the Hankel Transform}
 
-As previously noted, the Hankel transform arises from axisymmetric problems in cylindrical coordinates from the radial eigenfunction of Laplace's equation. Because of this, the Hankel transform along with the Laplace transform have many applications in solving partial differential equations in physics. Some examples include, but are not limited to, a free vibration of a circular membrane, the diffusion equation, acoustic radiation, or even the axisymmetric Cauchy-Poisson wave problem, which shares many similarities with this work.
+As previously noted, the Hankel transform arises from axisymmetric problems in cylindrical coordinates from the radial eigenfunction of Laplace's equation. Because of this, the Hankel transform along with the Laplace transform have many applications in solving partial differential equations in physics. Some examples include, but are not limited to, the free vibration of a circular membrane, the diffusion equation, acoustic radiation, or even the axisymmetric Cauchy-Poisson wave problem, which shares many similarities with this work.
 
 \end{document}
