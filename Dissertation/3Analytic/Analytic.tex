@@ -113,6 +113,15 @@ The temporal component can be solved for using equations of fluid dynamics.
 
 \subsection{Temporal Component of the Velocity Potential}
 
+\begin{align*}
+\left( \frac{\partial \varphi}{\partial t} + (g \eta + \Phi) \right) \bigg|_{z=0} = 0
+\end{align*}
+
+\begin{align}
+\label{eq:pressure}
+\left( \frac{\partial^2 \varphi}{\partial t^2} + g \frac{\partial \varphi}{\partial z} + \frac{\partial \Phi}{\partial t} \right) \bigg|_{z=0} = 0
+\end{align}
+
 ***Add the part about the fluid dynamics equation*** \\
 
 We must write the gravitational potential as an infinite sum of Bessel functions to match the form of $\varphi$, to do so, we take the Hankel transform,
@@ -125,10 +134,10 @@ We must write the gravitational potential as an infinite sum of Bessel functions
 \footnotetext{Note that $\int_0^\infty \sqrt{r}(r^2 + v^2 t^2)^{-3/2} dr = \Gamma^2(3/4) (\pi v^3 t^3)^{-1/2} < \infty$ for $t \neq 0$ which is not concerning since this is true almost everywhere, and so the condition in Theorem *** is satisfied.}
 We can now substitute this into *** to obtain,
 \begin{align*}
-\int_0^\infty J_0(kr)  \ddot{T}(t) dk + g \int_0^\infty k J_0(kr) T(t) dk + Gmv \int_0^\infty \sgn(t) e^{-kv|t|} J_0(kr)k \, dk = 0 \\
-\text{or, } \int_0^\infty \left[ \frac{\ddot{T}(t)}{k} + gT(t) + Gmv \sgn(t) e^{-kv|t|} \right] J_0(kr) k \, dk = 0,
+\int_0^\infty J_0(kr)  \ddot{T}(t) dk + g \int_0^\infty k J_0(kr) T(t) dk + Gmv \int_0^\infty \sgn(t) e^{-kv|t|} J_0(kr)k \, dk &= 0, \\
+\text{or, } \int_0^\infty \left[ \frac{\ddot{T}(t)}{k} + gT(t) + Gmv \sgn(t) e^{-kv|t|} \right] J_0(kr) k \, dk &= 0.
 \end{align*}
-but, this is nothing more than the Hankel transform of the differential equation for $T$. By taking the Hankel transform of both sides we can remove the integral,
+But, this is nothing more than the Hankel transform of the differential equation for $T$. By taking the Hankel transform of both sides we can remove the integral,
 \begin{align*}
 \frac{\ddot{T}(t)}{k} + gT(t) + Gmv \sgn(t) e^{-kv|t|} = 0.
 \end{align*}
@@ -194,6 +203,12 @@ T(t) &= \frac{Gmv}{g}\frac{1}{1+kv^2/g} \left(-\sgn(t)e^{-kv|t|} + 2H(t)\cos(\om
   \caption{$t=4$ s.}
  \end{subfigure}
  \end{centering}
+\end{figure}
+
+
+\begin{figure}[p]
+ \input{./AnalyticEnergyPlot}
+ \caption{Energy! All variables set to 1.}
 \end{figure}
 
 
