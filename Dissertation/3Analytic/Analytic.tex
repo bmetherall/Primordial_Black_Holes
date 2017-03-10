@@ -117,35 +117,41 @@ The temporal component can be solved for using equations of fluid dynamics.
 \left( \frac{\partial \varphi}{\partial t} + (g \eta + \Phi) \right) \bigg|_{z=0} = 0
 \end{align*}
 
+by taking the time derivative and using the substitution that
 \begin{align}
-\label{eq:pressure}
-\left( \frac{\partial^2 \varphi}{\partial t^2} + g \frac{\partial \varphi}{\partial z} + \frac{\partial \Phi}{\partial t} \right) \bigg|_{z=0} = 0
+\label{eq:smallamp}
+\frac{\partial \eta}{\partial t} = \frac{\partial \varphi}{\partial z} \bigg|_{z=0},
 \end{align}
 
-***Add the part about the fluid dynamics equation*** \\
+by ***, we obtain
+\begin{align}
+\label{eq:presscond}
+\left( \frac{\partial^2 \varphi}{\partial t^2} + g \frac{\partial \varphi}{\partial z} + \frac{\partial \Phi}{\partial t} \right) \bigg|_{z=0} = 0.
+\end{align}
 
-We must write the gravitational potential as an infinite sum of Bessel functions to match the form of $\varphi$, to do so, we take the Hankel transform,
+In order to solve this partial differential equation, we must write the gravitational potential as an infinite sum of Bessel functions to match the form of $\varphi$. To do so, we take the Hankel transform using the fact that it is self-reciprocal, then
 \begin{align*}
-\frac{\partial \Phi}{\partial t}\bigg|_{z=0} &=  \int_0^\infty \Hank{\frac{\partial \Phi}{\partial t}\bigg|_{z=0}}(k) J_0(kr) k \, dk \\
-&= G m v^2 t \int_0^\infty \Hank{\frac{1}{(r^2 + v^2 t^2)^{3/2}}}(k) J_0(kr) k \, dk \footnote{hey} \\
-&= G m v^2 t \int_0^\infty \frac{1}{|vt|} e^{-k|vt|} J_0(kr) k \, dk \\
+\frac{\partial \Phi}{\partial t}\bigg|_{z=0} &=  \int_0^\infty \Hank{\frac{\partial \Phi}{\partial t}\bigg|_{z=0}}(k) J_0(kr) k \, dk, \\
+&= G m v^2 t \int_0^\infty \Hank{\frac{1}{(r^2 + v^2 t^2)^{3/2}}}(k) J_0(kr) k \, dk, \footnote{} \\
+&= G m v^2 t \int_0^\infty \frac{1}{|vt|} e^{-k|vt|} J_0(kr) k \, dk, *** \\
 &= G m v \sgn(t) \int_0^\infty e^{-kv|t|} J_0(kr) k \, dk.
 \end{align*}
 \footnotetext{Note that $\int_0^\infty \sqrt{r}(r^2 + v^2 t^2)^{-3/2} dr = \Gamma^2(3/4) (\pi v^3 t^3)^{-1/2} < \infty$ for $t \neq 0$ which is not concerning since this is true almost everywhere, and so the condition in Theorem *** is satisfied.}
-We can now substitute this into *** to obtain,
+
+Now we can substitute this into \eqref{eq:presscond} to obtain,
 \begin{align*}
 \int_0^\infty J_0(kr)  \ddot{T}(t) dk + g \int_0^\infty k J_0(kr) T(t) dk + Gmv \int_0^\infty \sgn(t) e^{-kv|t|} J_0(kr)k \, dk &= 0, \\
 \text{or, } \int_0^\infty \left[ \frac{\ddot{T}(t)}{k} + gT(t) + Gmv \sgn(t) e^{-kv|t|} \right] J_0(kr) k \, dk &= 0.
 \end{align*}
-But, this is nothing more than the Hankel transform of the differential equation for $T$. By taking the Hankel transform of both sides we can remove the integral,
+But, this is nothing more than the Hankel transform of the differential equation for $T$. By taking the Hankel transform of both sides we can remove the integral, giving an ordinary differential equation for the time component:
 \begin{align*}
 \frac{\ddot{T}(t)}{k} + gT(t) + Gmv \sgn(t) e^{-kv|t|} = 0.
 \end{align*}
-Clearly, the homogeneous solution is $T(t) = A \cos(\omega_k t) + B \sin(\omega_k t)$ with $\omega_k^2 = gk$. The form of the differential equations suggests the form $T(t) = C e^{-kv|t|}$ for the particular solution. Substituting this in yields
+Clearly, the homogeneous solution is $T(t) = A \cos(\omega_k t) + B \sin(\omega_k t)$ with $\omega_k^2 = gk$. The form of this differential equations suggests the form $T(t) = C e^{-kv|t|}$ for the particular solution. Substituting this in yields
 \begin{align*}
-C \left(k^2 v^2 \sgn^2(t) e^{-kv |t|} + gk e^{-kv |t|} \right) &+ Gmvk \sgn(t) e^{-kv|t|} = 0,
+C \left(k^2 v^2 \sgn^2(t) e^{-kv |t|} + gk e^{-kv |t|} \right) &+ Gmvk \sgn(t) e^{-kv|t|} = 0.
 \end{align*}
-giving
+Isolating for $C$ 
 \begin{align*}
 C &= \frac{-Gmvk \sgn(t)}{k^2v^2 + gk} \\
 &= \frac{Gmv}{g} \frac{-\sgn(t)}{1+kv^2/g}
@@ -154,20 +160,28 @@ as the coefficient, and,
 \begin{align*}
 T(t) = \frac{Gmv}{g} \frac{1}{1+kv^2/g} \left( -\sgn(t) e^{-kv|t|} \right) + A \cos(\omega_k t) + B \sin(\omega_k t)
 \end{align*}
-as the full time component of the velocity potential. We can now apply the boundary conditions to find $A$, and $B$. Physically, we expect $T(t) \in C^1(-\infty,\infty)$, furthermore, we only expect the sinusoidal terms to contribute at times greater than zero, thus,
+as the full time component of the velocity potential. We can now apply the boundary conditions to find $A$, and $B$. Physically, we expect $T(t) \in C^1(-\infty,\infty)$, furthermore, we only expect the sinusoidal terms to contribute at times greater than zero, thus finally, we procure
 \begin{align*}
 T(t) &= \frac{Gmv}{g}\frac{1}{1+kv^2/g} \left(-\sgn(t)e^{-kv|t|} + 2H(t)\cos(\omega_k t) \right)dk, \text{ and,} \\
-\varphi &= \frac{Gmv}{g} \int_0^\infty \frac{J_0(kr)e^{kz}}{1+kv^2/g} \left(-\sgn(t)e^{-kv|t|} + 2H(t)\cos(\omega_k t) \right)dk.
+\varphi &= \frac{Gmv}{g} \int_0^\infty \frac{J_0(kr)e^{kz}}{1+kv^2/g} \left(-\sgn(t)e^{-kv|t|} + 2H(t)\cos(\omega_k t) \right) dk.
 \end{align*}
 
+\subsection{Deformation of the Surface}
+
+From \eqref{eq:smallamp} we can isolate for $\eta$:
 \begin{align*}
-\varphi = \int_0^\infty J_0(kr) e^{kz} T(t) dk \\
-\left( \frac{\partial \varphi}{\partial t} + (g \eta + \Phi) \right) \bigg|_{z=0} = 0 \\
-\left( \frac{\partial^2 \varphi}{\partial t^2} + g \frac{\partial \varphi}{\partial z} + \frac{\partial \Phi}{\partial t} \right) \bigg|_{z=0} = 0\\
-\text{where }\Phi = \frac{-Gm}{\sqrt{r^2+(z-vt)^2}} \\
-\varphi = \frac{Gmv}{g} \int_0^\infty \frac{J_0(kr)e^{kz}}{1+kv^2/g} \left(-\sgn(t)e^{-kv|t|} + 2 \Heavi (t)\cos(\omega_k t) \right)dk \\
-\text{with } \omega_k^2=gk
+\eta &= \int_0^t \frac{\partial \varphi}{\partial z} \bigg|_{z=0} \, dt \\
+&= \int_0^t \frac{Gmv}{g} \int_0^\infty \frac{k J_0(kr)}{1+kv^2/g} \left(-\sgn(t)e^{-kv|t|} + 2H(t)\cos(\omega_k t) \right) dk \, dt \\
+&= \frac{Gmv}{g} \int_0^\infty \frac{k J_0(kr)}{1+kv^2/g} \left( \int_0^t  -\sgn(t)e^{-kv|t|} + 2H(t)\cos(\omega_k t) \, dt \right) dk \\
+&= \frac{Gmv}{g} \int_0^\infty \frac{k J_0(kr)}{1+kv^2/g} \left( -\sgn(t) \frac{e^{-kv|t|}}{-k v \sgn(t)} + 2H(t)\frac{1}{\omega_k}\sin(\omega_k t) \right) dk \\
+&= \frac{Gm}{g} \int_0^\infty \frac{J_0(kr)}{1+kv^2/g} \left( e^{-kv|t|} + 2H(t) v \sqrt{\frac{k}{g}} \sin(\omega_k t) \right) dk
 \end{align*}
+
+
+
+
+
+
 
 \newpage
 
