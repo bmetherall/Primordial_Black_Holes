@@ -6,6 +6,7 @@
 /Wave/load
 /Wave/Waves2.dat
 /ThesisTemplate
+/
 BlackHoleVideo.sh
 *.nb
 *.png
@@ -13,7 +14,7 @@ BlackHoleVideo.sh
 *.pdf
 *~*
 /Dissertation/Hankel.text
-blackhole_output
+blackhole_output*
 parameters.dat
 
 # TeX files
@@ -24,7 +25,7 @@ test.tex
 *.log
 *.lot
 *.out
-*.gz
+*.gz*
 *.zip
 *.nav
 *.snm
