@@ -55,15 +55,19 @@ A function $f: X \rightarrow Y$, with $X, \, Y \subseteq \mathbb{R}$, is uniform
 Uniform continuity has a very similar formal definition to continuity, the difference being of course, is that  $\delta$ must be the same for the entire domain. Furthermore, continuity is only defined for a point, whereas uniform continuity is defined over an interval.
 
 \begin{theorem}
-If a function $f: X \rightarrow \mathbb{R}$, with $X$ a compact, subset of the real numbers, is continuous, $f$ is uniformly continuous on $X$.
+If a function $f: X \rightarrow \mathbb{R}$, with $X$ a closed, subset of the real numbers, is continuous, $f$ is uniformly continuous on $X$.
 \label{thm:uniform}
 \end{theorem}
 \begin{proof}
-Since $f$ is continuous
+Since $f$ is continuous, by the Heine-Borel Theorem *** there exists a finite sub-cover of $X$:
 \begin{align*}
-\forall \, \frac{\varepsilon}{2} > 0, \, \exists \, \delta_i > 0 : |x-x_i| < \frac{1}{2} \delta_i \Rightarrow |f(x)-f(x_i)| < \frac{1}{2}\varepsilon \, \forall \, x_i \in X.
+\{ B_{\delta_i/2} (x_i) : 1 \leq i \leq n \in \mathbb{N} \} : X \subseteq \bigcup_{i=1}^n B_{\delta_i/2}(x_i),
 \end{align*}
-Then, let $\delta = \min \{ \frac{1}{2} \delta_i \}$, and suppose, $|x-x_0| < \delta$, then, $\exists i : |x-x_i| < \frac{1}{2}\delta_i$, and
+such that
+\begin{align*}
+\forall \, \frac{\varepsilon}{2} > 0, \, \exists \, i : |x-x_i| < \frac{1}{2} \delta_i \Rightarrow |f(x)-f(x_i)| < \frac{1}{2}\varepsilon \, \forall \, x \in X.
+\end{align*}
+Now, let $\delta = \min \{ \frac{1}{2} \delta_i : 1 \leq i \leq n \}$, and suppose, $|x-x_0| < \delta$, then, $\exists i : |x-x_i| < \frac{1}{2}\delta_i$.  Then,
 \begin{align*}
 |x_0-x_i| \leq |x_0-x| &+ |x-x_i| < \delta + \frac{1}{2}\delta_i \leq \delta_i, \\
 |f(x_0)-f(x)| \leq |f(x_0)-f(x_i)| &+ |f(x_i)-f(x)| < \frac{1}{2}\varepsilon + \frac{1}{2}\varepsilon = \varepsilon
@@ -120,7 +124,7 @@ The Hankel transform is self-reciprocal
 by the orthogonality of the Bessel functions.
 \end{proof}
 
-However, only the order zero Hankel transform will be used in the analysis, so the $\nu$ shall be omitted and assumed zero. Note that the kernel function of the Hankel transform is not $J_0 (s \sigma) s$, but in fact $\sqrt{s} J_0 (s \sigma)$, the other $\sqrt{s}$ factor gets absorbed into $f$. This is to ensure uniform continuity of the kernel (Lemma \ref{lem:Jcont}), and the continuity of the transform, while minimizing the constraint on $f$. As a consequence, we have the modified condition that $\int_0^\infty \sqrt{s}|f(s)| ds < \infty$.
+However, only the order zero Hankel transform will be used in the analysis, so the $\nu$ shall be omitted and assumed zero, unless otherwise stated. Note that the kernel function of the Hankel transform is not $J_0 (s \sigma) s$, but in fact $\sqrt{s} J_0 (s \sigma)$, the other $\sqrt{s}$ factor gets absorbed into $f$. This is to ensure uniform continuity of the kernel (Lemma \ref{lem:Jcont}), and the continuity of the transform, while minimizing the constraint on $f$. As a consequence, we have the modified condition that $\int_0^\infty \sqrt{s}|f(s)| ds < \infty$.
 
 \begin{lemma}
 $\sqrt{s}J_0(s \sigma)$ is uniformly continuous on $[0,\infty)$.
@@ -139,6 +143,25 @@ The Hankel transform is continuous if $\int_0^\infty \sqrt{s}|f(s)| ds < \infty$
 \end{theorem}
 \begin{proof}
 Lemma \ref{lem:Jcont} shows the uniform continuity of the kernel, and $\int_0^\infty \sqrt{s}|f(s)| ds < \infty$ is a stronger condition than $\int_0^\infty |f(s)| ds < \infty$, thus by Theorem \ref{thm:continuity}, the Hankel transform is continuous.
+\end{proof}
+
+The following, and final theorem will be particularly useful for calculating the energy deposited to the neutron star.
+\begin{theorem}
+\label{thm:square}
+The integral of the square of the Hankel transform weighted by $\sigma$, is equivalent to the integral of the square of the function weighted by $s$:
+\begin{align*}
+\int_0^\infty \Hank[\nu]{f}^2(\sigma) \sigma \, d\sigma = \int_0^\infty f^2(s)s \, ds.
+\end{align*}
+\end{theorem}
+
+\begin{proof}
+From the definition of the Hankel transform we have
+\begin{align*}
+\int_0^\infty \Hank[\nu]{f}^2(\sigma) \sigma \, d\sigma &= \int_0^\infty \int_0^\infty f(s) J_\nu(s \sigma) s \, ds \int_0^\infty f(s') J_\nu(s' \sigma) s' \, ds' \, \sigma \, d\sigma, \\
+&= \int_0^\infty \int_0^\infty f(s) f(s') s \, s' \int_0^\infty J_\nu(s \sigma) J_\nu(s' \sigma) \sigma \, d\sigma \, ds \, ds', \\
+&= \int_0^\infty f^2(s) s \, ds
+\end{align*}
+by the orthogonality of Bessel functions.
 \end{proof}
 
 \subsubsection{Applications of the Hankel Transform}

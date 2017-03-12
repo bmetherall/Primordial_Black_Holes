@@ -6,15 +6,17 @@
 /Wave/load
 /Wave/Waves2.dat
 /ThesisTemplate
-/
+/hydro*
 BlackHoleVideo.sh
 *.nb
 *.png
 *.eps
 *.pdf
+*.swp
 *~*
+*save*
 /Dissertation/Hankel.text
-blackhole_output*
+*output*
 parameters.dat
 
 # TeX files
