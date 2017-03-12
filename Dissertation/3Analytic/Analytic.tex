@@ -8,12 +8,14 @@
 \usepackage{xcolor,graphicx}
 \usepackage{subcaption}
 \usepackage{setspace}
+\usepackage{amssymb}
 
 \newgeometry{margin=1in}
 \setlength\parindent{0pt}
 
 \DeclareMathOperator{\sgn}{sgn}
 \DeclareMathOperator{\Heavi}{H}
+\DeclareMathOperator{\grad}{\overset{\rightharpoonup}\nabla}
 
 \DeclareMathOperator{\Hsign}{\mathscr{H}}
 \newcommand\Hank[2][]{{\left( \Hsign_{#1} #2 \right) }}
@@ -29,7 +31,7 @@
 
 \section{Analytic Solution}
 
-Typically, in fluid dynamics, the scalar function known as the velocity potential denoted by $\varphi$, is what is desired. Once the velocity potential is known, the system is solved because  $\overset{\rightharpoonup}\nabla \varphi = \bf{u}$, and in the case of a free surface, the deformation of the surface can readily be found from the velocity potential as well. The velocity potential will be found in the coming sub-chapters, and then the energy deposited into the neutron star will be calculated.
+Typically, in fluid dynamics, the scalar function known as the velocity potential denoted by $\varphi$, is what is desired. Once the velocity potential is known, the system is solved because  $\grad \varphi = \bf{u}$, and in the case of a free surface, the deformation of the surface can readily be found from the velocity potential as well. The velocity potential will be found in the coming sub-chapters, and then the energy deposited into the neutron star will be calculated.
 
 \subsection{Eigenfunctions of the Laplacian}
 
@@ -166,6 +168,8 @@ T(t) &= \frac{Gmv}{g}\frac{1}{1+kv^2/g} \left(-\sgn(t)e^{-kv|t|} + 2H(t)\cos(\om
 \varphi &= \frac{Gmv}{g} \int_0^\infty \frac{J_0(kr)e^{kz}}{1+kv^2/g} \left(-\sgn(t)e^{-kv|t|} + 2H(t)\cos(\omega_k t) \right) dk.
 \end{align*}
 
+Another way the velocity potential can be expressed is as the Hankel transform of the time component, $\varphi = \Hank{e^{kz}\frac{T(t;k)}{k}}(r,z,t)$.
+
 \subsection{Deformation of the Surface}
 
 From \eqref{eq:smallamp} we can isolate for $\eta$:
@@ -174,7 +178,8 @@ From \eqref{eq:smallamp} we can isolate for $\eta$:
 &= \int_0^t \frac{Gmv}{g} \int_0^\infty \frac{k J_0(kr)}{1+kv^2/g} \left(-\sgn(t)e^{-kv|t|} + 2H(t)\cos(\omega_k t) \right) dk \, dt \\
 &= \frac{Gmv}{g} \int_0^\infty \frac{k J_0(kr)}{1+kv^2/g} \left( \int_0^t  -\sgn(t)e^{-kv|t|} + 2H(t)\cos(\omega_k t) \, dt \right) dk \\
 &= \frac{Gmv}{g} \int_0^\infty \frac{k J_0(kr)}{1+kv^2/g} \left( -\sgn(t) \frac{e^{-kv|t|}}{-k v \sgn(t)} + 2H(t)\frac{1}{\omega_k}\sin(\omega_k t) \right) dk \\
-&= \frac{Gm}{g} \int_0^\infty \frac{J_0(kr)}{1+kv^2/g} \left( e^{-kv|t|} + 2H(t) v \sqrt{\frac{k}{g}} \sin(\omega_k t) \right) dk
+&= \frac{Gm}{g} \int_0^\infty \frac{J_0(kr)}{1+kv^2/g} \left( e^{-kv|t|} + 2H(t) v \sqrt{\frac{k}{g}} \sin(\omega_k t) \right) dk \\
+\text{Let } \widetilde{T}(t;k) &= \frac{Gm}{g} \frac{1}{1+kv^2/g} \left( e^{-kv|t|} + 2H(t) v \sqrt{\frac{k}{g}} \sin(\omega_k t) \right) \\
 \end{align*}
 
 
@@ -216,13 +221,82 @@ From \eqref{eq:smallamp} we can isolate for $\eta$:
  \end{centering}
 \end{figure}
 
+\subsection{Calculating the Energy Transferred}
+
+
+\begin{align*}
+E &= \frac{1}{2} \rho \int \left| \grad \varphi \right|^2 \, dV + \rho g \int z \, dV \\
+&= \frac{1}{2} \rho \int_0^{2\pi} \int_0^\infty \int_{-\infty}^0 \left| \grad \varphi \right|^2 \, dz \, r \, dr \, d\theta + \rho g \int_0^{2\pi} \int_0^\infty \int_0^\eta z \, dz \, r \, dr \, d\theta \\
+&= \rho \pi \left( \int_0^\infty \int_{-\infty}^0 \left| \grad \varphi \right|^2 r \, dz \, dr + g \int_0^\infty \eta^2 r \, dr \right) \\
+&= \rho \pi \left( \int_0^\infty \int_{-\infty}^0 \left( \frac{\partial \varphi}{\partial r} \right)^2 r \, dz \, dr + \int_0^\infty \int_{-\infty}^0 \left( \frac{\partial \varphi}{\partial z} \right)^2 r \, dz \, dr + g \int_0^\infty \eta^2 r \, dr \right)
+\end{align*}
+
+To simplify and tidy this calculation, let $\clubsuit$, $\spadesuit$, and $\blacklozenge$ be the three terms respectively, so that
+\begin{align*}
+E = \rho \pi (\clubsuit + \spadesuit + g \blacklozenge).
+\end{align*}
+\begin{align*}
+\clubsuit &= \int_0^\infty \int_{-\infty}^0 \left( \frac{\partial \varphi}{\partial r} \right)^2 r \, dz \, dr \\
+&= \int_{-\infty}^0 \int_0^\infty \Hank[1]{\frac{e^{kz}T(t;k)}{k}}^2(r,z,t) r \, dr \, dz \\
+&*** \\
+&= \int_{-\infty}^0 \int_0^\infty e^{2kz} T^2(t;k) \, k \, dk \, dz \\
+&= \frac{1}{2} \int_0^\infty T^2(t;k) \, dk
+\end{align*}
+\begin{align*}
+\spadesuit &= \int_0^\infty \int_{-\infty}^0 \left( \frac{\partial \varphi}{\partial z} \right)^2 r \, dz \, dr \\
+&= \int_{-\infty}^0 \int_0^\infty \Hank{e^{kz}T(t;k)}^2(r,z,t) r \, dr \, dz \\
+&*** \\
+&= \int_{-\infty}^0 \int_0^\infty e^{2kz} T^2(t;k) \, k \, dk \, dz \\
+&= \frac{1}{2} \int_0^\infty T^2(t;k) \, dk
+\end{align*}
+\begin{align*}
+\blacklozenge &=  \int_0^\infty \eta^2 r \, dr \\
+&= \int_0^\infty \Hank{\frac{\widetilde{T}(t;k)}{k}}^2(r,t) \, r \, dr \\
+&*** \\
+&= \int_0^\infty \frac{\widetilde{T}^2(t;k)}{k} \, dk \\
+\end{align*}
+\begin{align*}
+E(t) = \rho \pi \int_0^\infty T^2(t;k) + g \frac{\widetilde{T}^2(t;k)}{k} \, dk
+\end{align*}
+\begin{equation*}
+\begin{split}
+E = \frac{G^2 m^2 \rho \pi}{g} \int_0^\infty \frac{v^2}{g} \left( \frac{- \sgn(t) e^{-kv |t|} + 2 \Heavi(t) \cos(\omega_k t)}{1+kv^2/g} \right)^2& \\
++ \frac{1}{k} \left( \frac{e^{-kv |t|} + 2 \Heavi(t) v \sqrt{\frac{k}{g}} \sin(\omega_k t)}{1+kv^2/g} \right)^2& \, dk
+\end{split}
+\end{equation*}
+
+By taking the long time limit the exponentials decay to zero, and the sine and cosine simplify to $1$. The energy then becomes
+\begin{align*}
+E = 4 \pi \rho \frac{G^2 m^2}{g}.
+\end{align*}
+
 
 \begin{figure}[p]
  \input{./AnalyticEnergyPlot}
  \caption{Energy! All variables set to 1.}
+ \label{fig:analyticenergy}
 \end{figure}
+
+***
+Compare with dynamical friction solution
 
 
 
 
 \end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
