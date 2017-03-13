@@ -9,6 +9,7 @@
 \usepackage{subcaption}
 \usepackage{setspace}
 \usepackage{amssymb}
+\usepackage{footmisc}
 
 \newgeometry{margin=1in}
 \setlength\parindent{0pt}
@@ -23,6 +24,8 @@
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{definition}[theorem]{Definition}
 \newtheorem{corollary}[theorem]{Corollary}
+
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
 
 \begin{document}
 
@@ -132,16 +135,20 @@ on the surface ***, we obtain
 \left( \frac{\partial^2 \varphi}{\partial t^2} + g \frac{\partial \varphi}{\partial z} + \frac{\partial \Phi}{\partial t} \right) \bigg|_{z=0} = 0.
 \end{align}
 
-In order to solve this partial differential equation, we must write the gravitational potential as an infinite sum of Bessel functions to match the form of $\varphi$. To do so, we take the Hankel transform using the fact that it is self-reciprocal, then
+In order to solve this partial differential equation, we must write the gravitational potential as an infinite sum of Bessel functions to match the form of $\varphi$. We can do so using the Hankel transform using the fact that it is self-reciprocal,
 \begin{align*}
 \frac{\partial \Phi}{\partial t}\bigg|_{z=0} &=  \int_0^\infty \Hank{\frac{\partial \Phi}{\partial t}\bigg|_{z=0}}(k) J_0(kr) k \, dk, \\
-&= G m v^2 t \int_0^\infty \Hank{\frac{1}{(r^2 + v^2 t^2)^{3/2}}}(k) J_0(kr) k \, dk, \footnote{} \\
-&= G m v^2 t \int_0^\infty \frac{1}{|vt|} e^{-k|vt|} J_0(kr) k \, dk, *** \\
-&= G m v \sgn(t) \int_0^\infty e^{-kv|t|} J_0(kr) k \, dk.
+&= G m v^2 t \int_0^\infty \Hank{\frac{1}{(r^2 + v^2 t^2)^{3/2}}}(k) J_0(kr) k \, dk. \footnote[4]{}
 \end{align*}
 
-\footnotetext{Note that $\int_0^\infty \sqrt{r}(r^2 + v^2 t^2)^{-3/2} dr = \Gamma^2(3/4) (\pi v^3 t^3)^{-1/2} < \infty$ for $t \neq 0$ which is not concerning since this is true almost everywhere, and so the condition in Theorem *** is satisfied.}
-Now we can substitute this into \eqref{eq:presscond} to obtain,
+Applying the Hankel transform *** gives
+\begin{align*}
+\frac{\partial \Phi}{\partial t}\bigg|_{z=0} &= G m v^2 t \int_0^\infty \frac{1}{|vt|} e^{-k|vt|} J_0(kr) k \, dk, \\
+&= G m v \sgn(t) \int_0^\infty e^{-kv|t|} J_0(kr) k \, dk, 
+\end{align*}
+
+\footnotetext[4]{Note that $\int_0^\infty \sqrt{r}(r^2 + v^2 t^2)^{-3/2} dr = \Gamma^2(3/4) (\pi v^3 t^3)^{-1/2} < \infty$ for $t \neq 0$ which is not concerning since this is true almost everywhere, and so the condition in Theorem *** is satisfied.}
+which we can now substitute into \eqref{eq:presscond} to obtain,
 \begin{align*}
 \int_0^\infty J_0(kr)  \ddot{T}(t) dk + g \int_0^\infty k J_0(kr) T(t) dk + Gmv \int_0^\infty \sgn(t) e^{-kv|t|} J_0(kr)k \, dk &= 0, \\
 \text{or, } \int_0^\infty \left[ \frac{\ddot{T}(t)}{k} + gT(t) + Gmv \sgn(t) e^{-kv|t|} \right] J_0(kr) k \, dk &= 0.
@@ -169,7 +176,7 @@ T(t) &= \frac{Gmv}{g}\frac{1}{1+kv^2/g} \left(-\sgn(t)e^{-kv|t|} + 2H(t)\cos(\om
 \varphi &= \frac{Gmv}{g} \int_0^\infty \frac{J_0(kr)e^{kz}}{1+kv^2/g} \left(-\sgn(t)e^{-kv|t|} + 2H(t)\cos(\omega_k t) \right) dk.
 \end{align*}
 
-Another way the velocity potential can be expressed is as the Hankel transform of the time component, $\varphi = \Hank{e^{kz}\frac{T(t;k)}{k}}(r,z,t)$, which will be of particular importance in Chapter \ref{chap:energy}
+Another way the velocity potential can be expressed is as the Hankel transform of the time component, $\varphi = \Hank{e^{kz}\frac{T(t;k)}{k}}(r,z,t)$, which will be of particular importance in Chapter \ref{chap:energy} for the energy calculation.
 
 \subsection{Deformation of the Surface}
 

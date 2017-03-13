@@ -6,6 +6,7 @@
 \usepackage{amsthm}
 \usepackage{mathrsfs}
 \usepackage{setspace}
+\usepackage{footmisc}
 
 \newgeometry{margin=1in}
 \setlength\parindent{0pt}
@@ -20,6 +21,8 @@
 \newtheorem{definition}[theorem]{Definition}
 \newtheorem{corollary}[theorem]{Corollary}
 \newtheorem{lemma}[theorem]{Lemma}
+
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
 
 \begin{document}
 
@@ -39,7 +42,7 @@ Common examples of operators are the Sturm-Liouville operator, the Laplacian, or
 
 \begin{definition}[Integral Transform]
 \label{def:transform}
-Let the domain, and co-domain of the transform be $C[a,b]$ and $K: \mathbb{R}^2 \rightarrow \mathbb{R}$, then we can define our operator $\mathcal{T}:C[a,b] \rightarrow C[a,b]$ as
+Let the domain, and co-domain of the transform be $C[a,b]\footnote[4]{$C[a,b]$ denotes the set of continuous functions on the interval $[a,b]$. Likewise, $C^n[a,b]$ denotes the set of functions whose $n$-th derivative is continuous on the interval $[a,b]$.}$ and $K: \mathbb{R}^2 \rightarrow \mathbb{R}$, then we can define our operator $\mathcal{T}:C[a,b] \rightarrow C[a,b]$ as
 \begin{align*}
 (\mathcal{T}f)(x) = \int_a^b f(y) K(x,y) \, dy,
 \end{align*}
