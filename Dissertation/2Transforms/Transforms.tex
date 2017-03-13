@@ -54,12 +54,14 @@ A function $f: X \rightarrow Y$, with $X, \, Y \subseteq \mathbb{R}$, is uniform
 
 Uniform continuity has a very similar formal definition to continuity, the difference being of course, is that  $\delta$ must be the same for the entire domain. Furthermore, continuity is only defined for a point, whereas uniform continuity is defined over an interval.
 
-\begin{theorem}
+\begin{theorem}[Heine-Cantor Theorem ***]
+% http://projecteuclid.org/download/pdf_1/euclid.acta/1485881938
+% page 23 theorem 1
 If a function $f: X \rightarrow \mathbb{R}$, with $X$ a closed, subset of the real numbers, is continuous, $f$ is uniformly continuous on $X$.
 \label{thm:uniform}
 \end{theorem}
 \begin{proof}
-Since $f$ is continuous, by the Heine-Borel Theorem *** there exists a finite sub-cover of $X$:
+Since $f$ is continuous, by Cousin's Theorem *** there exists a finite sub-cover of $X$:
 \begin{align*}
 \{ B_{\delta_i/2} (x_i) : 1 \leq i \leq n \in \mathbb{N} \} : X \subseteq \bigcup_{i=1}^n B_{\delta_i/2}(x_i),
 \end{align*}
