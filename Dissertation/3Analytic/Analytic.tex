@@ -115,17 +115,18 @@ The temporal component can be solved for using equations of fluid dynamics.
 
 \subsection{Temporal Component of the Velocity Potential}
 
+The time component of the velocity potential comes from the specific problem. In our case by linearizing, and assuming the waves have a small amplitude, we have
 \begin{align*}
-\left( \frac{\partial \varphi}{\partial t} + (g \eta + \Phi) \right) \bigg|_{z=0} = 0
+\left( \frac{\partial \varphi}{\partial t} + (g \eta + \Phi) \right) \bigg|_{z=0} = 0,
 \end{align*}
 
-by taking the time derivative and using the substitution that
+where $\eta$ denotes the deformation of the surface. This comes from the pressure condition at the surface, and in our case, has the addition of the gravitational potential. ***Fluids book eqn 3.21 3.22*** By taking the time derivative and using the relation that
 \begin{align}
 \label{eq:smallamp}
-\frac{\partial \eta}{\partial t} = \frac{\partial \varphi}{\partial z} \bigg|_{z=0},
+\frac{\partial \eta}{\partial t} = \frac{\partial \varphi}{\partial z}
 \end{align}
 
-by ***, we obtain
+on the surface ***, we obtain
 \begin{align}
 \label{eq:presscond}
 \left( \frac{\partial^2 \varphi}{\partial t^2} + g \frac{\partial \varphi}{\partial z} + \frac{\partial \Phi}{\partial t} \right) \bigg|_{z=0} = 0.
@@ -138,8 +139,8 @@ In order to solve this partial differential equation, we must write the gravitat
 &= G m v^2 t \int_0^\infty \frac{1}{|vt|} e^{-k|vt|} J_0(kr) k \, dk, *** \\
 &= G m v \sgn(t) \int_0^\infty e^{-kv|t|} J_0(kr) k \, dk.
 \end{align*}
-\footnotetext{Note that $\int_0^\infty \sqrt{r}(r^2 + v^2 t^2)^{-3/2} dr = \Gamma^2(3/4) (\pi v^3 t^3)^{-1/2} < \infty$ for $t \neq 0$ which is not concerning since this is true almost everywhere, and so the condition in Theorem *** is satisfied.}
 
+\footnotetext{Note that $\int_0^\infty \sqrt{r}(r^2 + v^2 t^2)^{-3/2} dr = \Gamma^2(3/4) (\pi v^3 t^3)^{-1/2} < \infty$ for $t \neq 0$ which is not concerning since this is true almost everywhere, and so the condition in Theorem *** is satisfied.}
 Now we can substitute this into \eqref{eq:presscond} to obtain,
 \begin{align*}
 \int_0^\infty J_0(kr)  \ddot{T}(t) dk + g \int_0^\infty k J_0(kr) T(t) dk + Gmv \int_0^\infty \sgn(t) e^{-kv|t|} J_0(kr)k \, dk &= 0, \\
@@ -149,13 +150,13 @@ But, this is nothing more than the Hankel transform of the differential equation
 \begin{align*}
 \frac{\ddot{T}(t)}{k} + gT(t) + Gmv \sgn(t) e^{-kv|t|} = 0.
 \end{align*}
-Clearly, the homogeneous solution is $T(t) = A \cos(\omega_k t) + B \sin(\omega_k t)$ with $\omega_k^2 = gk$. The form of this differential equations suggests the form $T(t) = C e^{-kv|t|}$ for the particular solution. Substituting this in yields
+Clearly, the homogeneous solution is $T(t) = A \cos(\omega_k t) + B \sin(\omega_k t)$ with $\omega_k^2 = gk$. The form of this differential equations suggests the particular solution should take the form $T(t) = C e^{-kv|t|}$. Substituting this in yields
 \begin{align*}
 C \left(k^2 v^2 \sgn^2(t) e^{-kv |t|} + gk e^{-kv |t|} \right) &+ Gmvk \sgn(t) e^{-kv|t|} = 0.
 \end{align*}
-Isolating for $C$ 
+Now, by rearranging we find
 \begin{align*}
-C &= \frac{-Gmvk \sgn(t)}{k^2v^2 + gk} \\
+C &= \frac{-Gmvk \sgn(t)}{k^2v^2 + gk}, \\
 &= \frac{Gmv}{g} \frac{-\sgn(t)}{1+kv^2/g}
 \end{align*}
 as the coefficient, and,
@@ -168,7 +169,7 @@ T(t) &= \frac{Gmv}{g}\frac{1}{1+kv^2/g} \left(-\sgn(t)e^{-kv|t|} + 2H(t)\cos(\om
 \varphi &= \frac{Gmv}{g} \int_0^\infty \frac{J_0(kr)e^{kz}}{1+kv^2/g} \left(-\sgn(t)e^{-kv|t|} + 2H(t)\cos(\omega_k t) \right) dk.
 \end{align*}
 
-Another way the velocity potential can be expressed is as the Hankel transform of the time component, $\varphi = \Hank{e^{kz}\frac{T(t;k)}{k}}(r,z,t)$.
+Another way the velocity potential can be expressed is as the Hankel transform of the time component, $\varphi = \Hank{e^{kz}\frac{T(t;k)}{k}}(r,z,t)$, which will be of particular importance in Chapter \ref{chap:energy}
 
 \subsection{Deformation of the Surface}
 
@@ -222,7 +223,7 @@ From \eqref{eq:smallamp} we can isolate for $\eta$:
 \end{figure}
 
 \subsection{Calculating the Energy Transferred}
-
+\label{chap:energy}
 
 \begin{align*}
 E &= \frac{1}{2} \rho \int \left| \grad \varphi \right|^2 \, dV + \rho g \int z \, dV \\
