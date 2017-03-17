@@ -176,24 +176,30 @@ T(t) &= \frac{Gmv}{g}\frac{1}{1+kv^2/g} \left(-\sgn(t)e^{-kv|t|} + 2H(t)\cos(\om
 \varphi &= \frac{Gmv}{g} \int_0^\infty \frac{J_0(kr)e^{kz}}{1+kv^2/g} \left(-\sgn(t)e^{-kv|t|} + 2H(t)\cos(\omega_k t) \right) dk.
 \end{align*}
 
-Another way the velocity potential can be expressed is as the Hankel transform of the time component, $\varphi = \Hank{e^{kz}\frac{T(t;k)}{k}}(r,z,t)$, which will be of particular importance in Chapter \ref{chap:energy} for the energy calculation.
+Another way the velocity potential can be expressed is as the Hankel transform of the time component, $\varphi = \Hank{e^{kz}\frac{T(t;k)}{k}}(r,z,t)$; this will be of particular importance in Chapter \ref{chap:energy} for the energy calculation.
 
 \subsection{Deformation of the Surface}
 
-From \eqref{eq:smallamp} we can isolate for $\eta$:
+Now that the velocity potential has been acquired, naturally the next step is to find the shape of the surface waves, $\eta$. This can easily be done by integrating both sides of \eqref{eq:smallamp} so that 
 \begin{align*}
-\eta &= \int_0^t \frac{\partial \varphi}{\partial z} \bigg|_{z=0} \, dt \\
-&= \int_0^t \frac{Gmv}{g} \int_0^\infty \frac{k J_0(kr)}{1+kv^2/g} \left(-\sgn(t)e^{-kv|t|} + 2H(t)\cos(\omega_k t) \right) dk \, dt \\
-&= \frac{Gmv}{g} \int_0^\infty \frac{k J_0(kr)}{1+kv^2/g} \left( \int_0^t  -\sgn(t)e^{-kv|t|} + 2H(t)\cos(\omega_k t) \, dt \right) dk \\
-&= \frac{Gmv}{g} \int_0^\infty \frac{k J_0(kr)}{1+kv^2/g} \left( -\sgn(t) \frac{e^{-kv|t|}}{-k v \sgn(t)} + 2H(t)\frac{1}{\omega_k}\sin(\omega_k t) \right) dk \\
-&= \frac{Gm}{g} \int_0^\infty \frac{J_0(kr)}{1+kv^2/g} \left( e^{-kv|t|} + 2H(t) v \sqrt{\frac{k}{g}} \sin(\omega_k t) \right) dk \\
-\text{Let } \widetilde{T}(t;k) &= \frac{Gm}{g} \frac{1}{1+kv^2/g} \left( e^{-kv|t|} + 2H(t) v \sqrt{\frac{k}{g}} \sin(\omega_k t) \right) \\
+\eta &= \int_0^t \frac{\partial \varphi}{\partial z} \bigg|_{z=0} \, dt.
 \end{align*}
+It is now just a matter of taking the partial derivative, and integrating:
+\begin{align*}
+\eta &= \frac{Gmv}{g} \int_0^\infty \frac{k J_0(kr)}{1+kv^2/g} \left( \int_0^t  -\sgn(t)e^{-kv|t|} + 2H(t)\cos(\omega_k t) \, dt \right) dk, \\
+&= \frac{Gm}{g} \int_0^\infty \frac{J_0(kr)}{1+kv^2/g} \left( e^{-kv|t|} + 2H(t) v \sqrt{\frac{k}{g}} \sin(\omega_k t) \right) dk.
+\end{align*}
+As with the velocity potential it will be convenient to express this as a Hankel transform, specifically,
+\begin{align*}
+\eta &= \Hank{\frac{\widetilde{T}(t;k)}{k}}(r,t),
+\end{align*}
+where
+\begin{align*}
+\widetilde{T}(t;k) &= \frac{Gm}{g} \frac{1}{1+kv^2/g} \left( e^{-kv|t|} + 2H(t) v \sqrt{\frac{k}{g}} \sin(\omega_k t) \right)
+\end{align*}
+is the time component. \\
 
-
-
-
-
+This expression for the surface waves can be numerically integrated, the results can be found in Figure \ref{fig:eta}. Initially, before the collision, the primordial black hole causes the surface of the neutron star to rise. At impact, a large wave is created which slowly decays as it traverses outwards. After which waves of smaller and smaller wavelength are observed slowly moving away from the point of impact.
 
 \begin{figure}[p]
 \begin{centering}
@@ -227,56 +233,70 @@ From \eqref{eq:smallamp} we can isolate for $\eta$:
   \caption{$t=4$ s.}
  \end{subfigure}
  \end{centering}
+ \caption{Deformation of the neutron star around the time of impact.}
+ \label{fig:eta}
 \end{figure}
 
 \subsection{Calculating the Energy Transferred}
 \label{chap:energy}
 
+Finally, the last quantity of interest is the energy. Having an idea of what the waves would look like is great, however, if such a collision were to take place, the waves would not be detectable from Earth. On the other hand, the energy would. Now, clearly in order to make reasonable predictions about what would be detected on Earth, more than just Newtonian gravity is necessary. Since energy does not escape the system in this model, it is only transferred between the primordial black hole and the neutron star, we cannot predict what such an event would look like from Earth, but it is a worthwhile calculation nonetheless. \\
+
+To calculate the energy transferred we shall start with
 \begin{align*}
-E &= \frac{1}{2} \rho \int \left| \grad \varphi \right|^2 \, dV + \rho g \int z \, dV \\
-&= \frac{1}{2} \rho \int_0^{2\pi} \int_0^\infty \int_{-\infty}^0 \left| \grad \varphi \right|^2 \, dz \, r \, dr \, d\theta + \rho g \int_0^{2\pi} \int_0^\infty \int_0^\eta z \, dz \, r \, dr \, d\theta \\
-&= \rho \pi \left( \int_0^\infty \int_{-\infty}^0 \left| \grad \varphi \right|^2 r \, dz \, dr + g \int_0^\infty \eta^2 r \, dr \right) \\
-&= \rho \pi \left( \int_0^\infty \int_{-\infty}^0 \left( \frac{\partial \varphi}{\partial r} \right)^2 r \, dz \, dr + \int_0^\infty \int_{-\infty}^0 \left( \frac{\partial \varphi}{\partial z} \right)^2 r \, dz \, dr + g \int_0^\infty \eta^2 r \, dr \right)
+E(t) &= \frac{1}{2} \rho \int_V \left| \grad \varphi \right|^2 + \rho g \int_V z,
+\end{align*}
+where $\grad \varphi$ is of course $\overset{\rightharpoonup}u$, which is the typical expression for energy, except we use the density of a fluid element instead of its mass. We can expand the volume integral out so that 
+\begin{align*}
+E(t) &= \frac{1}{2} \rho \int_0^{2\pi} \int_0^\infty \int_{-\infty}^0 \left| \grad \varphi \right|^2 \, dz \, r \, dr \, d\theta + \rho g \int_0^{2\pi} \int_0^\infty \int_0^\eta z \, dz \, r \, dr \, d\theta,
+\end{align*}
+notice that the bounds on $z$ are from $0$ to $\eta$, this is because we are interested in the change in energy so we subtract the initial potential energy of the neutron star. After solving the trivia integrals we find that
+\begin{align*}
+E(t) &= \rho \pi \left( \int_0^\infty \int_{-\infty}^0 \left( \frac{\partial \varphi}{\partial r} \right)^2 r \, dz \, dr + \int_0^\infty \int_{-\infty}^0 \left( \frac{\partial \varphi}{\partial z} \right)^2 r \, dz \, dr + g \int_0^\infty \eta^2 r \, dr \right).
+\end{align*}
+These are non-trivial integrals since $\varphi$, and $\eta$ are themselves non-trivial integrals. To simplify and tidy this calculation, let $\clubsuit$, $\spadesuit$, and $\blacklozenge$ be the three terms respectively, so that $E = \rho \pi (\clubsuit + \spadesuit + g \blacklozenge)$. \\
+
+The reason we wrote the velocity potential, and the deformation of the surface as Hankel transforms of their time components is so these integrals can more easily be solved using Theorem ***. Starting with the first term,
+\begin{align*}
+\clubsuit &= \int_0^\infty \int_{-\infty}^0 \left( \frac{\partial \varphi}{\partial r} \right)^2 r \, dz \, dr,
+\end{align*}
+$\partial \varphi / \partial r$ can be replaced by its Hankel transform representation so that
+\begin{align*}
+\clubsuit &= \int_{-\infty}^0 \int_0^\infty \Hank[1]{e^{kz}T(t;k)}^2(r,z,t) r \, dr \, dz.
+\end{align*}
+After invoking Theorem *** we acquire
+\begin{align*}
+\clubsuit &= \int_{-\infty}^0 \int_0^\infty e^{2kz} T^2(t;k) \, k \, dk \, dz,
+\end{align*}
+then by integrating over $z$ we get the final expression
+\begin{align*}
+\clubsuit &= \frac{1}{2} \int_0^\infty T^2(t;k) \, dk.
 \end{align*}
 
-To simplify and tidy this calculation, let $\clubsuit$, $\spadesuit$, and $\blacklozenge$ be the three terms respectively, so that
+Following this same procedure for the other two terms we find that 
 \begin{align*}
-E = \rho \pi (\clubsuit + \spadesuit + g \blacklozenge).
+\spadesuit &= \frac{1}{2} \int_0^\infty T^2(t;k) \, dk, \text{ and} \\
+\blacklozenge &= \int_0^\infty \frac{\widetilde{T}^2(t;k)}{k} \, dk.
 \end{align*}
-\begin{align*}
-\clubsuit &= \int_0^\infty \int_{-\infty}^0 \left( \frac{\partial \varphi}{\partial r} \right)^2 r \, dz \, dr \\
-&= \int_{-\infty}^0 \int_0^\infty \Hank[1]{\frac{e^{kz}T(t;k)}{k}}^2(r,z,t) r \, dr \, dz \\
-&*** \\
-&= \int_{-\infty}^0 \int_0^\infty e^{2kz} T^2(t;k) \, k \, dk \, dz \\
-&= \frac{1}{2} \int_0^\infty T^2(t;k) \, dk
-\end{align*}
-\begin{align*}
-\spadesuit &= \int_0^\infty \int_{-\infty}^0 \left( \frac{\partial \varphi}{\partial z} \right)^2 r \, dz \, dr \\
-&= \int_{-\infty}^0 \int_0^\infty \Hank{e^{kz}T(t;k)}^2(r,z,t) r \, dr \, dz \\
-&*** \\
-&= \int_{-\infty}^0 \int_0^\infty e^{2kz} T^2(t;k) \, k \, dk \, dz \\
-&= \frac{1}{2} \int_0^\infty T^2(t;k) \, dk
-\end{align*}
-\begin{align*}
-\blacklozenge &=  \int_0^\infty \eta^2 r \, dr \\
-&= \int_0^\infty \Hank{\frac{\widetilde{T}(t;k)}{k}}^2(r,t) \, r \, dr \\
-&*** \\
-&= \int_0^\infty \frac{\widetilde{T}^2(t;k)}{k} \, dk \\
-\end{align*}
+
+
+
 \begin{align*}
 E(t) = \rho \pi \int_0^\infty T^2(t;k) + g \frac{\widetilde{T}^2(t;k)}{k} \, dk
 \end{align*}
-\begin{equation*}
+\begin{equation}
+\label{eq:fullenergy}
 \begin{split}
 E = \frac{G^2 m^2 \rho \pi}{g} \int_0^\infty \frac{v^2}{g} \left( \frac{- \sgn(t) e^{-kv |t|} + 2 \Heavi(t) \cos(\omega_k t)}{1+kv^2/g} \right)^2& \\
 + \frac{1}{k} \left( \frac{e^{-kv |t|} + 2 \Heavi(t) v \sqrt{\frac{k}{g}} \sin(\omega_k t)}{1+kv^2/g} \right)^2& \, dk
 \end{split}
-\end{equation*}
+\end{equation}
 
 By taking the long time limit the exponentials decay to zero, and the sine and cosine simplify to $1$. The energy then becomes
-\begin{align*}
+\begin{align}
+\label{eq:energy}
 E = 4 \pi \rho \frac{G^2 m^2}{g}.
-\end{align*}
+\end{align}
 
 
 \begin{figure}[p]
