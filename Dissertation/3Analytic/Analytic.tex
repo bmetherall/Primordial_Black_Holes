@@ -34,7 +34,7 @@
 
 \chapter{Analytic Solution}
 
-Typically, in fluid dynamics, the scalar function known as the velocity potential denoted by $\varphi$, is what is desired. Once the velocity potential is known, the system is solved because  $\grad \varphi = \overset{\rightharpoonup}u$, and in the case of a free surface, the deformation of the surface can readily be found from the velocity potential as well. The velocity potential will be found in the coming sub-chapters, and then the energy deposited into the neutron star will be calculated.
+Typically, in fluid dynamics, the scalar function known as the velocity potential denoted by $\varphi$, is the desired quantity. Once the velocity potential is known, the system is essentially solved because  $\grad \varphi = \overset{\rightharpoonup}u$, and in the case of a free surface, the deformation of the surface can readily be found from the velocity potential as well. The velocity potential will be found in the coming sections, along with the profile of the surface, and lastly the energy deposited into the neutron star will be calculated.
 
 \section{Eigenfunctions of the Laplacian}
 
@@ -46,10 +46,10 @@ The first step in analytically solving for the velocity potential will be to fin
 The temporal component can be divided out since the Laplacian does not involve time, and will be found later on. Substituting in our assumed form, and dividing by $\varphi$, yields
 \begin{align}
 \label{eq:laplaciansub}
-\frac{1}{fr}\frac{\partial}{\partial r}(rf') + \frac{1}{r^2}\frac{g''}{g} + \frac{h''}{h} = 0.
+\frac{1}{fr}\frac{\partial}{\partial r}(rf') + \frac{1}{r^2}\frac{g''}{g} + \frac{h''}{h} = 0,
 \end{align}
 
-Where primes denote the derivative with respect to the function's only variable. Notice that the function $h(z)$ has been separated from both $f(r)$, and $g(\theta)$, and since each function is univariate, it must be the case that the last term is constant,
+where primes denote the derivative with respect to the function's only variable. Notice that the function $h(z)$ has been separated from both $f(r)$, and $g(\theta)$, and since each function is univariate, it must be the case that the last term is constant,
 \begin{align*}
 \frac{h''}{h} = k^2.
 \end{align*}
@@ -92,7 +92,7 @@ By substituting $\mu = 0$ into \eqref{eq:laplacenoh}, and multiplying through by
 r \frac{\partial}{\partial r}(rf') + (k^2r^2 - 0^2)f = 0,
 \end{align*}
 
-which indeed is Bessel's differential equation of order $0$. Therefore,
+which is indeed Bessel's differential equation of order $0$. Therefore,
 \begin{align*}
 f(r) = A J_0(kr) + B Y_0(kr),
 \end{align*}
@@ -105,20 +105,20 @@ f(r) = J_0(kr).
 
 By combining \eqref{eq:h}, \eqref{eq:g}, and \eqref{eq:f} we find that the velocity potential is 
 \begin{align*}
-\varphi \propto e^{kz}T(t)J_0(kr),
+\varphi \propto e^{kz}T(t;k)J_0(kr),
 \end{align*}
 
-where $k$ is the eigenvalues. Clearly though, the only restriction on $k$ is that it must be a non-negative real number, all of which are a valid solution to Laplace's equation. Therefore, the total solution must be the sum of all of these, or since $k$ is valid within an interval, we have the integral form 
+where $k$ is the eigenvalues. Clearly though, all non-negative, real values of $k$ are a valid solution to Laplace's equation, and the boundary conditions. Therefore, the total solution must be the sum of all of these, or since $k$ is valid within an interval, we have the integral form 
 \begin{align}
 \label{eq:phieigen}
-\varphi = \int_0^\infty e^{kz}T(t)J_0(kr)dk.
+\varphi = \int_0^\infty e^{kz}T(t;k)J_0(kr)dk.
 \end{align}
 
 The temporal component can be solved for using equations of fluid dynamics.
 
 \section{Temporal Component of the Velocity Potential}
 
-The time component of the velocity potential comes from the specific problem. In our case by linearizing, and assuming the waves have a small amplitude, we have
+The time component of the velocity potential comes from our specific problem. In our case by linearizing, and assuming the waves have a small amplitude, we have
 \begin{align*}
 \left( \frac{\partial \varphi}{\partial t} + (g \eta + \Phi) \right) \bigg|_{z=0} = 0,
 \end{align*}
@@ -150,14 +150,14 @@ Applying the Hankel transform *** gives
 \footnotetext[4]{Note that $\int_0^\infty \sqrt{r}(r^2 + v^2 t^2)^{-3/2} dr = \Gamma^2(3/4) (\pi v^3 t^3)^{-1/2} < \infty$ for $t \neq 0$ which is not concerning since this is true almost everywhere, and so the condition in Theorem *** is satisfied.}
 which we can now substitute into \eqref{eq:presscond} to obtain,
 \begin{align*}
-\int_0^\infty J_0(kr)  \ddot{T}(t) dk + g \int_0^\infty k J_0(kr) T(t) dk + Gmv \int_0^\infty \sgn(t) e^{-kv|t|} J_0(kr)k \, dk &= 0, \\
-\text{or, } \int_0^\infty \left[ \frac{\ddot{T}(t)}{k} + gT(t) + Gmv \sgn(t) e^{-kv|t|} \right] J_0(kr) k \, dk &= 0.
+\int_0^\infty J_0(kr)  \ddot{T}(t;k) dk + g \int_0^\infty k J_0(kr) T(t;k) dk + Gmv \int_0^\infty \sgn(t) e^{-kv|t|} J_0(kr)k \, dk &= 0, \\
+\text{or, } \int_0^\infty \left[ \frac{\ddot{T}(t;k)}{k} + gT(t;k) + Gmv \sgn(t) e^{-kv|t|} \right] J_0(kr) k \, dk &= 0.
 \end{align*}
 But, this is nothing more than the Hankel transform of the differential equation for $T$. By taking the Hankel transform of both sides we can remove the integral, giving an ordinary differential equation for the time component:
 \begin{align*}
-\frac{\ddot{T}(t)}{k} + gT(t) + Gmv \sgn(t) e^{-kv|t|} = 0.
+\frac{\ddot{T}(t;k)}{k} + gT(t;k) + Gmv \sgn(t) e^{-kv|t|} = 0.
 \end{align*}
-Clearly, the homogeneous solution is $T(t) = A \cos(\omega_k t) + B \sin(\omega_k t)$ with $\omega_k^2 = gk$. The form of this differential equations suggests the particular solution should take the form $T(t) = C e^{-kv|t|}$. Substituting this in yields
+Clearly, the homogeneous solution is $T(t;k) = A \cos(\omega_k t) + B \sin(\omega_k t)$ with $\omega_k^2 = gk$. The form of this differential equations suggests the particular solution should take the form $T(t;k) = C e^{-kv|t|}$. Substituting this in yields
 \begin{align*}
 C \left(k^2 v^2 \sgn^2(t) e^{-kv |t|} + gk e^{-kv |t|} \right) &+ Gmvk \sgn(t) e^{-kv|t|} = 0.
 \end{align*}
@@ -168,38 +168,17 @@ C &= \frac{-Gmvk \sgn(t)}{k^2v^2 + gk}, \\
 \end{align*}
 as the coefficient, and,
 \begin{align*}
-T(t) = \frac{Gmv}{g} \frac{1}{1+kv^2/g} \left( -\sgn(t) e^{-kv|t|} \right) + A \cos(\omega_k t) + B \sin(\omega_k t)
+T(t;k) = \frac{Gmv}{g} \frac{1}{1+kv^2/g} \left( -\sgn(t) e^{-kv|t|} \right) + A \cos(\omega_k t) + B \sin(\omega_k t)
 \end{align*}
-as the full time component of the velocity potential. We can now apply the boundary conditions to find $A$, and $B$. Physically, we expect $T(t) \in C^1(-\infty,\infty)$, furthermore, we only expect the sinusoidal terms to contribute at times greater than zero, thus finally, we procure
+as the full time component of the velocity potential. We can now apply the boundary conditions to find $A$, and $B$. Physically, we expect $T(t;k) \in C^1(-\infty,\infty)$, furthermore, we only expect the sinusoidal terms to contribute at times greater than zero, thus finally, we procure
 \begin{align*}
-T(t) &= \frac{Gmv}{g}\frac{1}{1+kv^2/g} \left(-\sgn(t)e^{-kv|t|} + 2H(t)\cos(\omega_k t) \right)dk, \text{ and,} \\
+T(t;k) &= \frac{Gmv}{g}\frac{1}{1+kv^2/g} \left(-\sgn(t)e^{-kv|t|} + 2H(t)\cos(\omega_k t) \right), \text{ and,} \\
 \varphi &= \frac{Gmv}{g} \int_0^\infty \frac{J_0(kr)e^{kz}}{1+kv^2/g} \left(-\sgn(t)e^{-kv|t|} + 2H(t)\cos(\omega_k t) \right) dk.
 \end{align*}
 
-Another way the velocity potential can be expressed is as the Hankel transform of the time component, $\varphi = \Hank{e^{kz}\frac{T(t;k)}{k}}(r,z,t)$; this will be of particular importance in Chapter \ref{chap:energy} for the energy calculation.
+Another way the velocity potential can be expressed is as the Hankel transform of its time component, $\varphi = \Hank{e^{kz}\frac{T(t;k)}{k}}(r,z,t)$; this will be of particular importance in ***Chapter/Section \ref{chap:energy} for the energy calculation.
 
 \section{Deformation of the Surface}
-
-Now that the velocity potential has been acquired, naturally the next step is to find the shape of the surface waves, $\eta$. This can easily be done by integrating both sides of \eqref{eq:smallamp} so that 
-\begin{align*}
-\eta &= \int_0^t \frac{\partial \varphi}{\partial z} \bigg|_{z=0} \, dt.
-\end{align*}
-It is now just a matter of taking the partial derivative, and integrating:
-\begin{align*}
-\eta &= \frac{Gmv}{g} \int_0^\infty \frac{k J_0(kr)}{1+kv^2/g} \left( \int_0^t  -\sgn(t)e^{-kv|t|} + 2H(t)\cos(\omega_k t) \, dt \right) dk, \\
-&= \frac{Gm}{g} \int_0^\infty \frac{J_0(kr)}{1+kv^2/g} \left( e^{-kv|t|} + 2H(t) v \sqrt{\frac{k}{g}} \sin(\omega_k t) \right) dk.
-\end{align*}
-As with the velocity potential it will be convenient to express this as a Hankel transform, specifically,
-\begin{align*}
-\eta &= \Hank{\frac{\widetilde{T}(t;k)}{k}}(r,t),
-\end{align*}
-where
-\begin{align*}
-\widetilde{T}(t;k) &= \frac{Gm}{g} \frac{1}{1+kv^2/g} \left( e^{-kv|t|} + 2H(t) v \sqrt{\frac{k}{g}} \sin(\omega_k t) \right)
-\end{align*}
-is the time component. \\
-
-This expression for the surface waves can be numerically integrated, the results can be found in Figure \ref{fig:eta}. Initially, before the collision, the primordial black hole causes the surface of the neutron star to rise. At impact, a large wave is created which slowly decays as it traverses outwards. After which waves of smaller and smaller wavelength are observed slowly moving away from the point of impact.
 
 \begin{figure}[p]
 \begin{centering}
@@ -233,20 +212,41 @@ This expression for the surface waves can be numerically integrated, the results
   \caption{$t=4$ s.}
  \end{subfigure}
  \end{centering}
- \caption{Deformation of the neutron star around the time of impact.}
+ \caption{Deformation of the surface of a neutron star around the time of impact. ***Full animation at .}
  \label{fig:eta}
 \end{figure}
+
+Now that the velocity potential has been acquired, naturally the next step is to find the shape of the surface waves, $\eta$. This can easily be done by integrating both sides of \eqref{eq:smallamp} so that 
+\begin{align*}
+\eta &= \int_0^t \frac{\partial \varphi}{\partial z} \bigg|_{z=0} \, dt.
+\end{align*}
+It is now just a matter of taking the partial derivative, and integrating:
+\begin{align*}
+\eta &= \frac{Gmv}{g} \int_0^\infty \frac{k J_0(kr)}{1+kv^2/g} \left( \int_0^t  -\sgn(t)e^{-kv|t|} + 2H(t)\cos(\omega_k t) \, dt \right) dk, \\
+&= \frac{Gm}{g} \int_0^\infty \frac{J_0(kr)}{1+kv^2/g} \left( e^{-kv|t|} + 2H(t) v \sqrt{\frac{k}{g}} \sin(\omega_k t) \right) dk.
+\end{align*}
+As with the velocity potential it will be convenient to express this as a Hankel transform, specifically,
+\begin{align*}
+\eta &= \Hank{\frac{\widetilde{T}(t;k)}{k}}(r,t),
+\end{align*}
+where
+\begin{align*}
+\widetilde{T}(t;k) &= \frac{Gm}{g} \frac{1}{1+kv^2/g} \left( e^{-kv|t|} + 2H(t) v \sqrt{\frac{k}{g}} \sin(\omega_k t) \right)
+\end{align*}
+is the time component of $\eta$. \\
+
+This expression for the surface waves can be numerically integrated, the results can be found in Figure \ref{fig:eta}. Initially, before the collision, the primordial black hole causes the surface of the neutron star to rise. At impact, a large wave is created which slowly decays as it traverses outwards. After which waves of smaller and smaller wavelength are observed slowly moving away from the point of impact.
 
 \section{Calculating the Energy Transferred}
 \label{chap:energy}
 
-Finally, the last quantity of interest is the energy. Having an idea of what the waves would look like is great, however, if such a collision were to take place, the waves would not be detectable from Earth. On the other hand, the energy would. Now, clearly in order to make reasonable predictions about what would be detected on Earth, more than just Newtonian gravity is necessary. Since energy does not escape the system in this model, it is only transferred between the primordial black hole and the neutron star, we cannot predict what such an event would look like from Earth, but it is a worthwhile calculation nonetheless. \\
+Finally, the last quantity of interest is the energy. Having an idea of what the waves would look like is great, however, if such a collision were to take place, the waves would not be detectable from Earth. On the other hand, the energy would. Now, clearly in order to make reasonable predictions about what would be detected on Earth more than just Newtonian gravity is necessary. Since energy does not escape the system in this model, it is only transferred between the primordial black hole and the neutron star, predictions cannot me made about what such an event would look like from Earth, but it is a worthwhile calculation nonetheless. \\
 
 To calculate the energy transferred we shall start with
 \begin{align*}
 E(t) &= \frac{1}{2} \rho \int_V \left| \grad \varphi \right|^2 + \rho g \int_V z,
 \end{align*}
-where $\grad \varphi$ is of course $\overset{\rightharpoonup}u$, which is the typical expression for energy, except we use the density of a fluid element instead of its mass. We can expand the volume integral out so that 
+where $\grad \varphi$ is of course $\overset{\rightharpoonup}u$, which is a typical expression for energy, except we use the density of a fluid element instead of its mass. We can expand the volume integrals out so that 
 \begin{align*}
 E(t) &= \frac{1}{2} \rho \int_0^{2\pi} \int_0^\infty \int_{-\infty}^0 \left| \grad \varphi \right|^2 \, dz \, r \, dr \, d\theta + \rho g \int_0^{2\pi} \int_0^\infty \int_0^\eta z \, dz \, r \, dr \, d\theta,
 \end{align*}
@@ -256,15 +256,15 @@ E(t) &= \rho \pi \left( \int_0^\infty \int_{-\infty}^0 \left( \frac{\partial \va
 \end{align*}
 These are non-trivial integrals since $\varphi$, and $\eta$ are themselves non-trivial integrals. To simplify and tidy this calculation, let $\clubsuit$, $\spadesuit$, and $\blacklozenge$ be the three terms respectively, so that $E = \rho \pi (\clubsuit + \spadesuit + g \blacklozenge)$. \\
 
-The reason we wrote the velocity potential, and the deformation of the surface as the Hankel transform of their time components is so these integrals can more easily be solved using Theorem ***. Starting with the first term,
+The reason we wrote the velocity potential, and the deformation of the surface as the Hankel transform of their time components is so these integrals can more easily be solved with the aid of Theorem ***. Starting with the first term,
 \begin{align*}
 \clubsuit &= \int_0^\infty \int_{-\infty}^0 \left( \frac{\partial \varphi}{\partial r} \right)^2 r \, dz \, dr,
 \end{align*}
 $\partial \varphi / \partial r$ can be replaced by its Hankel transform representation so that
 \begin{align*}
-\clubsuit &= \int_{-\infty}^0 \int_0^\infty \Hank[1]{e^{kz}T(t;k)}^2(r,z,t) r \, dr \, dz.
+\clubsuit &= \int_{-\infty}^0 \int_0^\infty \Hank[1]{e^{kz}T(t;k)}^2(r,z,t) r \, dr \, dz,
 \end{align*}
-After invoking Theorem ***
+and after invoking Theorem ***
 \begin{align*}
 \clubsuit &= \int_{-\infty}^0 \int_0^\infty e^{2kz} T^2(t;k) \, k \, dk \, dz,
 \end{align*}
@@ -281,28 +281,31 @@ Following this same procedure for the other two terms we find that
 
 Combining these we find
 \begin{align*}
-E(t) = \rho \pi \int_0^\infty T^2(t;k) + g \frac{\widetilde{T}^2(t;k)}{k} \, dk.
+E(t) = \rho \pi \int_0^\infty T^2(t;k) + g \frac{\widetilde{T}^2(t;k)}{k} \, dk,
 \end{align*}
+which after expanding out in full
 \begin{equation}
 \label{eq:fullenergy}
 \begin{split}
-E = \frac{G^2 m^2 \rho \pi}{g} \int_0^\infty \frac{v^2}{g} \left( \frac{- \sgn(t) e^{-kv |t|} + 2 \Heavi(t) \cos(\omega_k t)}{1+kv^2/g} \right)^2& \\
-+ \frac{1}{k} \left( \frac{e^{-kv |t|} + 2 \Heavi(t) v \sqrt{\frac{k}{g}} \sin(\omega_k t)}{1+kv^2/g} \right)^2& \, dk
+E(t) = \frac{G^2 m^2 \rho \pi}{g} \int_0^\infty \frac{v^2}{g} \left( \frac{- \sgn(t) e^{-kv |t|} + 2 \Heavi(t) \cos(\omega_k t)}{1+kv^2/g} \right)^2& \\
++ \frac{1}{k} \left( \frac{e^{-kv |t|} + 2 \Heavi(t) v \sqrt{\frac{k}{g}} \sin(\omega_k t)}{1+kv^2/g} \right)^2& \, dk.
 \end{split}
 \end{equation}
 
-By taking the long time limit the exponentials decay to zero, and the sine and cosine simplify to $1$. The energy then becomes
-\begin{align}
-\label{eq:energy}
-E = 4 \pi \rho \frac{G^2 m^2}{g}.
-\end{align}
-
-
 \begin{figure}[p]
  \input{./AnalyticEnergyPlot}
- \caption{Energy! All variables set to 1.}
- \label{fig:analyticenergy}
+ \caption{Plot of \eqref{eq:fullenergy}, with all variables equal to 1.}
+ \label{fig:energy}
 \end{figure}
+
+Figure \ref{fig:energy} shows a plot of the energy for times near the collision. Initially, the energy grows exponentially, then at $t=0$, when the primordial black hole collides with the neutron star, a considerable amount of energy is deposited. After which, a majority of the energy is carried away exponentially by the primordial black hole. The long time limit is perhaps more useful, since that is the net energy transfer of the interaction. By taking the limit as $t \rightarrow \infty$ of \eqref{eq:fullenergy}, the exponential terms decay to zero, and the sine and cosine simplify to $1$. This new integrand has an elementary antiderivative, and so after integrating, the energy becomes
+\begin{align}
+\label{eq:energy}
+E = 4 \pi \rho \frac{G^2 m^2}{g},
+\end{align}
+which is a surprisingly compact form.
+
+
 
 ***
 Compare with dynamical friction solution
