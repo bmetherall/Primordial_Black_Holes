@@ -1,4 +1,4 @@
-\documentclass[12pt]{article}
+\documentclass[12pt]{report}
 
 \usepackage{amsfonts}
 \usepackage{amsmath}
@@ -32,11 +32,11 @@
 \doublespacing
 \linespread{2}
 
-\section{Analytic Solution}
+\chapter{Analytic Solution}
 
-Typically, in fluid dynamics, the scalar function known as the velocity potential denoted by $\varphi$, is what is desired. Once the velocity potential is known, the system is solved because  $\grad \varphi = \bf{u}$, and in the case of a free surface, the deformation of the surface can readily be found from the velocity potential as well. The velocity potential will be found in the coming sub-chapters, and then the energy deposited into the neutron star will be calculated.
+Typically, in fluid dynamics, the scalar function known as the velocity potential denoted by $\varphi$, is what is desired. Once the velocity potential is known, the system is solved because  $\grad \varphi = \overset{\rightharpoonup}u$, and in the case of a free surface, the deformation of the surface can readily be found from the velocity potential as well. The velocity potential will be found in the coming sub-chapters, and then the energy deposited into the neutron star will be calculated.
 
-\subsection{Eigenfunctions of the Laplacian}
+\section{Eigenfunctions of the Laplacian}
 
 The first step in analytically solving for the velocity potential will be to find the eigenfunctions of Laplace's equation, $\nabla^2 \varphi = 0$, since the velocity potential is conservative. Since this is a partial differential equation we will assume the solution is the product of univariate functions, $\varphi = f(r) g(\theta) h(z) T(t)$. Expanding the Laplacian for cylindrical systems gives 
 \begin{align*}
@@ -116,7 +116,7 @@ where $k$ is the eigenvalues. Clearly though, the only restriction on $k$ is tha
 
 The temporal component can be solved for using equations of fluid dynamics.
 
-\subsection{Temporal Component of the Velocity Potential}
+\section{Temporal Component of the Velocity Potential}
 
 The time component of the velocity potential comes from the specific problem. In our case by linearizing, and assuming the waves have a small amplitude, we have
 \begin{align*}
@@ -178,7 +178,7 @@ T(t) &= \frac{Gmv}{g}\frac{1}{1+kv^2/g} \left(-\sgn(t)e^{-kv|t|} + 2H(t)\cos(\om
 
 Another way the velocity potential can be expressed is as the Hankel transform of the time component, $\varphi = \Hank{e^{kz}\frac{T(t;k)}{k}}(r,z,t)$; this will be of particular importance in Chapter \ref{chap:energy} for the energy calculation.
 
-\subsection{Deformation of the Surface}
+\section{Deformation of the Surface}
 
 Now that the velocity potential has been acquired, naturally the next step is to find the shape of the surface waves, $\eta$. This can easily be done by integrating both sides of \eqref{eq:smallamp} so that 
 \begin{align*}
@@ -237,7 +237,7 @@ This expression for the surface waves can be numerically integrated, the results
  \label{fig:eta}
 \end{figure}
 
-\subsection{Calculating the Energy Transferred}
+\section{Calculating the Energy Transferred}
 \label{chap:energy}
 
 Finally, the last quantity of interest is the energy. Having an idea of what the waves would look like is great, however, if such a collision were to take place, the waves would not be detectable from Earth. On the other hand, the energy would. Now, clearly in order to make reasonable predictions about what would be detected on Earth, more than just Newtonian gravity is necessary. Since energy does not escape the system in this model, it is only transferred between the primordial black hole and the neutron star, we cannot predict what such an event would look like from Earth, but it is a worthwhile calculation nonetheless. \\
@@ -256,7 +256,7 @@ E(t) &= \rho \pi \left( \int_0^\infty \int_{-\infty}^0 \left( \frac{\partial \va
 \end{align*}
 These are non-trivial integrals since $\varphi$, and $\eta$ are themselves non-trivial integrals. To simplify and tidy this calculation, let $\clubsuit$, $\spadesuit$, and $\blacklozenge$ be the three terms respectively, so that $E = \rho \pi (\clubsuit + \spadesuit + g \blacklozenge)$. \\
 
-The reason we wrote the velocity potential, and the deformation of the surface as Hankel transforms of their time components is so these integrals can more easily be solved using Theorem ***. Starting with the first term,
+The reason we wrote the velocity potential, and the deformation of the surface as the Hankel transform of their time components is so these integrals can more easily be solved using Theorem ***. Starting with the first term,
 \begin{align*}
 \clubsuit &= \int_0^\infty \int_{-\infty}^0 \left( \frac{\partial \varphi}{\partial r} \right)^2 r \, dz \, dr,
 \end{align*}
@@ -264,7 +264,7 @@ $\partial \varphi / \partial r$ can be replaced by its Hankel transform represen
 \begin{align*}
 \clubsuit &= \int_{-\infty}^0 \int_0^\infty \Hank[1]{e^{kz}T(t;k)}^2(r,z,t) r \, dr \, dz.
 \end{align*}
-After invoking Theorem *** we acquire
+After invoking Theorem ***
 \begin{align*}
 \clubsuit &= \int_{-\infty}^0 \int_0^\infty e^{2kz} T^2(t;k) \, k \, dk \, dz,
 \end{align*}
@@ -273,16 +273,15 @@ then by integrating over $z$ we get the final expression
 \clubsuit &= \frac{1}{2} \int_0^\infty T^2(t;k) \, dk.
 \end{align*}
 
-Following this same procedure for the other two terms we find that 
+Following this same procedure for the other two terms we find that
 \begin{align*}
 \spadesuit &= \frac{1}{2} \int_0^\infty T^2(t;k) \, dk, \text{ and} \\
 \blacklozenge &= \int_0^\infty \frac{\widetilde{T}^2(t;k)}{k} \, dk.
 \end{align*}
 
-
-
+Combining these we find
 \begin{align*}
-E(t) = \rho \pi \int_0^\infty T^2(t;k) + g \frac{\widetilde{T}^2(t;k)}{k} \, dk
+E(t) = \rho \pi \int_0^\infty T^2(t;k) + g \frac{\widetilde{T}^2(t;k)}{k} \, dk.
 \end{align*}
 \begin{equation}
 \label{eq:fullenergy}
