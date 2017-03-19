@@ -1,12 +1,12 @@
 set terminal pngcairo size 800, 600 # pngcairo produces a higher quality output
 
-set title "Surface Waves"
+set title "Analytic Solution"
 set xlabel "r"
 set ylabel "Surface"
 set yr [-8:16]
 set xr [0.05:1]
 set xtics 0,0.2,1
-set xzeroaxis lt 1 lc 7 # Plot the x-axis
+set xzeroaxis lt 1 lc 8 # Plot the x-axis
 
 do for [t=2:402] {
     set output sprintf('./Images/wave%03.0f.png',t-2)
