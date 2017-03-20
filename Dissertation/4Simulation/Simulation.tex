@@ -1,4 +1,4 @@
-\documentclass[10pt]{article}
+\documentclass[12pt]{report}
 
 \usepackage{amsfonts}
 \usepackage{amsmath}
@@ -9,6 +9,7 @@
 %\usepackage{wrapfig}
 \usepackage{subcaption}
 %\usepackage{hyperref}
+\usepackage{setspace}
 
 \definecolor{codegreen}{rgb}{0,0.6,0}
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}
@@ -39,7 +40,15 @@
 
 \begin{document}
 
+\doublespacing
+\linespread{2}
 \lstset{style=mystyle}
+
+\chapter{Simulation Solution}
+
+\section{Smoothed Particle Hydrodynamics}
+
+\subsection{PySPH}
 
 \section{Code}
 
@@ -58,5 +67,9 @@
   \lstinputlisting[language=Python, firstnumber=212, firstline=212, lastline=217]{../../blackhole.py}
  \caption{Modifications of the hydrostatic tank.}
 \end{figure}
+
+\section{Deformation of the Surface?}
+
+\section{Calculating the Energy Transferred?}
 
 \end{document}
