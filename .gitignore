@@ -21,7 +21,6 @@ parameters.dat
 
 # TeX files
 test.tex
-/Dissertation/Dissertation.tex
 *.aux
 *.lof
 *.log
@@ -42,3 +41,4 @@ test.tex
 !/Dissertation/2Transforms/Transforms.pdf
 !/Dissertation/3Analytic/Analytic.pdf
 !/Dissertation/4Simulation/Simulation.pdf
+!/Dissertation/Dissertation.pdf

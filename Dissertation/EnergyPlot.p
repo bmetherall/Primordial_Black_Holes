@@ -9,9 +9,9 @@ set xr [-30:30]
 
 set ytics 100,20,160
 
-set output sprintf('./AnalyticEnergyPlot.tex')
+set output sprintf('./3Analytic/AnalyticEnergyPlot.tex')
 set grid front
-plot '../../AnalyticEnergy.dat' using 1:(pi*$2) notitle with lines lc 8 lw 3
+plot '../AnalyticEnergy.dat' using 1:(pi*$2) notitle with lines lc 8 lw 3
 set out
 unset grid
 

@@ -1,0 +1,78 @@
+\documentclass{jthesis}
+
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{geometry}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{setspace}
+\usepackage{footmisc}
+\usepackage{hyperref}
+\usepackage{xcolor,graphicx}
+\usepackage{subcaption}
+\usepackage{amssymb}
+
+\title{Collisions of Primordial Black Holes with Neutron Stars} %Don't put a line break in, it gets really upset
+\author{Brady Metherall}
+\date{March 30, 2017}
+
+\setlength\parindent{0pt}
+
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\Heavi}{H}
+
+\DeclareMathOperator{\Hsign}{\mathscr{H}}
+\newcommand\Hank[2][]{{\left( \Hsign_{#1} #2 \right) }}
+
+\DeclareMathOperator{\grad}{\overset{\rightharpoonup}\nabla}
+
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+\begin{document}
+
+\pagenumbering{roman}
+\maketitle
+
+\makeabstract{
+This is a short example of an abstract.
+}
+
+\makeacknowledgements{
+Thank some people that you like here.
+}
+
+\makedeclaration
+
+\maketableofcontents
+
+\pagenumbering{arabic}
+\doublespacing
+\linespread{2}
+
+
+\input{./2Transforms/Transforms}
+
+\input{./3Analytic/Analytic}
+
+
+
+
+\begin{thebibliography}{}
+
+\bibitem[Navarro, Frenk, \& White(1995)]{nfw95} Navarro, J.F., Frenk, C.S., \& White, S.D.M.  1995, MNRAS, 275, 720
+
+\end{thebibliography}
+
+\appendix
+
+\chapter{A Sample Appendix}
+\label{app:sample}
+
+This is just an example of an appendix.
+
+\end{document}

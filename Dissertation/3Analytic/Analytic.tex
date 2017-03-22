@@ -1,36 +1,36 @@
-\documentclass[12pt]{report}
-
-\usepackage{amsfonts}
-\usepackage{amsmath}
-\usepackage{geometry}
-\usepackage{amsthm}
-\usepackage{mathrsfs}
-\usepackage{xcolor,graphicx}
-\usepackage{subcaption}
-\usepackage{setspace}
-\usepackage{amssymb}
-\usepackage{footmisc}
-
-\newgeometry{margin=1in}
-\setlength\parindent{0pt}
-
-\DeclareMathOperator{\sgn}{sgn}
-\DeclareMathOperator{\Heavi}{H}
-\DeclareMathOperator{\grad}{\overset{\rightharpoonup}\nabla}
-
-\DeclareMathOperator{\Hsign}{\mathscr{H}}
-\newcommand\Hank[2][]{{\left( \Hsign_{#1} #2 \right) }}
-
-\newtheorem{theorem}{Theorem}[section]
-\newtheorem{definition}[theorem]{Definition}
-\newtheorem{corollary}[theorem]{Corollary}
-
-\renewcommand{\thefootnote}{\fnsymbol{footnote}}
-
-\begin{document}
-
-\doublespacing
-\linespread{2}
+%\documentclass[12pt]{report}
+%
+%\usepackage{amsfonts}
+%\usepackage{amsmath}
+%\usepackage{geometry}
+%\usepackage{amsthm}
+%\usepackage{mathrsfs}
+%\usepackage{xcolor,graphicx}
+%\usepackage{subcaption}
+%\usepackage{setspace}
+%\usepackage{amssymb}
+%\usepackage{footmisc}
+%
+%\newgeometry{margin=1in}
+%\setlength\parindent{0pt}
+%
+%\DeclareMathOperator{\sgn}{sgn}
+%\DeclareMathOperator{\Heavi}{H}
+%\DeclareMathOperator{\grad}{\overset{\rightharpoonup}\nabla}
+%
+%\DeclareMathOperator{\Hsign}{\mathscr{H}}
+%\newcommand\Hank[2][]{{\left( \Hsign_{#1} #2 \right) }}
+%
+%\newtheorem{theorem}{Theorem}[section]
+%\newtheorem{definition}[theorem]{Definition}
+%\newtheorem{corollary}[theorem]{Corollary}
+%
+%\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+%
+%\begin{document}
+%
+%\doublespacing
+%\linespread{2}
 
 \chapter{Analytic Solution}
 
@@ -213,15 +213,15 @@ with $\omega_\kappa^2 = \kappa$.
 \begin{figure}[p]
 \begin{centering}
  \begin{subfigure}{\textwidth}
-  \input{./Analytic000}
+  \input{./3Analytic/Analytic000}
   \caption{$t \cdot \frac{g}{v} = -1$}
  \end{subfigure} \\
  \begin{subfigure}{\textwidth}
-  \input{./Analytic001}
+  \input{./3Analytic/Analytic001}
   \caption{$t = 0$}
  \end{subfigure} \\
  \begin{subfigure}{\textwidth}
-  \input{./Analytic002}
+  \input{./3Analytic/Analytic002}
   \caption{$t \cdot \frac{g}{v} = 1$}
  \end{subfigure}
 \end{centering}
@@ -230,15 +230,15 @@ with $\omega_\kappa^2 = \kappa$.
 \begin{figure}[p] \ContinuedFloat
 \begin{centering}
  \begin{subfigure}{\textwidth}
-  \input{./Analytic003}
+  \input{./3Analytic/Analytic003}
   \caption{$t \cdot \frac{g}{v} = 2$}
  \end{subfigure} \\
  \begin{subfigure}{\textwidth}
-  \input{./Analytic004}
+  \input{./3Analytic/Analytic004}
   \caption{$t \cdot \frac{g}{v} = 3$}
  \end{subfigure} \\
   \begin{subfigure}{\textwidth}
-  \input{./Analytic005}
+  \input{./3Analytic/Analytic005}
   \caption{$t \cdot \frac{g}{v} = 4$}
  \end{subfigure}
  \end{centering}
@@ -312,7 +312,7 @@ E(\tau) = \frac{G^2 m^2 \rho \pi}{g} \int_0^\infty \left( \frac{- \sgn(\tau) e^{
 \end{equation}
 
 \begin{figure}[p]
- \input{./AnalyticEnergyPlot}
+ \input{./3Analytic/AnalyticEnergyPlot}
  \caption{Energy transfer of the interaction for short times.}
  \label{fig:energy}
 \end{figure}
@@ -345,7 +345,7 @@ which agrees to within around an order of magnitude.
 
 
 
-\end{document}
+%\end{document}
 
 
 
