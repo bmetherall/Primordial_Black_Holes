@@ -1,8 +1,8 @@
 set terminal epslatex color size 6.0in,2.5in
 
 set notitle
-set xlabel '$r \cdot \frac{g}{v^2}$'
-set ylabel rotate by 0 '$\eta \cdot \frac{v^2}{Gm}$'
+set xlabel '$\chi$'
+set ylabel rotate by 0 '$\frac{\eta}{Gm/v^2}$'
 set yr [-4:8]
 set xr [0.05:1]
 set xtics 0,0.2,1

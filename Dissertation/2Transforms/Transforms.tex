@@ -64,7 +64,7 @@ If a function $f: X \rightarrow \mathbb{R}$, with $X$ a closed, subset of the re
 \label{thm:uniform}
 \end{theorem}
 \begin{proof}
-Since $f$ is continuous, by Cousin's Theorem *** there exists a finite sub-cover of $X$:
+Since $f$ is continuous, by Cousin's Theorem *** there exists a finite sub-cover of $X$\footnote[4]{Figure \ref{fig:arrows} helps visualize the concept of finite sub-covers.}:
 \begin{align*}
 \{ B_{\delta_i/2} (x_i) : 1 \leq i \leq n \in \mathbb{N} \} : X \subseteq \bigcup_{i=1}^n B_{\delta_i/2}(x_i),
 \end{align*}
@@ -79,6 +79,13 @@ Now, let $\delta = \min \{ \frac{1}{2} \delta_i : 1 \leq i \leq n \}$, and suppo
 \end{align*}
 by the triangle inequality.
 \end{proof}
+
+\begin{figure}[!p]
+\centering
+\input{Arrows}
+\caption{Cousin's Theorem states that there exists a finite sub-cover of a closed interval. For example, take the interval $[1,2] \in \mathbb{R}$, then there exists a finite collection of circles (or more generally balls) spanning the interval.}
+\label{fig:arrows}
+\end{figure}
 
 Physically, we require the velocity potential to be continuous, and so the Hankel transform, and in fact all integral transforms, should preserve continuity, as shown in Theorem \ref{thm:continuity}.
 
