@@ -16,7 +16,7 @@ from pysph.sph.integrator import PECIntegrator
 from pysph.sph.integrator_step import WCSPHStep
 from pysph.solver.output import dump
 
-# Import the eqations
+# Import the equations
 from pysph.sph.equation import Group
 from pysph.sph.BlackHoleEquation import BlackHole2D
 
@@ -38,7 +38,7 @@ from pysph.sph.basic_equations import XSPHCorrection, \
     MonaghanArtificialViscosity
 
 # Domain and reference values
-Lx = 30.0; H = 15.0; Ly = 1.5*H
+Lx = 120.0; H = 15.0; Ly = 1.5*H
 gy = -1.0
 Vmax = np.sqrt(abs(gy) * H)
 c0 = 10 * Vmax; rho0 = 1.0
@@ -46,15 +46,15 @@ p0 = c0*c0*rho0
 gamma = 1.0
 
 soft = 0.01
-t_hit = 10.0
+t_hit = 200.0
 Mass = 1.0
-tf = H + t_hit # Simulation ends when the black hole reaches the bottom of the tank
+tf = 300.0
 
 # Reynolds number and kinematic viscosity
-Re = 0; nu = 0.01#Vmax*Ly/Re # Ideal fluid
+Re = 0; nu = 0.01 # Ideal fluid
 
 # Numerical setup
-nx = 100; dx = Lx/nx
+nx = 1600; dx = Lx/nx
 ghost_extent = 5.5 * dx
 hdx = 1.2
 
