@@ -2,8 +2,8 @@
 set terminal epslatex color size 6.0in,4.5in
 
 set notitle
-set xlabel '$t \cdot \frac{g}{v}$'
-set ylabel '$E \cdot \frac{g}{G^2m^2 \rho}$'
+set xlabel '$\tau$'
+set ylabel rotate by 0 '$E$'
 
 set xr [-30:30]
 
