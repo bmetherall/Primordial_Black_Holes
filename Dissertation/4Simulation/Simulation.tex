@@ -5,7 +5,7 @@
 \usepackage{geometry}
 \usepackage{listings}
 \usepackage[dvipsnames]{xcolor}
-\usepackage{graphicx}
+\usepackage[draft]{graphicx}
 %\usepackage{wrapfig}
 \usepackage{subcaption}
 %\usepackage{hyperref}
@@ -38,6 +38,8 @@
 \newgeometry{margin=1in}
 \setlength\parindent{0pt}
 
+\DeclareMathOperator{\grad}{\overset{\rightharpoonup}\nabla}
+
 \begin{document}
 
 \doublespacing
@@ -49,27 +51,112 @@
 \section{Smoothed Particle Hydrodynamics}
 
 \subsection{PySPH}
+The simulations were conducted with PySPH ***, open source SPH code written in Python and compiled in Cython. This allows a majority of the code to be written in pure Python, but is then converted to high performance Cython code to run at speeds closer to C and FORTRAN. For further optimizations, PySPH can run in parallel with OpenMP and MPI to take advantage of multiple cores / threads. Also, one of the main reasons for choosing PySPH is that it allows user defined classes, and equations which was needed to incorporate the primordial black hole.
 
 \section{Code}
 
-\begin{figure}[htbp]
+In order to simulate a primordial black hole collision with a neutron star we must first write a class to include the acceleration. The acceleration of course is just
+\begin{align*}
+\overset{\rightharpoonup}a &= - \frac{1}{m_{part}} \grad \Phi.
+\end{align*}
+
+In this simulation and coordinates
+\begin{align*}
+\overset{\rightharpoonup}a &= \frac{-m}{\left( x^2 + s^2 + (y + v\tau)^2 \right)^{3/2}} \left( \begin{matrix}
+x \\
+y+v \tau
+\end{matrix}
+\right)
+\end{align*}
+with $G = 1$, $\tau = t-t\_hit$, and $s$ a softening length so the solution does not diverge at $\tau = 0$ at the origin. The mass of the particle is also omitted in the simulation because PySPH uses acceleration per unit mass. In the class function (Figure \ref{fig:blackholeclass}) the velocity is hard coded to be $1$, and the parameter \emph{t\_hit} is used to offset the collision of the primordial black hole since the simulation starts at $t = 0$. Now that the class function has been written, it can be called within the equations block of the main file, \emph{blackhole.py}. Figure \ref{fig:blackhole} shows the important sections of \emph{blackhole.py}; first the acceleration equation is imported, and the values for the simulation are specified in the preamble. Then, the black hole can be added to the equations group in the main acceleration block. The example \emph{hydrostatic\_tank.py} was used as the base for \emph{blackhole.py}, it was the most useful starting point since it is a $2D$ tank filled with fluid, and included the force of gravity. \\
+
+\begin{figure}[p]
 \lstinputlisting[language=Python, lastline=18]{../../BlackHoleEquation.py}
-\caption{Class for adding the acceleration due to the primordial black hole.}
+\caption{Class file for adding the acceleration due to the primordial black hole, \emph{BlackHoleEquation.py}.}
 \label{fig:blackholeclass}
 \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}[p]
   \lstinputlisting[language=Python, firstnumber=19, firstline=19, lastline=21]{../../blackhole.py}
   \lstinputlisting[language=Python, firstnumber=40, firstline=40, lastline=59]{../../blackhole.py}
   \lstinputlisting[language=Python, firstnumber=82, firstline=82, lastline=82]{../../blackhole.py}
   \lstinputlisting[language=Python, firstnumber=171, firstline=171, lastline=173]{../../blackhole.py}
   \lstinputlisting[language=Python, firstnumber=194, firstline=194, lastline=195]{../../blackhole.py}
   \lstinputlisting[language=Python, firstnumber=212, firstline=212, lastline=217]{../../blackhole.py}
- \caption{Modifications of the hydrostatic tank.}
+ \caption{Modifications of the hydrostatic tank example, \emph{blackhole.py}.}
+ \label{fig:blackhole}
 \end{figure}
 
-\section{Deformation of the Surface?}
+The parameters of the simulation were mostly the same as what were used to generate the images of the analytic solution, everything set equal to unity, with the exceptions of \emph{t\_hit} $= 200$, and $s=0.01$. The reason \emph{t\_hit} is so large is due how the particles are initially placed. They are simply placed on a grid with spacing $dx$; once the simulation starts gravity pulls the surface down attempting to equilibrate to a linear pressure gradient. However, since the fluid is not at equilibrium, the surface undergoes harmonic motion and is slowly dampened to equilibrium, and so the long \emph{t\_hit} is to dampen out a majority of the oscillations. \\
 
-\section{Calculating the Energy Transferred?}
+Determining the dimensions of the tank required a considerable amount of care. If the tank was too narrow, the walls at the edges would reflect the initial waves which would then start to interfere with the secondary waves. This caused erroneous results in the energy calculations during testing. Similarly, if the tank was too shallow, the waves resembled shallow water waves instead of deep, as in our model. And of course, if the tank was needlessly large, it greatly effected the computation time of the simulation. In the end, $Lx = 120$, $Ly = 15$, and $dx = 0.075$ were decided on.
+
+\section{Simulation Results}
+
+In total the simulation took about 330 CPU hours over the course of three days. 
+
+plots of waves \\
+energy: calculation, 2d to 3d, noise, damping, weird increase \\
+shock wave: didn't see in testing, PBH exiting tank, line in the middle is an artifact of the plot \\
+waves crashing into walls
+
+\begin{figure}[p]
+\centering
+\begin{subfigure}{\textwidth}
+\input{./Sim199}
+\caption{$\tau = -1$}
+\end{subfigure} \\
+\begin{subfigure}{\textwidth}
+\input{./Sim200}
+\caption{$\tau = 0$}
+\end{subfigure} \\
+\begin{subfigure}{\textwidth}
+\input{./Sim201}
+\caption{$\tau = 1$}
+\end{subfigure}
+\end{figure}
+\begin{figure}[p] \ContinuedFloat
+\centering
+\begin{subfigure}{\textwidth}
+\input{./Sim202}
+\caption{$\tau = 2$}
+\end{subfigure} \\
+\begin{subfigure}{\textwidth}
+\input{./Sim205}
+\caption{$\tau = 5$}
+\end{subfigure} \\
+\begin{subfigure}{\textwidth}
+\input{./Sim210}
+\caption{$\tau = 10$}
+\end{subfigure}
+\caption{Simulated results.  ***}
+\end{figure}
+
+\begin{figure}
+\centering
+\begin{subfigure}{\textwidth}
+\input{BadEnergy}
+\caption{Crazy looking energy.}
+\end{subfigure} \\
+\begin{subfigure}{\textwidth}
+\input{GoodEnergy}
+\caption{Smoothed energy without noise.}
+\end{subfigure}
+\caption{Energy transfer from the simulation.}
+\end{figure}
+
+\begin{figure}
+\centering
+\begin{subfigure}{\textwidth}
+\input{Shock1}
+\caption{Initial shock-wave. $\tau  = 15.24$.}
+\end{subfigure} \\
+\begin{subfigure}{\textwidth}
+\input{Shock2}
+\caption{Reflected shock-wave. $\tau = 15.56$.}
+\end{subfigure}
+\caption{Shock-wave created by PBH leaving tank.}
+\end{figure}
+
 
 \end{document}
