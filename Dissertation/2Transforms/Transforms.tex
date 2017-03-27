@@ -31,7 +31,7 @@
 
 \chapter{Operators and Integral Transforms}
 
-Before starting the in-depth analysis, we first must introduce key definitions, and theorems, several of which have been modified from ***, to more easily analytically solve the velocity potential of the neutron star.
+Before starting the in-depth analysis, we first must introduce key definitions, and theorems, several of which have been modified from \cite{functional}, to more easily analytically solve the velocity potential of the neutron star.
 
 \begin{definition}[Operator]
 \label{def:operator}
@@ -57,14 +57,14 @@ A function $f: X \rightarrow Y$, with $X, \, Y \subseteq \mathbb{R}$, is uniform
 
 Uniform continuity has a very similar formal definition to continuity, the difference being of course, is that  $\delta$ must be the same for the entire domain. Furthermore, continuity is only defined for a point, whereas uniform continuity is defined over an interval.
 
-\begin{theorem}[Heine-Cantor Theorem ***]
+\begin{theorem}[Heine-Cantor Theorem]
 % http://projecteuclid.org/download/pdf_1/euclid.acta/1485881938
 % page 23 theorem 1
 If a function $f: X \rightarrow \mathbb{R}$, with $X$ a closed, subset of the real numbers, is continuous, $f$ is uniformly continuous on $X$.
 \label{thm:uniform}
 \end{theorem}
 \begin{proof}
-Since $f$ is continuous, by Cousin's Theorem *** there exists a finite sub-cover of $X$\footnote[4]{Figure \ref{fig:arrows} helps visualize the concept of finite sub-covers.}:
+Since $f$ is continuous, by Cousin's Theorem \cite{cousin} there exists a finite sub-cover of $X$\footnote[4]{Figure \ref{fig:arrows} helps visualize the concept of finite sub-covers.}:
 \begin{align*}
 \{ B_{\delta_i/2} (x_i) : 1 \leq i \leq n \in \mathbb{N} \} : X \subseteq \bigcup_{i=1}^n B_{\delta_i/2}(x_i),
 \end{align*}
@@ -83,7 +83,7 @@ by the triangle inequality.
 \begin{figure}[!p]
 \centering
 \input{Arrows}
-\caption{Cousin's Theorem states that there exists a finite sub-cover of a closed interval. For example, consider the interval $[1,2] \in \mathbb{R}$, then there exists a finite collection of circles (or more generally balls) of radii $\delta_i/2$ which spans the interval.}
+\caption[Cousin's Theorem Depiction]{Cousin's Theorem states that there exists a finite sub-cover of a closed interval. For example, consider the interval $[1,2] \in \mathbb{R}$, then there exists a finite collection of circles (or more generally balls) of radii $\delta_i/2$ which spans the interval.}
 \label{fig:arrows}
 \end{figure}
 

@@ -123,13 +123,13 @@ The time component of the velocity potential comes from our specific problem. In
 \left( \frac{\partial \varphi}{\partial t} + (g \eta + \Phi) \right) \bigg|_{z=0} = 0,
 \end{align*}
 
-where $\eta$ denotes the deformation of the surface. This comes from the pressure condition at the surface, and in our case, has the addition of the gravitational potential. ***Fluids book eqn 3.21 3.22*** By taking the time derivative and using the relation that
+where $\eta$ denotes the deformation of the surface. This comes from the pressure condition at the surface \cite{fluids}, and in our case, has the addition of the gravitational potential. By taking the time derivative and using the relation that
 \begin{align}
 \label{eq:smallamp}
 \frac{\partial \eta}{\partial t} = \frac{\partial \varphi}{\partial z}
 \end{align}
 
-on the surface ***, we obtain
+on the surface \cite{fluids}, we obtain
 \begin{align}
 \label{eq:presscond}
 \left( \frac{\partial^2 \varphi}{\partial t^2} + g \frac{\partial \varphi}{\partial z} + \frac{\partial \Phi}{\partial t} \right) \bigg|_{z=0} = 0.
@@ -141,13 +141,13 @@ In order to solve this partial differential equation, we must write the gravitat
 &= G m v^2 t \int_0^\infty \Hank{\frac{1}{(r^2 + v^2 t^2)^{3/2}}}(k) J_0(kr) k \, dk. \footnote[4]{}
 \end{align*}
 
-Applying the Hankel transform *** gives
+Applying the Hankel transform \cite{transforms, tableofints} gives
 \begin{align*}
 \frac{\partial \Phi}{\partial t}\bigg|_{z=0} &= G m v^2 t \int_0^\infty \frac{1}{|vt|} e^{-k|vt|} J_0(kr) k \, dk, \\
 &= G m v \sgn(t) \int_0^\infty e^{-kv|t|} J_0(kr) k \, dk, 
 \end{align*}
 
-\footnotetext[4]{Note that $\int_0^\infty \sqrt{r}(r^2 + v^2 t^2)^{-3/2} dr = \Gamma^2(3/4) (\pi v^3 t^3)^{-1/2} < \infty$ for $t \neq 0$ which is not concerning since this is true almost everywhere, and so the condition in Theorem *** is satisfied.}
+\footnotetext[4]{Note that $\int_0^\infty \sqrt{r}(r^2 + v^2 t^2)^{-3/2} dr = \Gamma^2(3/4) (\pi v^3 t^3)^{-1/2} < \infty$ for $t \neq 0$ which is not concerning since this is true almost everywhere, and so the condition in Theorem \ref{thm:continuity} is satisfied.}
 which we can now substitute into \eqref{eq:presscond} to obtain,
 \begin{align*}
 \int_0^\infty J_0(kr)  \ddot{T}(t;k) dk + g \int_0^\infty k J_0(kr) T(t;k) dk + Gmv \int_0^\infty \sgn(t) e^{-kv|t|} J_0(kr)k \, dk &= 0, \\
@@ -267,7 +267,7 @@ E(t) &= \rho \pi \left( \int_0^\infty \int_{-\infty}^0 \left( \frac{\partial \va
 \end{align*}
 These are non-trivial integrals since $\varphi$, and $\eta$ are themselves non-trivial integrals. To simplify and tidy this calculation, let $\clubsuit$, $\spadesuit$, and $\blacklozenge$ be the three terms respectively, so that $E = \rho \pi (\clubsuit + \spadesuit + g \blacklozenge)$. \\
 
-The reason we wrote the velocity potential, and the deformation of the surface as the Hankel transform of their time components is so these integrals can more easily be solved with the aid of Theorem ***. Starting with the first term,
+The reason we wrote the velocity potential, and the deformation of the surface as the Hankel transform of their time components is so these integrals can more easily be solved with the aid of Theorem \ref{thm:square}. Starting with the first term,
 \begin{align*}
 \clubsuit &= \int_0^\infty \int_{-\infty}^0 \left( \frac{\partial \varphi}{\partial r} \right)^2 r \, dz \, dr,
 \end{align*}
@@ -275,7 +275,7 @@ $\partial \varphi / \partial r$ can be replaced by its Hankel transform represen
 \begin{align*}
 \clubsuit &= \int_{-\infty}^0 \int_0^\infty \Hank[1]{e^{kz}T(t;k)}^2(r,z,t) r \, dr \, dz,
 \end{align*}
-and after invoking Theorem ***
+and after invoking Theorem \ref{thm:square}
 \begin{align*}
 \clubsuit &= \int_{-\infty}^0 \int_0^\infty e^{2kz} T^2(t;k) \, k \, dk \, dz,
 \end{align*}
@@ -324,7 +324,7 @@ E = 4 \pi \rho \frac{G^2 m^2}{g}
 \end{align}
 which is a surprisingly compact form. \\
 
-The dynamical friction approach *** finds that the energy loss is
+The dynamical friction approach \cite{dynamicalfriction} finds that the energy loss is
 \begin{align*}
 E &= \frac{4 G^2 m^2 M}{R^2} \left< \frac{\ln \Lambda}{v^2} \right>,
 \end{align*}

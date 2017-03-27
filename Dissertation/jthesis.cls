@@ -4,7 +4,7 @@
 \RequirePackage{graphicx}
 \RequirePackage{url}
 \RequirePackage[top=1in, bottom=1in, left=1.5in, right=1in]{geometry}
-\RequirePackage{natbib}
+\RequirePackage[square, numbers]{natbib}
 \RequirePackage{hyperref}
 \RequirePackage{amsmath}
 \RequirePackage{amssymb}
