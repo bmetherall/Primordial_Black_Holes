@@ -5,7 +5,7 @@
 \usepackage{geometry}
 \usepackage{listings}
 \usepackage[dvipsnames]{xcolor}
-\usepackage[draft]{graphicx}
+\usepackage{graphicx}
 %\usepackage{wrapfig}
 \usepackage{subcaption}
 %\usepackage{hyperref}
@@ -93,13 +93,7 @@ Determining the dimensions of the tank required a considerable amount of care. I
 
 \section{Simulation Results}
 
-In total the simulation took about 330 CPU hours over the course of three days. 
-
-plots of waves \\
-energy: calculation, 2d to 3d, noise, damping, weird increase \\
-shock wave: didn't see in testing, PBH exiting tank, line in the middle is an artifact of the plot \\
-waves crashing into walls
-
+In total the simulation took about 330 CPU hours over the course of three days. The resulting surface waves from the collision can be seen in Figure \ref{fig:simresults}.
 \begin{figure}[p]
 \centering
 \begin{subfigure}{\textwidth}
@@ -130,20 +124,48 @@ waves crashing into walls
 \caption{$\tau = 10$}
 \end{subfigure}
 \caption{Simulated results.  ***}
+\label{fig:simresults}
 \end{figure}
+As with the analytic results, we see that the surface of the neutron star is pulled upwards due to the gravitational force of the primordial black hole. Then, after the collision, the initial wave propagates outwards. It is fairly difficult to notice, however, a second much smaller amplitude wave is created as well. Unfortunately, because of the resolution of the simulation, waves smaller than $dx$ cannot be seen, unlike in the analytic solution. \\
+
+In order to calculate the energy we do so in the traditional way, by taking the sum of the potential and kinetic energies of each particle,
+\begin{align*}
+E &= \sum_i T_i + U_i, \\
+&= \sum_i \frac{1}{2} m_i \left( u_i^2 + v_i^2 \right) + m_i g y_i.
+\end{align*}
+However, to compare to the analytic result, we must transform this into three dimensions by revolving this about the $y$ axis. This can be done by weighting each particle by $\pi |x_i| / dx$, then,
+\begin{align*}
+E &= \frac{\pi}{dx} \sum_i \left( \frac{1}{2} \left( u_i^2 + v_i^2 \right) + g y_i \right) m_i |x_i|.
+\end{align*}
 
 \begin{figure}
 \centering
 \begin{subfigure}{\textwidth}
 \input{BadEnergy}
 \caption{Crazy looking energy.}
+\label{fig:badenergy}
 \end{subfigure} \\
 \begin{subfigure}{\textwidth}
 \input{GoodEnergy}
 \caption{Smoothed energy without noise.}
+\label{fig:goodenergy}
 \end{subfigure}
 \caption{Energy transfer from the simulation.}
 \end{figure}
+
+This is essentially the same as a shell integration, however, we only integrate through $\pi$, and the absolute value of the $x$ coordinate is needed. The energy is calculated in this fashion for all times steps and is plotted in Figure \ref{fig:badenergy}. Clearly, this is of little use since the energy is highly oscillatory. As mentioned before, this is also the result of how the particles are initially placed within the simulation. As the surface oscillates up and down while attempting to equilibrate, so too does the potential energy. The oscillations have a period of 39 time steps, and therefore, by taking running averages of 39 time steps, most of the noise is removed. Also, for clarity the damping is removed, and the energy has been shifted to start at 0, the resulting plot is much cleaner and is in Figure \ref{fig:goodenergy}. \\
+
+This cleaned up energy has a very similar shape to the analytic calculation; initially, the neutron star gains energy as the primordial black hole approaches
+***idk about that dip at 0***
+
+At approximately $\tau = 40$ the initial wave hits the boundaries which causes the energy of the system to increase as the wave climbs the wall. After this the wave is reflected back towards the centre of the tank. This also causes the first wave to interfere with the smaller waves trailing it, which again causes the energy to increase. \\
+
+Another point of interest is that since the tank has a depth of $15$ at $\tau = 15$ the primordial black hole exits the tank. During the lower resolution testing this did not appear to effect the results of the simulation. However, it seems to have an impact on the energy.
+
+
+
+
+
 
 \begin{figure}
 \centering
@@ -157,6 +179,12 @@ waves crashing into walls
 \end{subfigure}
 \caption{Shock-wave created by PBH leaving tank.}
 \end{figure}
+
+
+plots of waves \\
+energy: calculation, 2d to 3d, noise, damping, weird increase \\
+shock wave: didn't see in testing, PBH exiting tank, line in the middle is an artifact of the plot \\
+waves crashing into walls ~240s
 
 
 \end{document}
