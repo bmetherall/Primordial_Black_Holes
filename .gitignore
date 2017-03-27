@@ -10,8 +10,6 @@
 BlackHoleVideo.sh
 *.nb
 *.png
-*.eps
-*.pdf
 *.swp
 *~*
 *save*
