@@ -25,6 +25,20 @@
 
 \section{Model}
 
+In this thesis we use a relatively simplistic model for the collision of a primordial black hole and a neutron star. We shall treat the primordial black hole as a point mass, and the neutron star to be flat and infinite. This allows us to use cylindrical coordinates, with no angular dependence. This is a reasonable approximation to make given the sheer size difference the primordial black hole and the neutron star. Although neutron stars are fairly compact, and very dense, primordial black holes are microscopic, and so the curvature of the neutron star is negligible compared to the primordial black hole. Also, we will be using the assumption that the velocity of the primordial black hole is constant. Despite the fact that the primordial black hole would be accelerating into the neutron star, this is a fair assumption to make. Most of the energy transfer occurs in a relatively short time, as we shall see in Section ***, during which we can approximate a constant velocity. \\
+
+Furthermore, we will be using Newtonian gravity with the potential
+\begin{align}
+\label{eq:gravity}
+\Phi &= \frac{-Gm}{\sqrt{r^2 + (z + vt)^2}}
+\end{align}
+to greatly simplify the solution. Given the mass scales of neutron stars, and primordial black holes, general relativity would be more appropriate, however, it is too complicated. \\
+
+Lastly, we will be modelling the neutron star as an incompressible, ideal fluid.
+
 \section{Outline}
+
+The rest of this thesis is organized as follows. In Chapter *** we will define the Hankel transform and derive some useful theorems and corollaries which will be of utmost importance in Chapter *** where we shall analytically calculate the energy transferred during the interaction. Then in Chapter *** we will use the same model and simulate the collision using PySPH, and finally in Chapter *** we make comparisons between the two solutions, and conclusions.
+
 
 \end{document}
