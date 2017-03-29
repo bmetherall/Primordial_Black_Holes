@@ -8,13 +8,39 @@
 \usepackage{setspace}
 \usepackage{footmisc}
 \usepackage{hyperref}
-\usepackage{xcolor,graphicx}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{graphicx}
 \usepackage{subcaption}
 \usepackage{amssymb}
+\usepackage{listings}
 
-\title{Collisions of Primordial Black Holes with Neutron Stars} %Don't put a line break in, it gets really upset
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+ 
+\lstdefinestyle{mystyle}{
+    emph={self, Equation, loop, BlackHole2D,__init__, initialize, BlackHole, Application, Group},
+    emphstyle=\color{PineGreen},
+    commentstyle=\color{blue},
+    keywordstyle={\color{BrickRed}\bfseries},
+    numberstyle=\color{codegray},
+    stringstyle=\color{codepurple},
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\title{The Effects of a Primordial Black Hole on the Surface of a Neutron Star} %Don't put a line break in, it gets really upset
 \author{Brady Metherall}
-\date{March 30, 2017}
+\date{March 31, 2017}
 
 \setlength\parindent{0pt}
 
@@ -40,11 +66,15 @@
 \maketitle
 
 \makeabstract{
-This is a short example of an abstract.
+%How do I abstract?
 }
 
 \makeacknowledgements{
-Thank some people that you like here.
+%Joe
+
+%Math Faculty members
+
+%Hendrick
 }
 
 \makedeclaration
@@ -52,15 +82,16 @@ Thank some people that you like here.
 \maketableofcontents
 
 \pagenumbering{arabic}
+
 \doublespacing
 \linespread{2}
-
+\lstset{style=mystyle}
 
 \input{./2Transforms/Transforms}
 
 \input{./3Analytic/Analytic}
 
-
+\input{./4Simulation/Simulation}
 
 
 \begin{thebibliography}{99}
@@ -80,6 +111,9 @@ Pierre Cousin, \emph{Sur les Fonctions de $n$ Variables Complexes}, Acta Math. 1
 \bibitem{transforms}
 Lokenath Debnath, and Dambaru Bhatta, \emph{Integral Transforms and Their Applications}, Chapman \& Hall/CRC, 2007.
 
+\bibitem{origsph}
+R. A. Gingold, and J. J. Monaghan, \emph{Smoothed Particle Hydrodynamics: Theory and Application to Non-Spherical Stars}, Monthly Notices of the Royal Astronomical Society 181, 1977.
+
 \bibitem{tidalcapture}
 Guillaume Defillon, Etienne Granet, Peter Tinyakov, and Michel H.G. Tytgat, \emph{On Tidal Capture of Primordial Black Holes by Neutron Stars}, American Physics Society Phys. Rev. D 90, 2014.
 
@@ -92,11 +126,15 @@ D. H. Griffel, \emph{Applied Functional Analysis}, Dover Publishing Inc., 2002.
 \bibitem{hawking}
 S. W. Hawking, \emph{Black Hole Explosions?}, Nature, 1974.
 
+\bibitem{newsph}
+J. J. Monaghan, \emph{Smoothed Particle Hydrodynamics}, Reports on Progress in Physics 68, 2005.
+
 \bibitem{a}
 Paolo Pani, and Abraham Loeb, \emph{Tidal Capture of a Primordial Black Hole by a Neutron Star: Implications for Constrains on Dark Matter}, Journal of Cosmology and Astroparticle Physics, 2014.
 
 \bibitem{pysph}
 Prabhu Ramachandran, \emph{PySPH: a reproducible and high-performance framework for smoothed particle hydrodynamics}, In Proceedings of the 15th Python in Science Conference, 2016.
+
 
 
 

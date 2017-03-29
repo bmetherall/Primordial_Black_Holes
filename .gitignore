@@ -19,6 +19,7 @@ BlackHoleVideo.sh
 /Dissertation/Hankel.text
 *output*
 parameters.dat
+*.dat
 
 # TeX files
 test.tex

@@ -1,63 +1,63 @@
-\documentclass[12pt]{report}
-
-\usepackage{amsfonts}
-\usepackage{amsmath}
-\usepackage{geometry}
-\usepackage{listings}
-\usepackage[dvipsnames]{xcolor}
-\usepackage{graphicx}
-%\usepackage{wrapfig}
-\usepackage{subcaption}
-%\usepackage{hyperref}
-\usepackage{setspace}
-
-\definecolor{codegreen}{rgb}{0,0.6,0}
-\definecolor{codegray}{rgb}{0.5,0.5,0.5}
-\definecolor{codepurple}{rgb}{0.58,0,0.82}
-\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
- 
-\lstdefinestyle{mystyle}{
-    emph={self, Equation, loop, BlackHole2D,__init__, initialize, BlackHole, Application, Group},
-    emphstyle=\color{PineGreen},
-    commentstyle=\color{blue},
-    keywordstyle={\color{BrickRed}\bfseries},
-    numberstyle=\color{codegray},
-    stringstyle=\color{codepurple},
-    breakatwhitespace=false,         
-    breaklines=true,                 
-    captionpos=b,                    
-    keepspaces=true,                 
-    numbers=left,                    
-    numbersep=5pt,                  
-    showspaces=false,                
-    showstringspaces=false,
-    showtabs=false,                  
-    tabsize=2
-}
-
-\newgeometry{margin=1in}
-\setlength\parindent{0pt}
-
-\DeclareMathOperator{\grad}{\overset{\rightharpoonup}\nabla}
-
-\begin{document}
-
-\doublespacing
-\linespread{2}
-\lstset{style=mystyle}
+%\documentclass[12pt]{report}
+%
+%\usepackage{amsfonts}
+%\usepackage{amsmath}
+%\usepackage{geometry}
+%\usepackage{listings}
+%\usepackage[dvipsnames]{xcolor}
+%\usepackage{graphicx}
+%%\usepackage{wrapfig}
+%\usepackage{subcaption}
+%%\usepackage{hyperref}
+%\usepackage{setspace}
+%
+%\definecolor{codegreen}{rgb}{0,0.6,0}
+%\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+%\definecolor{codepurple}{rgb}{0.58,0,0.82}
+%\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+% 
+%\lstdefinestyle{mystyle}{
+%    emph={self, Equation, loop, BlackHole2D,__init__, initialize, BlackHole, Application, Group},
+%    emphstyle=\color{PineGreen},
+%    commentstyle=\color{blue},
+%    keywordstyle={\color{BrickRed}\bfseries},
+%    numberstyle=\color{codegray},
+%    stringstyle=\color{codepurple},
+%    breakatwhitespace=false,         
+%    breaklines=true,                 
+%    captionpos=b,                    
+%    keepspaces=true,                 
+%    numbers=left,                    
+%    numbersep=5pt,                  
+%    showspaces=false,                
+%    showstringspaces=false,
+%    showtabs=false,                  
+%    tabsize=2
+%}
+%
+%\newgeometry{margin=1in}
+%\setlength\parindent{0pt}
+%
+%\DeclareMathOperator{\grad}{\overset{\rightharpoonup}\nabla}
+%
+%\begin{document}
+%
+%\doublespacing
+%\linespread{2}
+%\lstset{style=mystyle}
 
 \chapter{Simulation Solution}
 
 \section{Smoothed Particle Hydrodynamics}
 
-Since we model neutron stars as a fluid, in order to simulate the collision of a primordial black hole with a neutron star, we need to use computational fluid dynamics, more specifically, smoothed particle hydrodynamics. Smoothed particle hydrodynamics was initially developed in 1977 for simulating stars ***. A major assumption in the modelling of stars is that they are spherically symmetric, however, there are a lot of cases where this is not true. For example the collapse of a protostar will be very lumpy; or if the star has a large angular momentum, or strong magnetic fields the star will considerably deformed ***. \\
+Since we model neutron stars as a fluid, in order to simulate the collision of a primordial black hole with a neutron star, we need to use computational fluid dynamics, more specifically, smoothed particle hydrodynamics. Smoothed particle hydrodynamics was initially developed in 1977 for simulating spherically asymmetric stars \cite{origsph}. A major assumption in the modelling of stars is that they are spherically symmetric, however, there are a lot of cases where this is not true. For example the collapse of a protostar will be very lumpy; or if the star has a large angular momentum, or strong magnetic fields the star will considerably deformed \cite{origsph}. \\
 
-Smoothed particle hydrodynamics has since been extended more generally so it can be applied outside of astrophysics such as solid mechanics, and fluid dynamics. In essence smoothed particle hydrodynamics uses similar methods of N-body code -- the continuous media is represented as a set of particles, and the equations are solved numerically. Mathematically, the particles represent the points at which the properties of the fluid are calculated, the rest can then be interpolated. Physically, the particles are simply a subset of all the particles in the system ***. One of the biggest advantages of smoothed particle hydrodynamics is that it is mesh-free, unlike most computational fluid dynamics methods. Therefore, it is very useful for interactions between different types of particles, and for free surface simulations. \\
+Smoothed particle hydrodynamics has since been extended more generally so it can be applied outside of astrophysics such as solid mechanics, and fluid dynamics. In essence smoothed particle hydrodynamics uses similar methods of N-body code -- the continuous media is represented as a set of particles, and the equations are solved numerically. Mathematically, the particles represent the points at which the properties of the fluid are calculated, the rest can then be interpolated. Physically, the particles are simply a subset of all the particles in the system \cite{newsph}. One of the biggest advantages of smoothed particle hydrodynamics is that it is mesh-free, unlike most computational fluid dynamics methods. Therefore, it is very useful for interactions between different types of particles, and for free surface simulations. \\
 
 Typically, smoothed particle hydrodynamics uses a nearest neighbour scheme for calculating the changes in a particles properties. This is done by using a cubic Hermite spline to interpolate properties within a radius of twice the smoothing length of a particular particle. A cubic Hermite spline is a set of cubic polynomials specified by its values, and the values of its first derivative at the boundaries of the interval.
 
 \subsection{PySPH}
-The simulations were conducted with PySPH ***, open source SPH code written in Python and compiled in Cython. This allows a majority of the code to be written in pure Python, but is then converted to high performance Cython code to run at speeds closer to C and FORTRAN. For further optimizations, PySPH can run in parallel with OpenMP and MPI to take advantage of multiple cores / threads. One of the main reasons for choosing PySPH is that it allows user defined classes, and equations which was needed to incorporate the primordial black hole.
+The simulations were conducted with PySPH \cite{pysph}, open source SPH code written in Python and compiled in Cython. This allows a majority of the code to be written in pure Python, but is then converted to high performance Cython code to run at speeds closer to C and FORTRAN. For further optimizations, PySPH can run in parallel with OpenMP and MPI to take advantage of multiple cores / threads. One of the main reasons for choosing PySPH is that it allows user defined classes, and equations which was needed to incorporate the primordial black hole.
 
 \section{Code}
 
@@ -76,21 +76,21 @@ y+v \tau
 \end{align*}
 with $G = 1$, $\tau = t-t\_hit$, and $s$ a softening length so the solution does not diverge at $\tau = 0$ at the origin. The mass of the particle is also omitted in the simulation because PySPH uses acceleration per unit mass. In the class function (Figure \ref{fig:blackholeclass}) the velocity is hard coded to be $1$, and the parameter \emph{t\_hit} is used to offset the collision of the primordial black hole since the simulation starts at $t = 0$. \\
 
-Now that the class function has been written, it can be called within the equations block of the main file, \emph{blackhole.py}. Figure \ref{fig:blackhole} shows the important sections of \emph{blackhole.py}; first the acceleration equation is imported, and the values for the simulation are specified in the preamble. Then, the black hole can be added to the equations group in the main acceleration block. The included example \emph{hydrostatic\_tank.py} *** was used as the base for \emph{blackhole.py}, it was the most useful starting point -- it is a 2D tank filled with fluid, and includes the force of gravity. \\
+Now that the class function has been written, it can be called within the equations block of the main file, \emph{blackhole.py}. Figure \ref{fig:blackhole} shows the important sections of \emph{blackhole.py}; first the acceleration equation is imported, and the values for the simulation are specified in the preamble. Then, the black hole can be added to the equations group in the main acceleration block. The included example \emph{hydrostatic\_tank.py} was used as the base for \emph{blackhole.py}, it was the most useful starting point -- it is a 2D tank filled with fluid, and includes the force of gravity. \\
 
 \begin{figure}[p]
-\lstinputlisting[language=Python, lastline=18]{../../BlackHoleEquation.py}
+\lstinputlisting[language=Python, lastline=18]{../BlackHoleEquation.py}
 \caption{Class file for adding the acceleration due to the primordial black hole, \emph{BlackHoleEquation.py}.}
 \label{fig:blackholeclass}
 \end{figure}
 
 \begin{figure}[p]
-  \lstinputlisting[language=Python, firstnumber=19, firstline=19, lastline=21]{../../blackhole.py}
-  \lstinputlisting[language=Python, firstnumber=40, firstline=40, lastline=59]{../../blackhole.py}
-  \lstinputlisting[language=Python, firstnumber=82, firstline=82, lastline=82]{../../blackhole.py}
-  \lstinputlisting[language=Python, firstnumber=171, firstline=171, lastline=173]{../../blackhole.py}
-  \lstinputlisting[language=Python, firstnumber=194, firstline=194, lastline=195]{../../blackhole.py}
-  \lstinputlisting[language=Python, firstnumber=212, firstline=212, lastline=217]{../../blackhole.py}
+  \lstinputlisting[language=Python, firstnumber=19, firstline=19, lastline=21]{../blackhole.py}
+  \lstinputlisting[language=Python, firstnumber=40, firstline=40, lastline=59]{../blackhole.py}
+  \lstinputlisting[language=Python, firstnumber=82, firstline=82, lastline=82]{../blackhole.py}
+  \lstinputlisting[language=Python, firstnumber=171, firstline=171, lastline=173]{../blackhole.py}
+  \lstinputlisting[language=Python, firstnumber=194, firstline=194, lastline=195]{../blackhole.py}
+  \lstinputlisting[language=Python, firstnumber=212, firstline=212, lastline=217]{../blackhole.py}
  \caption{Modifications of the hydrostatic tank example, \emph{blackhole.py}.}
  \label{fig:blackhole}
 \end{figure}
@@ -105,30 +105,30 @@ In total the simulation took about 330 CPU hours over the course of three days. 
 \begin{figure}[p]
 \centering
 \begin{subfigure}{\textwidth}
-\input{./Sim199}
+\input{./4Simulation/Sim199}
 \caption{$\tau = -1$}
 \end{subfigure} \\
 \begin{subfigure}{\textwidth}
-\input{./Sim200}
+\input{./4Simulation/Sim200}
 \caption{$\tau = 0$}
 \end{subfigure} \\
 \begin{subfigure}{\textwidth}
-\input{./Sim201}
+\input{./4Simulation/Sim201}
 \caption{$\tau = 1$}
 \end{subfigure}
 \end{figure}
 \begin{figure}[p] \ContinuedFloat
 \centering
 \begin{subfigure}{\textwidth}
-\input{./Sim202}
+\input{./4Simulation/Sim202}
 \caption{$\tau = 2$}
 \end{subfigure} \\
 \begin{subfigure}{\textwidth}
-\input{./Sim205}
+\input{./4Simulation/Sim205}
 \caption{$\tau = 5$}
 \end{subfigure} \\
 \begin{subfigure}{\textwidth}
-\input{./Sim210}
+\input{./4Simulation/Sim210}
 \caption{$\tau = 10$}
 \end{subfigure}
 \caption{Simulated results.  ***}
@@ -149,12 +149,12 @@ E &= \frac{\pi}{dx} \sum_i \left( \frac{1}{2} \left( u_i^2 + v_i^2 \right) + g y
 \begin{figure}
 \centering
 \begin{subfigure}{\textwidth}
-\input{BadEnergy}
+\input{./4Simulation/BadEnergy}
 \caption{Crazy looking energy.}
 \label{fig:badenergy}
 \end{subfigure} \\
 \begin{subfigure}{\textwidth}
-\input{GoodEnergy}
+\input{./4Simulation/GoodEnergy}
 \caption{Smoothed energy without noise.}
 \label{fig:goodenergy}
 \end{subfigure}
@@ -170,15 +170,15 @@ Another point of interest is that since the tank has a depth of $15$, at $\tau =
 \begin{figure}
 \centering
 \begin{subfigure}{\textwidth}
-\input{Shock1}
+\input{./4Simulation/Shock1}
 \caption{Initial shock-wave. $\tau  = 15.24$.}
 \end{subfigure} \\
 \begin{subfigure}{\textwidth}
-\input{Shock2}
+\input{./4Simulation/Shock2}
 \caption{Reflected shock-wave. $\tau = 15.56$.}
 \end{subfigure}
 \caption{Shock-wave created by PBH leaving tank.}
 \label{fig:shock}
 \end{figure}
 
-\end{document}
+%\end{document}
