@@ -1,27 +1,50 @@
-\documentclass[12pt]{report}
-
-\usepackage{amsfonts}
-\usepackage{amsmath}
-\usepackage{geometry}
-\usepackage{setspace}
-%\usepackage{xcolor,graphicx}
-%\usepackage{wrapfig}
-%\usepackage{subcaption}
-%\usepackage{hyperref}
-
-\newgeometry{margin=1in}
-\setlength\parindent{0pt}
-
-\begin{document}
-
-\doublespacing
-\linespread{2}
+%\documentclass[12pt]{report}
+%
+%\usepackage{amsfonts}
+%\usepackage{amsmath}
+%\usepackage{geometry}
+%\usepackage{setspace}
+%%\usepackage{xcolor,graphicx}
+%%\usepackage{wrapfig}
+%%\usepackage{subcaption}
+%%\usepackage{hyperref}
+%
+%\newgeometry{margin=1in}
+%\setlength\parindent{0pt}
+%
+%\begin{document}
+%
+%\doublespacing
+%\linespread{2}
 
 \chapter{Introduction}
 
-\section{Dark Matter and Primordial Black Holes}
+A black hole is region of space where enough mass is concentrated such that nothing, including light cannot escape it's gravitational pull. The effective radius of a black hole is called the Schwartzchild radius and can be derived from general relativity, or the escape velocity and is given by
+\begin{align*}
+r_s &= \frac{2Gm}{c^2}.
+\end{align*}
+
+For example, in order for the Sun to become a black hole, all of it's mass would need to be compacted into a spherical region three kilometers in radius; and the Schwartzchild radius for the Earth is only nine millimeters. \\
+
+The most common type of black holes are stellar black holes which form from the collapse of a massive star. Stellar black holes typically have masses between a few solar masses, and a few tens of solar masses. However, black holes can form by other mechanisms, and so have a very wide range of masses. It is presumed that at the centre of many galaxies lies a super massive black hole with a mass of hundreds of thousands, or even millions, of solar masses. And on the other extreme, black holes can have a mass considerably less than the Earth's. But since the density of a black hole is inversely proportional to its mass -- these small mass black holes are unfathomably compact and dense. The only known possible mechanism to create such a dense object is from perturbations in the very early universe, and as such are called primordial black holes.
+
+\section{Primordial Black Holes and Dark Matter}
+
+In astrophysics today, one of the least understood phenomena is dark matter, matter that does not interact with electromagnetic radiation, and is very hard to detect on Earth. Despite this, estimates suggest dark matter comprises approximately $70\%$ of the mass in the universe, while the light matter, the matter we can observe on Earth, is only around $25\%$. \\
+
+There are several theories for what the identity of dark matter is, and one candidate is primordial black holes. Primordial black holes are a viable candidate since they are neutrally charged, do not emit light, travel at non-relativistic speeds, and of course, have a significant mass. \\
+
+Black holes slowly evapourate away through a process called Hawking radiation, and the time required for a black hole to entirely evapourate is 
+\begin{align*}
+t_{ev} &= \frac{5120 \pi G^2 M_0^3}{\hbar c^4}.
+\end{align*}
+Thus, lower mass black holes evapourate more quickly. In fact, primordial black holes with an initial mass around $10^{15}$g would be exploding now as they vanish into nothing. By carefully looking for signs of a primordial black hole interaction with another massive object, the mass can constrained, as well as the number density of primordial black holes. Which in turn can be used to estimate their contribution to dark matter.
 
 \section{Literature Review}
+
+Multiple groups have studied primordial black holes, and several constraints have been placed on their masses, as well as the conditions in the early universe when they may have formed. Since primordial black holes would have formed in the radiation-dominated era, the big bang nucleosynthesis constraint of baryonic matter comprising $5\%$ of the critical density does not apply. Thus, primordial black holes are considered non-baryonic, and are treated the same as all other cold dark matter. The properties mentioned earlier are useful because other theories need to make additions to the Standard Model, such as weakly interacting massive particles (WIMPs) like supersymmetric particles or axions. Many theorists are becoming skeptical of these theories because of this. \\
+
+Gravitational lensing has greatly constrained the viable mass ranges of primordial black holes. Several ranges of masses have been excluded: $10^{17}-10^{20}$g by femtolensing of gamma-ray burts, $10^{-3}-60 M_\odot$ by microlensing of quasars, and $10^6-10^9 M_\odot$ by millilensing of compact radio sources. Furthermore, tidal disruption, and heating of galaxies constrains masses above $10^5 M_\odot$. And as previously mentioned, primordial black holes smaller than about $10^{15}$g have already completely evapourated. 
 
 \section{Model}
 
@@ -41,4 +64,4 @@ Lastly, we will be modelling the neutron star as an incompressible, ideal fluid.
 The rest of this thesis is organized as follows. In Chapter *** we will define the Hankel transform and derive some useful theorems and corollaries which will be of utmost importance in Chapter *** where we shall analytically calculate the energy transferred during the interaction. Then in Chapter *** we will use the same model and simulate the collision using PySPH, and finally in Chapter *** we make comparisons between the two solutions, and conclusions.
 
 
-\end{document}
+%\end{document}
