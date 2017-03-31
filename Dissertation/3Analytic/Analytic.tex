@@ -33,6 +33,7 @@
 %\linespread{2}
 
 \chapter{Analytic Solution}
+\label{chap:analytic}
 
 Typically in fluid dynamics, the scalar function known as the velocity potential denoted by $\varphi$, is the desired quantity. Once the velocity potential is known, the system is essentially solved because  $\grad \varphi = \overset{\rightharpoonup}u$, and in the case of a free surface, the deformation of the surface can readily be found from the velocity potential as well. The velocity potential will be found in the coming sections, along with the profile of the surface, and lastly the energy deposited into the neutron star will be calculated.
 
@@ -123,7 +124,7 @@ The time component of the velocity potential comes from our specific problem. In
 \left( \frac{\partial \varphi}{\partial t} + (g \eta + \Phi) \right) \bigg|_{z=0} = 0,
 \end{align*}
 
-where $\eta$ denotes the deformation of the surface. This comes from the pressure condition at the surface \cite{fluids}, and in our case, has the addition of the gravitational potential of the primordial black hole, ***. By taking the time derivative and using the relation that
+where $\eta$ denotes the deformation of the surface. This comes from the pressure condition at the surface \cite{fluids}, and in our case, has the addition of the gravitational potential of the primordial black hole, \eqref{eq:gravity}. By taking the time derivative and using the relation that
 \begin{align}
 \label{eq:smallamp}
 \frac{\partial \eta}{\partial t} = \frac{\partial \varphi}{\partial z}
@@ -244,7 +245,7 @@ with $\omega_\kappa^2 = \kappa$.
   \caption{$\tau = 4$}
  \end{subfigure}
  \end{centering}
- \caption[Analytic Deformation of the Neutron Star]{Deformation of the surface of a neutron star around the time of impact. ***Full animation at .}
+ \caption[Analytic Deformation of the Neutron Star]{Deformation of the surface of a neutron star around the time of impact. The full animation can be found at \url{https://github.com/bmetherall/Primordial_Black_Holes/blob/master/Videos/AnalyticWaves.gif}.}
  \label{fig:eta}
 \end{figure}
 
