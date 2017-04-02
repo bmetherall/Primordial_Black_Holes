@@ -37,34 +37,36 @@ There are several theories for what the identity of dark matter is, and one cand
 
 Black holes slowly evapourate away through a process called Hawking radiation \cite{hawking}, and the time required for a black hole to entirely evapourate is 
 \begin{align*}
-t_{ev} &= \frac{5120 \pi G^2 M_0^3}{\hbar c^4}.
+t_{ev} &= \frac{5120 \pi G^2 M_0^3}{\hbar c^4},
 \end{align*}
-Thus, lower mass black holes evapourate more quickly. In fact, primordial black holes with an initial mass around $10^{15}$g would be exploding now as they vanish into nothing. By carefully looking for signs of a primordial black hole interaction with another massive object, the mass can be constrained, as well as the number density of primordial black holes. This in turn can be used to estimate their contribution to dark matter.
+with power
+\begin{align*}
+P &= \frac{\hbar c^6}{15360 \pi G^2 M^2}.
+\end{align*}
+Thus, lower mass black holes evapourate more quickly; and black holes die with an explosion since the power is inversely proportional to the mass. In fact, primordial black holes with an initial mass around $10^{15}$g would be exploding now as they vanish into nothing. By carefully looking for signs of a primordial black hole interaction with another massive object, the mass can be constrained, as well as the number density of primordial black holes. This in turn can be used to estimate their contribution to dark matter.
 
 \section{Literature Review}
 
 Multiple groups have studied primordial black holes \cite{bigpaper}, and several constraints have been placed on their masses, as well as the conditions in the early universe when they may have formed. Since primordial black holes would have formed in the radiation-dominated era, the big bang nucleosynthesis constraint of baryonic matter comprising $5\%$ of the critical density does not apply \cite{critdens, cosmology}. Thus, primordial black holes are considered non-baryonic and are treated the same as all other cold dark matter. The properties mentioned earlier are useful because other theories need to make additions to the Standard Model, such as weakly interacting massive particles (WIMPs) like supersymmetric particles or axions \cite{supersym}. Many theorists are becoming skeptical of these theories because of this \cite{pessimism}. \\
 
-Gravitational lensing has greatly constrained the viable mass ranges of primordial black holes. Several ranges of masses have been excluded: $10^{17}-10^{20}$g by femtolensing of gamma-ray bursts \cite{massfemt}, $10^{-3}-60 M_\odot$ by microlensing of quasars, and $10^6-10^9 M_\odot$ by millilensing of compact radio sources \cite{massmilli}. Furthermore, tidal disruption, and heating of galaxies constrains masses above $10^5 M_\odot$ \cite{massheavy}. As previously mentioned, primordial black holes smaller than about $10^{15}$g have already completely evapourated. It has also been shown that the range from $10^{-7}$ to $10 M_\odot$ is also excluded \cite{mass1}. This leaves $10^{16}-10^{17}$g, $10^{20}-10^{26}$g, and $10-10^{5}M_\odot$ as the potential mass ranges of primordial black holes \cite{massrange}. \\
-
-In the first half of this thesis we shall be reproducing the work done by Defillon, Granet, Tinyakov, and Tytgat \cite{tidalcapture} defined by the following model.
+Gravitational lensing has greatly constrained the viable mass ranges of primordial black holes. Several ranges of masses have been excluded: $10^{17}-10^{20}$g by femtolensing of gamma-ray bursts \cite{massfemt}, $10^{-3}-60 M_\odot$ by microlensing of quasars, and $10^6-10^9 M_\odot$ by millilensing of compact radio sources \cite{massmilli}. Furthermore, tidal disruption, and heating of galaxies constrains masses above $10^5 M_\odot$ \cite{massheavy}. As previously mentioned, primordial black holes smaller than about $10^{15}$g have already completely evapourated. It has also been shown that the range from $10^{-7}$ to $10 M_\odot$ is also excluded \cite{mass1}. This leaves $10^{16}-10^{17}$g, $10^{20}-10^{26}$g, and $10-10^{5}M_\odot$ as the potential mass ranges of primordial black holes \cite{massrange}.
 
 \section{Model}
 
-In this thesis we use a relatively simplistic model \cite{tidalcapture} for the collision of a primordial black hole and a neutron star. We shall treat the primordial black hole as a point mass, and the neutron star to be flat and infinite. This allows us to use cylindrical coordinates with no angular dependence. This is a reasonable approximation to make, given the sheer size difference between the primordial black hole and the neutron star. Although neutron stars are fairly compact and very dense, primordial black holes are microscopic, and so the curvature of the neutron star is negligible compared to the primordial black hole. Also, we will be using the assumption that the velocity of the primordial black hole is constant. Despite the fact that the primordial black hole would be accelerating into the neutron star, this is a fair assumption to make. Most of the energy transfer occurs in a relatively short time, as we shall see in Section \ref{chap:energy}, during which we can approximate a constant velocity. \\
+In this thesis we use a relatively simplistic model, the same as Defillon, Granet, Tinyakov, and Tytgat \cite{tidalcapture}, for the collision of a primordial black hole and a neutron star. We shall treat the primordial black hole as a point mass, and the neutron star to be flat and infinite. This allows us to use cylindrical coordinates with no angular dependence. This is a reasonable approximation to make, given the sheer size difference between the primordial black hole and the neutron star. Although neutron stars are fairly compact and very dense, primordial black holes are microscopic, and so the curvature of the neutron star is negligible compared to the primordial black hole. Also, we will be using the assumption that the velocity of the primordial black hole is constant. Despite the fact that the primordial black hole would be accelerating into the neutron star, this is a fair assumption to make. Most of the energy transfer occurs in a relatively short time, as we shall see in Section \ref{chap:energy}, during which we can approximate a constant velocity. \\
 
 Furthermore, we will be using Newtonian gravity with the potential
 \begin{align}
 \label{eq:gravity}
 \Phi &= \frac{-Gm}{\sqrt{r^2 + (z + vt)^2}}
 \end{align}
-to greatly simplify the solution. Given the mass scales of neutron stars, and primordial black holes, general relativity would be more appropriate, however, it is too complicated. \\
+to greatly simplify the solution. \\
 
 Lastly, we will be modelling the neutron star as an incompressible, ideal fluid. This is a fairly common assumption in astrophysics because stars share many features with fluid dynamics. Stars are a continuous soup of particles, they have a free surface, and undergo convection and advection.
 
 \section{Outline}
 
-The rest of this thesis is organized as follows: In Chapter \ref{chap:hank} we will define the Hankel transform and derive some useful theorems and corollaries which will be of utmost importance; in Chapter \ref{chap:analytic} we shall analytically calculate the energy transferred during the interaction using the theorems from Chapter \ref{chap:hank}. Then, in Chapter \ref{chap:sim} we will use the same model and simulate the collision using PySPH, and finally in Chapter \ref{chap:conc}, we make conclusions.
+The rest of this thesis is organized as follows: In Chapter \ref{chap:hank} we will define the Hankel transform and derive some useful theorems and corollaries which will be of utmost importance. In Chapter \ref{chap:analytic} we shall analytically calculate the energy transferred during the interaction using the theorems from Chapter \ref{chap:hank}, and obtain the same result as Defillon, Granet, Tinyakov, and Tytgat \cite{tidalcapture}. Then, in Chapter \ref{chap:sim} we will use the same model and simulate the collision using PySPH, and finally in Chapter \ref{chap:conc}, we make conclusions.
 
 
 %\end{document}
