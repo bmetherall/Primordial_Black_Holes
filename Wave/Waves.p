@@ -1,6 +1,6 @@
 set terminal pngcairo size 800, 600 # pngcairo produces a higher quality output
 
-set title "Analytic Solution"
+#set title "Analytic Solution"
 set xlabel "r"
 set ylabel "Surface"
 set yr [-8:16]

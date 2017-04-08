@@ -1,0 +1,147 @@
+\documentclass[mathserif]{beamer}
+\usepackage{amsmath}
+\usepackage{color}
+\usepackage{amsfonts}
+\usepackage{xcolor,graphicx}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{mathrsfs}
+\usepackage{multimedia}
+
+\title[Primordial Black Holes]{The Effects of a Primordial Black Hole on the Surface of a Neutron Star}
+\author{Brady Metherall}
+\date{April 13, 2017}
+
+\usetheme[hideothersubsections]{Berkeley}
+\usecolortheme{whale}
+
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\Heavi}{H}
+
+\DeclareMathOperator{\Hsign}{\mathscr{H}}
+\newcommand\Hank[2][0]{{\Hsign_{#1} \{ #2 \} }}
+
+\begin{document}
+\frame{\titlepage}
+\setlength\parindent{0pt}
+
+\section{Introduction}
+
+\frame{
+\frametitle{Primordial Black Holes}
+\begin{itemize}
+\item Normal black holes have a minimum mass on the order of a few solar masses.
+\item In the early universe while it was very hot and dense, small perturbations could be enough to create a small black hole.
+\item The mass of a primordial black hole is much less than one solar mass ($10^{-18} - 10^{-6} M_{\odot}$), and microscopic in size.
+\end{itemize}
+}
+
+\frame{
+\frametitle{Primordial Black Holes as Dark Matter}
+Dark matter is matter that does not emit/absorb light, and is chargeless. Dark matter accounts for about a quarter of the energy in the universe, but we don't know what it is. \\
+\vspace*{\baselineskip}
+Primordial black holes may be a good candidate for dark matter since: they are chargeless, do not emit light, have a very small radius, and are non-relativistic. Also, most other proposed explanations of dark matter involve creating a new particle not part of the standard model.
+}
+
+\section{Model}
+
+\frame{
+\frametitle{Flat Star Model}
+\begin{itemize}
+\item Neutron stars are flat and infinite
+\item Primordial black holes are point masses
+\item Neutron stars are incompressible fluids
+\item Gravitational interactions are Newtonian
+\item Constant velocity
+\end{itemize}
+}
+
+\section{Analytic Solution}
+
+\subsection{Solving for $\varphi$}
+
+\frame{
+\frametitle{Eigenfunctions of Laplacian}
+Assume a product solution for the velocity potential and solve the Laplacian.
+\begin{align*}
+\varphi &= R(r) Z(z) \Theta(\theta) T(t) \\
+\nabla^2 \varphi &= 0 \\
+\implies \varphi &\propto \left\{ \begin{matrix}J_\mu(kr) \\ Y_\mu(kr) \end{matrix} \right\}  \left\{ \begin{matrix}e^{-kz} \\ e^{kz} \end{matrix} \right\} \left\{ \begin{matrix}\sin(\mu \theta) \\ \cos(\mu \theta) \end{matrix} \right\} T(t) \\
+\implies \varphi &\propto J_0(kr) e^{kz} T(t)
+\end{align*}
+$T(t)$ comes from boundary conditions.
+}
+
+\frame{
+\frametitle{Hankel Transform}
+\begin{definition}
+\label{def:hanktrans}
+The Hankel transform of a function $f(s)$ is given by
+\begin{align*}
+\Hank[\nu]{f}(\sigma) = \int_0^\infty f(s) J_\nu(s \sigma) s \, ds,
+\end{align*}
+where $J_\nu$ is the Bessel function of the first kind, of order $\nu \geq -\frac{1}{2}$, and $\sigma$ is a non-negative real variable.
+\end{definition}
+\begin{corollary}
+\label{def:invhanktrans}
+The Hankel transform is self-reciprocal, that is, the inverse Hankel transform is also given by Definition \ref{def:hanktrans}.
+\end{corollary}
+}
+
+\frame{
+\frametitle{Solving for $\varphi$}
+From the pressure condition:
+\begin{gather*}
+\left( \frac{\partial^2 \varphi}{\partial t^2} + g \frac{\partial \varphi}{\partial z} + \frac{\partial \Phi}{\partial t} \right) \bigg|_{z=0} = 0\\
+\text{where }\Phi = \frac{-Gm}{\sqrt{r^2+(z+vt)^2}} = \int_0^\infty a(k) J_0(kr)k \, dk \\
+\varphi = \frac{Gmv}{g} \int_0^\infty \frac{J_0(kr)e^{kz}}{1+kv^2/g} \left(-\sgn(t)e^{-kv|t|} + 2 \Heavi(t)\cos(\omega_k t) \right)dk \\
+\text{with } \omega_k^2=gk
+\end{gather*}
+}
+
+\subsection{Solving for $\eta$}
+
+\frame{
+\frametitle{Deformation of Surface}
+We can easily solve for the shape of the surface now that we have the velocity potential,
+\begin{gather*}
+\frac{\partial \varphi}{\partial z} \bigg|_{z=0} = \frac{\partial \eta}{\partial t} \\
+\eta = \frac{Gm}{g} \int_0^\infty \frac{J_0(kr)}{1+kv^2/g} \left(e^{-kv|t|} + 2\Heavi(t)v \sqrt{\frac{k}{g}} \sin(\omega_k t) \right)dk.
+\end{gather*}
+Maple was used to perform numerical integration and plot the surface waves.
+}
+
+\subsection{Plotting $\eta$}
+
+\frame{
+\frametitle{Analytic Surface Waves}
+\begin{figure}
+\centering
+\movie[width=8cm, height=6cm,poster, loop, autostart]{}{../Videos/SurfaceWaves.mp4}
+\caption{Waves!}
+\end{figure}
+}
+
+\subsection{Solving for $E$}
+
+\frame{
+\frametitle{Energy Transferred}
+We can calculate the energy by taking the sum of the kinetic, and potential energies,
+\begin{align*}
+E &= \lim_{t \rightarrow \infty} \frac{1}{2}\rho \int_{-\infty}^0 \int_0^\infty |\nabla \varphi |^2 \, r dr dz \int_0^{2\pi} d\theta \\
+& \qquad + \rho g \int_0^\infty \int_0^\eta z dz \, rdr \int_0^{2\pi} d\theta \\
+&= 4 \pi \rho \frac{G^2 m^2}{g}.
+\end{align*}
+We take the limit as $t$ approaches infinity, because we are interested in the total energy transferred.
+}
+
+\section{Simulation Solution}
+
+\subsection{Smooth Particle Hydrodynamics}
+
+\frame{
+\frametitle{Future Work}
+My focus next semester will be on simulating the collision with smooth particle hydrodynamics. Smooth particle hydrodynamics is a computational fluid dynamics method that uses N-Body methods, and is typically used for free surface simulations.
+}
+
+\end{document}
