@@ -30,6 +30,8 @@ set out
 
 unset yr
 
+set ylabel '$E$'
+
 set output './GoodEnergy.tex'
 plot '../Dissertation/4Simulation/AverageE.dat' using ($1 - 200):($4 + $5 + 15*($1-200) - 5.437*10**6 + 350) with lines notitle lc 8
 set out

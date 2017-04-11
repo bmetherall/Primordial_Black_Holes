@@ -35,7 +35,7 @@
 \item A black hole is a region of space where enough mass is concentrated such that nothing,
 including light, can escape its gravitational pull.
 \item Typical black holes form from the collapse of a massive star, and have a minimum mass on the order of a few solar masses.
-\item In the early universe while it was very hot and dense, small perturbations could be enough to create small black holes called primordial black holes.
+\item In the early universe, while it was very hot and dense, small perturbations could be enough to create small black holes called primordial black holes.
 \item The mass of a primordial black hole is probably much less than one solar mass ($10^{-18} - 10^{-6} M_{\odot}$), and microscopic in size.
 \end{itemize}
 }
@@ -108,7 +108,7 @@ Then,
 \begin{align*}
 \varphi = \frac{Gmv}{g} \int_0^\infty \frac{J_0(kr)e^{kz}}{1+kv^2/g} \left(-\sgn(t)e^{-kv|t|} + 2 \Heavi(t)\cos(\omega_k t) \right)dk,
 \end{align*}
-with $\omega_k^2=gk$
+with $\omega_k^2=gk$.
 }
 
 \subsection{Deformation of Surface}
@@ -118,7 +118,7 @@ with $\omega_k^2=gk$
 We can easily solve for the shape of the surface now that we have the velocity potential, using
 \begin{gather*}
 \frac{\partial \varphi}{\partial z} \bigg|_{z=0} = \frac{\partial \eta}{\partial t}. \\
-\eta = \frac{Gm}{g} \int_0^\infty \frac{J_0(kr)}{1+kv^2/g} \left(e^{-kv|t|} + 2\Heavi(t)v \sqrt{\frac{k}{g}} \sin(\omega_k t) \right)dk
+\eta = \frac{Gm}{g} \int_0^\infty \frac{J_0(kr)}{1+kv^2/g} \left(e^{-kv|t|} + 2\Heavi(t)v \sqrt{\frac{k}{g}} \sin(\omega_k t) \right)dk.
 \end{gather*}
 }
 
@@ -127,7 +127,7 @@ We can easily solve for the shape of the surface now that we have the velocity p
 \begin{figure}
 \centering
 \movie[width=8cm, height=6cm,poster, loop, autostart]{}{../Videos/SurfaceWaves.mp4}
-\caption{Waves!}
+\caption{Analytic waves}
 \end{figure}
 }
 
@@ -141,7 +141,7 @@ E(t) &= \frac{1}{2}\rho \int_{-\infty}^0 \int_0^\infty |\nabla \varphi |^2 \, r 
 & \qquad + \rho g \int_0^\infty \int_0^\eta z dz \, rdr \int_0^{2\pi} d\theta \\
 \lim_{t \rightarrow \infty} E(t) &= 4 \pi \rho \frac{G^2 m^2}{g}.
 \end{align*}
-We take the limit as $t$ approaches infinity, because we are interested in the total energy transferred.
+We take the limit as $t$ approaches infinity because we are interested in the total energy transferred.
 }
 
 \frame{
@@ -153,27 +153,66 @@ We take the limit as $t$ approaches infinity, because we are interested in the t
 
 \section{Simulation Solution}
 
-\subsection{Smooth Particle Hydrodynamics}
+\subsection{Smoothed Particle Hydrodynamics}
+
+\frame{
+\frametitle{Smoothed Particle Hydrodynamics}
+In order to simulate the collision smoothed particle hydrodynamics (SPH) was used.
+\begin{itemize}
+\item Developed in 1977 for astrophysics simulations
+\item Mesh-free, $N$-body methods
+\item Uses nearest neighbours
+\end{itemize}
+The neutron star is treated as a $120 \times 15$ tank with a particle spacing of $0.075$. The simulation was run in parallel over three days with PySPH, a SPH framework.
+}
 
 \frame{
 \frametitle{Analytic Surface Waves}
 \begin{figure}
 \centering
 \movie[width=6cm, height=6cm,poster, loop, autostart]{}{../Videos/SimulationWaves.mp4}
-\caption{Waves!}
+\caption{Simulation waves}
 \end{figure}
 }
 
+\subsection{Energy}
+
 \frame{
+\frametitle{Energy Calculation}
+The energy can be calculated in the same fashion as before:
+\begin{align*}
+E &= \sum_i \frac{1}{2} \left( u_i^2 + v_i^2 \right) + m_i g y_i.
+\end{align*}
+However, this must be transformed to three dimensions:
+\begin{align*}
+E &= \frac{\pi}{dx} \sum_i \left( \frac{1}{2} \left( u_i^2 + v_i^2 \right) + g y_i \right) m_i |x_i|.
+\end{align*}
+}
+
+\frame{
+\frametitle{Raw Noisy Energy}
 \begin{figure}
 \input{./CrazyEnergy}
 \end{figure}
 }
 
 \frame{
+\frametitle{Cleaned Energy}
 \begin{figure}
 \input{./GoodEnergy}
 \end{figure}
+}
+
+\section{Conclusion}
+
+\frame{
+\frametitle{Conclusion}
+If this project were continued some modifications would be
+\begin{itemize}
+\item Better initial conditions for the simulation
+\item Use a spherical model instead of planar
+\item Use general relativity instead of Newtonian gravity
+\end{itemize}
 }
 
 
